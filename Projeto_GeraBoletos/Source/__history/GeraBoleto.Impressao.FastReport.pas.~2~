@@ -1,0 +1,37 @@
+unit GeraBoleto.Impressao.FastReport;
+
+interface
+
+uses
+   GeraBoleto.Impressao,
+   GeraBoleto.Boleto,
+   System.Generics.Collections, SysUtils;
+
+type
+   TImpressaoBoletoFast = class(TInterfacedObject, IImpressaoBoleto)
+     private
+       FReportFile: string;
+     public
+       constructor Create(AReportFile: string);
+       procedure Imprime(ABoletos: TList<IBoleto>);
+   end;
+
+implementation
+
+{ TImpressaoBoletoFast }
+
+constructor TImpressaoBoletoFast.Create(AReportFile: string);
+begin
+   FReportFile := AReportFile;
+   if FReportFile.IsEmpty then
+      raise Exception.Create('Arquivo do FastReport não informado!');
+   if not FileExists(FReportFile) then
+      raise Exception.Create('Arquivo do FastReport não encontrado!');
+end;
+
+procedure TImpressaoBoletoFast.Imprime(ABoletos: TList<IBoleto>);
+begin
+//
+end;
+
+end.

@@ -1,0 +1,97 @@
+unit udmBoletoFastReport;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  frxBarcode, frxClass, frxDBSet,
+  GeraBoleto.Impressao,
+  GeraBoleto.Boleto;
+
+type
+  TdmBoletoFastReport = class(TDataModule)
+    Report: TfrxReport;
+    TfrxDBDataset: TfrxDBDataset;
+    frxBarCodeObject1: TfrxBarCodeObject;
+    Boletos: TFDMemTable;
+    BoletosBancoNumero: TStringField;
+    BoletosBancoDigito: TStringField;
+    BoletosBancoNome: TStringField;
+    BoletosContaLocalPagto: TStringField;
+    BoletosContaCodBeneficiario: TStringField;
+    BoletosContaCarteira: TStringField;
+    BoletosBenCnpjCpf: TStringField;
+    BoletosBenNome: TStringField;
+    BoletosBenLogradouro: TStringField;
+    BoletosBenNumero: TStringField;
+    BoletosBenBairro: TStringField;
+    BoletosBenCep: TStringField;
+    BoletosBenCidade: TStringField;
+    BoletosBenUF: TStringField;
+    BoletosBenFone: TStringField;
+    BoletosTitVencimento: TDateTimeField;
+    BoletosTitNossoNumero: TStringField;
+    BoletosTitDataProc: TDateTimeField;
+    BoletosTitDocumento: TStringField;
+    BoletosTitAceite: TStringField;
+    BoletosTitEspecDoc: TStringField;
+    BoletosTitEspecMoeda: TStringField;
+    BoletosTitValor: TCurrencyField;
+    BoletosTitInstrucoes: TMemoField;
+    BoletosPagCnpjCpf: TStringField;
+    BoletosPagNome: TStringField;
+    BoletosPagLogradouro: TStringField;
+    BoletosPagNumero: TStringField;
+    BoletosPagBairro: TStringField;
+    BoletosPagCep: TStringField;
+    BoletosPagCidade: TStringField;
+    BoletosPagUF: TStringField;
+    BoletosPagFone: TStringField;
+    BoletosCodigoBarras: TStringField;
+    BoletosLinhaDigitavel: TStringField;
+    BoletosTitData: TDateTimeField;
+  private
+    { Private declarations }
+  public
+    procedure AdicionaDadosNoMemTable(Aboleto: IBoleto);
+  end;
+
+var
+  dmBoletoFastReport: TdmBoletoFastReport;
+
+implementation
+
+
+{$R *.dfm}
+
+{ TdmBoletoFastReport }
+
+procedure TdmBoletoFastReport.AdicionaDadosNoMemTable(Aboleto: IBoleto);
+begin
+   Boletos.Append;
+   BoletosBancoNumero.AsString := ABoleto.GetConta.Banco.Numero;
+   BoletosBancoNome.AsString   := ABoleto.GetConta.Banco.Nome;
+   BoletosBancoDigito.AsString := ABoleto.GetConta.Banco.DigitoNumero;
+
+   BoletosContaLocalPagto.AsString := ABoleto.GetConta.LocalPagto;
+   BoletosContaCodBeneficiario.AsString := ABoleto.GetConta.Conta;
+   BoletosContaCarteira.AsString   := ABoleto.GetConta.Carteira;
+
+   BoletosBenCnpjCpf.AsString    := ABoleto.GetBeneficiario.CnpjCpf;
+   BoletosBenNome.AsString       := ABoleto.GetBeneficiario.Nome;
+   BoletosBenLogradouro.AsString := ABoleto.GetBeneficiario.Endereco.Logradouro;
+   BoletosBenNumero.AsString     := ABoleto.GetBeneficiario.Endereco.Numero;
+   BoletosBenBairro.AsString     := ABoleto.GetBeneficiario.Endereco.Bairro;
+   BoletosBenCep.AsString        := ABoleto.GetBeneficiario.Endereco.Cep;
+   BoletosBenCidade.AsString     := ABoleto.GetBeneficiario.Endereco.Cidade;
+   BoletosBenUF.AsString         := ABoleto.GetBeneficiario.Endereco.Uf;
+   BoletosBenFone.AsString       := ABoleto.GetBeneficiario.Telefone;
+
+
+
+
+end;
+
+end.

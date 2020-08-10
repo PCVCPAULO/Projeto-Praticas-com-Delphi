@@ -1,0 +1,7 @@
+unit GeraBoleto.Impressao.FastReport;
+
+interface
+
+implementation
+
+end.

@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{40C35288-9EFC-4DCF-9842-6FF5ABA604DA}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="TestesUnitarios\GeraBoletoTeste.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="TesteCaixaPreta\TesteCaixaPreta.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="GeraBoletoTeste">
+        <MSBuild Projects="TestesUnitarios\GeraBoletoTeste.dproj"/>
+    </Target>
+    <Target Name="GeraBoletoTeste:Clean">
+        <MSBuild Projects="TestesUnitarios\GeraBoletoTeste.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="GeraBoletoTeste:Make">
+        <MSBuild Projects="TestesUnitarios\GeraBoletoTeste.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="TesteCaixaPreta">
+        <MSBuild Projects="TesteCaixaPreta\TesteCaixaPreta.dproj"/>
+    </Target>
+    <Target Name="TesteCaixaPreta:Clean">
+        <MSBuild Projects="TesteCaixaPreta\TesteCaixaPreta.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TesteCaixaPreta:Make">
+        <MSBuild Projects="TesteCaixaPreta\TesteCaixaPreta.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="GeraBoletoTeste;TesteCaixaPreta"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="GeraBoletoTeste:Clean;TesteCaixaPreta:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="GeraBoletoTeste:Make;TesteCaixaPreta:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

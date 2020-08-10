@@ -1,0 +1,45 @@
+unit TestConta;
+
+interface
+
+uses
+  TestFramework, GeraBoleto.Conta, GeraBoleto.Banco;
+
+type
+  // Test methods for class TConta
+
+  TestTConta = class(TTestCase)
+  strict private
+    FConta: TConta;
+  public
+    procedure SetUp; override;
+    procedure TearDown; override;
+
+  published
+    procedure TesteNumercoDaContaComEspacos;
+  end;
+
+implementation
+
+procedure TestTConta.SetUp;
+begin
+  FConta := TConta.Create;
+end;
+
+procedure TestTConta.TearDown;
+begin
+  FConta.Free;
+  FConta := nil;
+end;
+
+procedure TestTConta.TesteNumercoDaContaComEspacos;
+begin
+  FConta.Conta := ' 00001 '; // número da conta com espaços em branco
+  CheckEquals('00001', FConta.Conta, 'Número da Conta inválido!');
+end;
+
+initialization
+  // Register any test cases with the test runner
+  RegisterTest(TestTConta.Suite);
+end.
+

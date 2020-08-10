@@ -1,0 +1,47 @@
+unit TestContainerBoleto;
+
+interface
+
+uses
+  TestFramework,
+  GeraBoleto.Container,
+  GeraBoleto.Boleto;
+
+type
+  TestTBoletoContainer = class(TTestCase)
+    strict private
+      FContainer: IBoletoContainer;
+    public
+      procedure SetUp; override;
+      procedure TearDown; override;
+    published
+      // aqui virão os testes
+      procedure TestAdicaoDeBoletoNoContainer;
+  end;
+
+implementation
+
+{ TestBoletoContainer }
+
+procedure TestTBoletoContainer.SetUp;
+begin
+  FContainer := TBoletoContainer.Create;
+end;
+
+procedure TestTBoletoContainer.TearDown;
+begin
+  //;
+end;
+
+procedure TestTBoletoContainer.TestAdicaoDeBoletoNoContainer;
+var
+  Boleto: IBoleto;
+begin
+  Boleto := FContainer.Add;
+  CheckTrue((Boleto is TBoleto), 'Nenhum boleto retornado');
+end;
+
+initialization
+  RegisterTest(TestTBoletoContainer.Suite);
+
+end.

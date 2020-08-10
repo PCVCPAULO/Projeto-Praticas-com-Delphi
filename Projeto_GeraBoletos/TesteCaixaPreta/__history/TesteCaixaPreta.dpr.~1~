@@ -1,0 +1,14 @@
+program TesteCaixaPreta;
+
+uses
+  Vcl.Forms,
+  ufrmMain in 'ufrmMain.pas' {ufrmTestes};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TufrmTestes, ufrmTestes);
+  Application.Run;
+end.

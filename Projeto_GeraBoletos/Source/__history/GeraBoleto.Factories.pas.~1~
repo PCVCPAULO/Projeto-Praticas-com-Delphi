@@ -1,0 +1,7 @@
+unit GeraBoleto.Factories;
+
+interface
+
+implementation
+
+end.

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2020/04/28 19:36:54.000.289,=C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/04/28 19:38:55.000.293,D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\Projeto_GeraBoletos\TesteCaixaPreta\ufrmMain.dfm=C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2020/04/28 19:38:55.000.293,D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\Projeto_GeraBoletos\TesteCaixaPreta\ufrmMain.pas=C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/04/28 19:39:44.000.216,D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\Projeto_GeraBoletos\TesteCaixaPreta\TesteCaixaPreta.dproj=C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

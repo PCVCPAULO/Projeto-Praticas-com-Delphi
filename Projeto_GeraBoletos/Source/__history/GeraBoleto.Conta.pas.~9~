@@ -1,0 +1,77 @@
+unit GeraBoleto.Conta;
+
+interface
+
+uses
+  GeraBoleto.Banco;
+
+type
+  TConta = class
+    private
+      FBanco:         TBanco;
+      FLocalPagto:    string;
+      FAgencia:       string;
+      FDigitoConta:   string;
+      FConta:         string;
+      FCarteira:      string;
+      FDigitoAgencia: string;
+      procedure SetNumeroConta(const Value: string);
+      procedure SetDigitoConta(const Value: string);
+      Procedure SetAgencia(const Value: string);
+    public
+      constructor Creatre;
+      destructor Destroy; override;
+
+      property Banco: TBanco         read FBanco write FBanco;
+      property LocalPagto: string    read FLocalPagto write FLocalPagto;
+      property Agencia: string       read FAgencia write SetAgencia;
+      property DigitoAgencia: string read FDigitoAgencia write FDigitoAgencia;
+      property Conta: string  read FConta write SetNumeroConta;
+      property DigitoConta: string read FDigitoConta write SetDigitoConta;
+      property Carteira: string    read FCarteira write FCarteira;
+  end;
+
+implementation
+
+uses
+  System.SysUtils, GeraBoleto.Funcoes;
+
+{ TConta }
+
+constructor TConta.Creatre;
+begin
+  Banco := TBanco.Create;
+end;
+
+destructor TConta.Destroy;
+begin
+  FBanco.Free;
+  inherited;
+end;
+
+
+
+procedure TConta.SetAgencia(const Value: string);
+begin
+  FAgencia := Trim(Value);
+  if not IsNumber(FAgencia) then
+     raise Exception.Create('Número da Agência inválido!');
+
+end;
+
+procedure TConta.SetDigitoConta(const Value: string);
+begin
+  FDigitoConta := Trim(Value);
+  if not IsNumber(FDigitoConta) then
+     raise Exception.Create('Dígito da Conta Banco inválido!');
+end;
+
+procedure TConta.SetNumeroConta(const Value: string);
+begin
+  FConta := Trim(Value);
+  if not IsNumber(FConta) then
+    raise Exception.Create('Número do Conta Inválido!');
+
+end;
+
+end.
