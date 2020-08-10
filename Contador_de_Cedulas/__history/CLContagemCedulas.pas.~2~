@@ -1,0 +1,81 @@
+unit CLContagemCedulas;
+
+interface
+
+uses Classes, Dialogs, SysUtils;
+
+type
+  TContagemCedulas = class
+  ['{B3D24ED7-5396-4C35-AB6B-2E885426F4FF}']
+
+  protected
+    FValorContagem : integer;
+    FQtdNotas100   : integer;
+    FQtdNotas50    : integer;
+    FQtdNotas10    : integer;
+    FQtdNotas5     : integer;
+    FQtdNotas2     : integer;
+    FQtdNotas1     : integer;
+
+  procedure Distrituicao;
+  procedure DefineValorContagem(valor: integer);
+
+  public
+    function ObterDistribuicao: TStringList;
+    property ValorContagem: Integer read FValorContagem write DefineValorContagem;
+
+end;
+
+implementation
+
+uses Math;
+
+{ TContagemCedulas }
+
+procedure TContagemCedulas.DefineValorContagem(valor: integer);
+begin
+//
+end;
+
+procedure TContagemCedulas.Distrituicao;
+var
+  iAux: integer;
+begin
+  iAux := FValorContagem;
+
+  FQtdNotas100 : iAux div 100;
+  iAux := iAux mod 100;
+
+  if iAux > 0 then
+  begin
+    FqtdNotas 50 := iAux div 50;
+    iAux := iAux mod 50;
+
+    if iAux > 0 then
+    begin
+      FQtdNotas10 := iAux div 10;
+      iAux := iAux mod 10;
+
+      if iAux >0 then
+      begin
+        FQtdNotas5 := iAux div 5;
+        iAux := iAux mod 5;
+
+        if iAux > 0  then
+        begin
+          FQtdNotas2 := iAux div 2;
+          iAux := iAux mod 2;
+
+          FQtdNotas1 := iAux;
+        end;
+      end;
+    end;
+  end;
+end;
+
+function TContagemCedulas.ObterDistribuicao: TStringList;
+begin
+//
+end;
+
+end.

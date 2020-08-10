@@ -1,0 +1,32 @@
+unit DLContagemDeculas;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons;
+
+type
+  TUPrincipal = class(TForm)
+    Label1: TLabel;
+    Label2: TLabel;
+    edtValorContagem: TEdit;
+    btnProcessar: TSpeedButton;
+    mmoCedulas: TMemo;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  UPrincipal: TUPrincipal;
+
+implementation
+
+{$R *.dfm}
+
+Uses
+  CLContagemCedulas;
+
+end.
