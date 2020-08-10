@@ -273,8 +273,8 @@ object DM_Dados: TDM_Dados
       'VendorLibWin64=fbclient.dll'
       'VendorLibOsx=/Library/Frameworks/Firebird.framework/Firebird'
       
-        'Database=D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Del' +
-        'phi_RAD\RAD_Sistema_Dizimo_(PC-IFES)\Banco_GDB\teste_Dizimo.fdb'
+        'Database=D:\Projeto-Praticas-com-Delphi_(GitHub)\RAD_Sistema_Diz' +
+        'imo_(PC-IF)\Banco_GDB\teste_Dizimo.fdb'
       'User_Name=sysdba'
       'Password=masterkey'
       'Role=RoleName'
