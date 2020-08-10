@@ -1,0 +1,64 @@
+object Frm_ApagaItem: TFrm_ApagaItem
+  Left = 0
+  Top = 0
+  Caption = 'ApagarItem'
+  ClientHeight = 110
+  ClientWidth = 322
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  KeyPreview = True
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 322
+    Height = 110
+    Align = alClient
+    TabOrder = 0
+    ExplicitLeft = 56
+    ExplicitTop = 32
+    ExplicitWidth = 185
+    ExplicitHeight = 41
+    object Label1: TLabel
+      Left = 1
+      Top = 79
+      Width = 320
+      Height = 30
+      Align = alBottom
+      Alignment = taCenter
+      Caption = 'DIGITE O C'#211'DIGO DO ITEM'
+      Color = clTeal
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlue
+      Font.Height = -21
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+      ExplicitWidth = 260
+    end
+    object Edit1: TEdit
+      Left = 1
+      Top = 1
+      Width = 320
+      Height = 72
+      Align = alTop
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -27
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      Text = 'Edit1'
+      ExplicitWidth = 328
+    end
+  end
+end

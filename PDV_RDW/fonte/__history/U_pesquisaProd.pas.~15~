@@ -1,0 +1,89 @@
+unit U_pesquisaProd;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
+  Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TFrm_Pesquisa = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    pnl_Pesquisa: TPanel;
+    edt_Descricao: TEdit;
+    Panel3: TPanel;
+    dbg_Produtos: TDBGrid;
+    dsProdutos: TDataSource;
+    procedure edt_DescricaoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure edt_DescricaoKeyPress(Sender: TObject; var Key: Char);
+    procedure dbg_ProdutosKeyPress(Sender: TObject; var Key: Char);
+    procedure FormShow(Sender: TObject);
+    procedure edt_DescricaoChange(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Frm_Pesquisa: TFrm_Pesquisa;
+
+implementation
+
+{$R *.dfm}
+
+uses U_DM, U_pdv; // use do pesquisa produto tem que existir essas duas Units.
+
+procedure TFrm_Pesquisa.dbg_ProdutosKeyPress(Sender: TObject; var Key: Char);
+begin
+   if key = #13 then
+   begin
+     Frm_PDV.VerificaProdutos('');
+     Close();
+   end;
+end;
+
+procedure TFrm_Pesquisa.edt_DescricaoChange(Sender: TObject);
+begin
+   dsProdutos.DataSet.Filter := 'Nome_Produto like ' ('%' +QuotedStr(edt_Descricao.Text+ '%'));
+   dsProdutos.DataSet.Filtered := True;
+   //linhas de codigo a ser acrescentada
+   Frm_PDV.edt_CODIGO.Text := dm.FDProdutosCODIGO_PRODUTO.AsString;
+   Frm_PDV.edt_Preco.Text  := dm.FDProdutosPRECO_PRODUTO.AsString;
+   Frm_PDV.edt_DESCRICAO.Text := dm.FDProdutosNOME_PRODUTO.AsString;
+   Frm_PDV.edt_QTD.SetFocus;
+end;
+
+procedure TFrm_Pesquisa.edt_DescricaoKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+   if Key = VK_F6 then
+   begin
+     Close;
+   end;
+end;
+
+procedure TFrm_Pesquisa.edt_DescricaoKeyPress(Sender: TObject; var Key: Char);
+begin
+   if Key = #13 then
+   dbg_Produtos.SetFocus;
+end;
+
+procedure TFrm_Pesquisa.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+   if Key = VK_F6 then
+   begin
+     Close;
+   end;
+end;
+
+procedure TFrm_Pesquisa.FormShow(Sender: TObject);
+begin
+   edt_Descricao.SetFocus;
+end;
+
+end.

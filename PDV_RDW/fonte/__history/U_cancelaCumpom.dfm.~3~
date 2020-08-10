@@ -1,0 +1,67 @@
+object Frm_CancelaCupom: TFrm_CancelaCupom
+  Left = 0
+  Top = 0
+  Caption = 'Cancela Cupom'
+  ClientHeight = 76
+  ClientWidth = 227
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  KeyPreview = True
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 227
+    Height = 76
+    Align = alClient
+    Color = 2763429
+    ParentBackground = False
+    TabOrder = 0
+    ExplicitLeft = 160
+    ExplicitTop = 48
+    ExplicitWidth = 185
+    ExplicitHeight = 41
+    object Label1: TLabel
+      Left = 1
+      Top = 50
+      Width = 225
+      Height = 25
+      Align = alBottom
+      Alignment = taCenter
+      Caption = 'DIGITE A SENHA'
+      Color = clTeal
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -19
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+      ExplicitWidth = 137
+    end
+    object edt_Senha: TEdit
+      Left = 1
+      Top = 1
+      Width = 225
+      Height = 38
+      Align = alTop
+      Color = 9234160
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -21
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      OnKeyDown = edt_SenhaKeyDown
+      OnKeyPress = edt_SenhaKeyPress
+      ExplicitWidth = 290
+    end
+  end
+end

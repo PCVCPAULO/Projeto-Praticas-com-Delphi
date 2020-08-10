@@ -1,0 +1,28 @@
+unit U_imprimeCupom;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, frxClass, frxDBSet;
+
+type
+  TFrm_ImprimeCupom = class(TForm)
+    Cupom: TfrxReport;
+    frxDs_Cupom: TfrxDBDataset;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Frm_ImprimeCupom: TFrm_ImprimeCupom;
+
+implementation
+
+{$R *.dfm}
+
+uses U_pdv;
+
+end.

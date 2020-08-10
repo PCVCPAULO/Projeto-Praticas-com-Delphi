@@ -1,0 +1,134 @@
+unit U_fechamento;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Buttons,
+  frxClass, frxDBSet;
+
+type
+  TFrm_Fechamento = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Panel2: TPanel;
+    Label2: TLabel;
+    edt_SubTotal: TEdit;
+    edt_Desconto: TEdit;
+    edt_Recebido: TEdit;
+    edt_Troco: TEdit;
+    ComboBox1: TComboBox;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Panel3: TPanel;
+    btn_LimparEdits: TSpeedButton;
+    btn_Cupom: TSpeedButton;
+    frxCUPOM: TfrxReport;
+    frxDs_Cupom: TfrxDBDataset;
+    procedure edt_RecebidoKeyPress(Sender: TObject; var Key: Char);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure btn_LimparEditsClick(Sender: TObject);
+    procedure btn_CupomClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure edt_SubTotalKeyPress(Sender: TObject; var Key: Char);
+    procedure edt_DescontoKeyPress(Sender: TObject; var Key: Char);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure CalcularVenda;
+    procedure LimparTudo;
+  end;
+
+var
+  Frm_Fechamento: TFrm_Fechamento;
+
+implementation
+
+{$R *.dfm}
+
+uses U_pdv;
+
+{ TFrm_Fechamento }
+
+procedure TFrm_Fechamento.btn_CupomClick(Sender: TObject);
+begin
+  frxCupom.Variables['Desconto'] := QuotedStr(edt_Desconto.Text);
+  frxCupom.PrepareReport;
+  frxCupom.ShowPreparedReport;
+end;
+
+procedure TFrm_Fechamento.btn_LimparEditsClick(Sender: TObject);
+begin
+   LimparTudo;
+end;
+
+procedure TFrm_Fechamento.CalcularVenda;
+var
+   n1, n2, n3, Total, Troco: Double;
+begin
+   n1 := StrToFloat(StringReplace(edt_SubTotal.Text,'.', '', [rfReplaceAll]));
+   n2 := StrToFloat(StringReplace(edt_Desconto.Text,'.', '', [rfReplaceAll]));
+   Total := n1 - n2;
+     edt_Desconto.Text := FormatFloat('#,##0.00', n2);
+   n3 := StrToFloat(StringReplace(edt_Recebido.Text,'.', '', [rfReplaceAll]));
+
+   Troco := (n3 - Total);
+   edt_Recebido.Text := FormatFloat('#,##0.00', n3);
+   edt_Troco.Text    := FormatFloat('#,##0.00', Troco);
+end;
+
+procedure TFrm_Fechamento.edt_DescontoKeyPress(Sender: TObject; var Key: Char);
+begin
+   if Key = #13 then
+   begin
+      edt_Recebido.SetFocus;
+   end;
+end;
+
+procedure TFrm_Fechamento.edt_RecebidoKeyPress(Sender: TObject; var Key: Char);
+begin
+   if Key = #13 then
+   begin
+     CalcularVenda;
+//     btn_LimparEdits
+   end;
+end;
+
+procedure TFrm_Fechamento.edt_SubTotalKeyPress(Sender: TObject; var Key: Char);
+begin
+   if Key = #13 then
+   begin
+      edt_Desconto.SetFocus;
+   end;
+end;
+
+procedure TFrm_Fechamento.FormCreate(Sender: TObject);
+begin
+   edt_SubTotal.Text := Frm_pdv.edt_Total.Caption;
+end;
+
+procedure TFrm_Fechamento.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+   if Key = VK_F3 then
+   begin
+     Close;
+   end;
+end;
+
+procedure TFrm_Fechamento.LimparTudo;
+begin
+   Frm_pdv.edt_CODIGO.Clear; // limpa edits
+   Frm_pdv.edt_QTD.Clear;
+   Frm_pdv.edt_Preco.Clear;
+   Frm_pdv.edt_TotalItem.Caption := '';
+   // adiciona uma mensagem no formulário PDV
+   Frm_pdv.edt_DESCRICAO.Text := 'Aguardando novo Produto';
+   Frm_pdv.cds_Itens.EmptyDataSet; // limpa o cds_itens do PDV.
+   Close;
+end;
+
+end.

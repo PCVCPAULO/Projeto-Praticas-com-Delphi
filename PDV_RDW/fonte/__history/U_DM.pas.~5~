@@ -1,0 +1,60 @@
+unit U_DM;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.FB,
+  FireDAC.Phys.FBDef, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf,
+  FireDAC.DApt, FireDAC.VCLUI.Wait, Data.DB, FireDAC.Phys.IBBase,
+  FireDAC.Comp.UI, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+
+type
+  TDM = class(TDataModule)
+    conexao: TFDConnection;
+    FDCliente: TFDQuery;
+    FDGUIxWaitCursor1: TFDGUIxWaitCursor;
+    FDPhysFBDriverLink1: TFDPhysFBDriverLink;
+    FDItens_Venda: TFDQuery;
+    FDPagamentos: TFDQuery;
+    FDProdutos: TFDQuery;
+    FDVendas: TFDQuery;
+    FDProdutosID_PRODUTO: TIntegerField;
+    FDProdutosCODIGO_PRODUTO: TStringField;
+    FDProdutosNOME_PRODUTO: TStringField;
+    FDProdutosPRECO_PRODUTO: TFloatField;
+    FDVendasID_VENDA: TIntegerField;
+    FDVendasID_CLIENTE: TIntegerField;
+    FDVendasID_PAGAMENTO: TIntegerField;
+    FDVendasSUBTOTAL_VENDA: TFloatField;
+    FDVendasDESCONTO_VENDA: TFloatField;
+    FDVendasTOTAL_VENDA: TFloatField;
+    FDItens_VendaID_ITEM: TIntegerField;
+    FDItens_VendaID_VENDA: TIntegerField;
+    FDItens_VendaID_PRODUTO: TIntegerField;
+    FDItens_VendaPRECO_ITEM: TFloatField;
+    FDItens_VendaQUANTIDADE_ITEM: TIntegerField;
+    FDItens_VendaTOTAL_ITEM: TFloatField;
+    FDPagamentosID_PAGAMENTO: TIntegerField;
+    FDPagamentosNOME_PAGAMENTO: TStringField;
+    FDClienteID_CLIENTE: TFDAutoIncField;
+    FDClienteNOME_CLIENTE: TStringField;
+    FDClienteLIMITE_CLIENTE: TFloatField;
+    FDTerminal: TFDQuery;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DM: TDM;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+end.

@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2019/08/26 17:57:15.000.304,=C:\Users\PCVCPAULO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/08/26 20:34:50.000.397,=C:\Users\PCVCPAULO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/08/26 20:49:48.000.996,=C:\Users\PCVCPAULO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/08/29 19:02:25.000.724,=C:\Users\PCVCPAULO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/08/29 19:04:45.000.313,=C:\Users\PCVCPAULO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/08/29 20:33:01.000.136,=C:\Users\PCVCPAULO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/05/21 21:36:25.000.026,=C:\Users\PCVCPAULO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/05/21 21:37:13.000.565,D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\fonte\U_principal.pas=C:\Users\PCVCPAULO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/05/21 21:37:13.000.565,D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\fonte\U_principal.dfm=C:\Users\PCVCPAULO\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2020/05/21 21:38:30.000.722,D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\SysPDV.dproj=C:\Users\PCVCPAULO\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2020/05/21 21:39:23.000.043,=D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\Unit1.pas</Transaction>
+    <Transaction>2020/05/21 21:40:51.000.824,D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\fonte\U_DM.dfm=D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\Unit1.dfm</Transaction>
+    <Transaction>2020/05/21 21:40:51.000.824,D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\fonte\U_DM.pas=D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\Unit1.pas</Transaction>
+    <Transaction>2020/05/21 22:11:36.000.619,=D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\Unit2.pas</Transaction>
+    <Transaction>2020/05/21 22:13:05.000.681,D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\fonte\U_cliente.dfm=D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\Unit2.dfm</Transaction>
+    <Transaction>2020/05/21 22:13:05.000.681,D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\fonte\U_cliente.pas=D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\Unit2.pas</Transaction>
+    <Transaction>2020/05/21 22:33:22.000.132,=D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\Unit2.pas</Transaction>
+    <Transaction>2020/05/21 22:42:23.000.337,D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\fonte\U_pdv.dfm=D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\Unit2.dfm</Transaction>
+    <Transaction>2020/05/21 22:42:23.000.337,D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\fonte\U_pdv.pas=D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\Unit2.pas</Transaction>
+    <Transaction>2020/05/21 22:46:44.000.602,=D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\Unit2.pas</Transaction>
+    <Transaction>2020/05/21 22:52:45.000.986,D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\fonte\U_pesquisa.pas=D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\Unit2.pas</Transaction>
+    <Transaction>2020/05/21 22:52:45.000.986,D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\fonte\U_pesquisa.dfm=D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\Unit2.dfm</Transaction>
+    <Transaction>2020/05/21 23:06:19.000.597,D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\fonte\U_pesquisaProd.dfm=D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\fonte\U_pesquisa.dfm</Transaction>
+    <Transaction>2020/05/21 23:06:19.000.597,D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\fonte\U_pesquisaProd.pas=D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\fonte\U_pesquisa.pas</Transaction>
+    <Transaction>2020/05/24 22:58:10.000.694,=D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\Unit1.pas</Transaction>
+    <Transaction>2020/05/24 23:02:20.000.619,D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\Unit1.dfm=D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\fonte\U_apagaItem.dfm</Transaction>
+    <Transaction>2020/05/24 23:02:20.000.619,D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\Unit1.pas=D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\fonte\U_apagaItem.pas</Transaction>
+    <Transaction>2020/05/24 23:29:55.000.850,=D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\Unit1.pas</Transaction>
+    <Transaction>2020/05/24 23:31:22.000.684,D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\Unit1.dfm=D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\fonte\U_cancelaCumpom.dfm</Transaction>
+    <Transaction>2020/05/24 23:31:22.000.684,D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\Unit1.pas=D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\fonte\U_cancelaCumpom.pas</Transaction>
+    <Transaction>2020/05/24 23:51:04.000.990,=D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\Unit1.pas</Transaction>
+    <Transaction>2020/05/24 23:51:30.000.862,D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\Unit1.pas=D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\fonte\U_fechamento.pas</Transaction>
+    <Transaction>2020/05/24 23:51:30.000.862,D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\Unit1.dfm=D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\fonte\U_fechamento.dfm</Transaction>
+    <Transaction>2020/05/25 21:36:56.000.956,=D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\Unit1.pas</Transaction>
+    <Transaction>2020/05/25 21:38:02.000.347,D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\fonte\U_imprimeCupom.dfm=D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\Unit1.dfm</Transaction>
+    <Transaction>2020/05/25 21:38:02.000.347,D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\fonte\U_imprimeCupom.pas=D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\Unit1.pas</Transaction>
+    <Transaction>2020/05/26 21:38:39.000.766,D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Delphi_RAD\PDV_RDW\fonte\U_imprimeCupom.pas=</Transaction>
+  </Transactions>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="fonte"/>
+    <File Path="fonte\U_cliente.pas"/>
+    <File Path="fonte\U_cliente.dfm"/>
+    <File Path="fonte\U_DM.pas"/>
+    <File Path="fonte\U_DM.dfm"/>
+    <File Path="fonte\U_pdv.pas"/>
+    <File Path="fonte\U_pdv.dfm"/>
+    <File Path="fonte\U_pesquisaProd.pas"/>
+    <File Path="fonte\U_pesquisaProd.dfm"/>
+    <File Path="fonte\U_principal.pas"/>
+    <File Path="fonte\U_principal.dfm"/>
+    <File Path="fonte\U_apagaItem.pas"/>
+    <File Path="fonte\U_apagaItem.dfm"/>
+    <File Path="fonte\U_cancelaCumpom.pas"/>
+    <File Path="fonte\U_cancelaCumpom.dfm"/>
+    <File Path="fonte\U_fechamento.pas"/>
+    <File Path="fonte\U_fechamento.dfm"/>
+  </ProjectSortOrder>
+</BorlandProject>

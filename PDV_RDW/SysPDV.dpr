@@ -1,0 +1,22 @@
+program SysPDV;
+
+uses
+  Vcl.Forms,
+  U_principal in 'fonte\U_principal.pas' {Frm_Principal},
+  U_DM in 'fonte\U_DM.pas' {DM: TDataModule},
+  U_cliente in 'fonte\U_cliente.pas' {Frm_Cliente},
+  U_pdv in 'fonte\U_pdv.pas' {Frm_PDV},
+  U_pesquisaProd in 'fonte\U_pesquisaProd.pas' {Frm_Pesquisa},
+  U_apagaItem in 'fonte\U_apagaItem.pas' {Frm_ApagaItem},
+  U_cancelaCumpom in 'fonte\U_cancelaCumpom.pas' {Frm_CancelaCupom},
+  U_fechamento in 'fonte\U_fechamento.pas' {Frm_Fechamento};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TDM, DM);
+  Application.CreateForm(TFrm_Principal, Frm_Principal);
+  Application.Run;
+end.
