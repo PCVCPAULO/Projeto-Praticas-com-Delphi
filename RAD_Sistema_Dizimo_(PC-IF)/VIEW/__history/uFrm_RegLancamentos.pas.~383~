@@ -1,0 +1,340 @@
+unit uFrm_RegLancamentos;
+
+interface
+
+uses
+  Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrm_CadastroBasico, Data.DB,
+  System.Actions, Vcl.ActnList, System.ImageList, Vcl.ImgList, Vcl.StdCtrls,
+  Vcl.ExtCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls, Vcl.Buttons, Vcl.ToolWin,
+  Vcl.Mask, Vcl.AppEvnts, Datasnap.DBClient, Vcl.DBCtrls, Winapi.Windows;
+
+type
+  Tfrm_RegLancamentos = class(Tfrm_CadastroBasico)
+    edt_Consulta: TButtonedEdit;
+    Label4: TLabel;
+    edt_CDFicha: TEdit;
+    edt_Nome: TEdit;
+    edt_Valor: TEdit;
+    edt_DataLancam: TEdit;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label11: TLabel;
+    edt_DataAbertura: TMaskEdit;
+    cbx_Referencia: TComboBox;
+    ds_Dizimo: TDataSource;
+    edt_CapituraFicha: TEdit;
+    DBGrid1: TDBGrid;
+    dbg_Dados: TDBGrid;
+    pnl_ToolBar: TToolBar;
+    SpeedButton10: TSpeedButton;
+    sbt_Pesquisar: TSpeedButton;
+    SpeedButton12: TSpeedButton;
+    sbt_Gravar: TSpeedButton;
+    SpeedButton14: TSpeedButton;
+    SpeedButton15: TSpeedButton;
+    sbt_Inserir: TSpeedButton;
+    ToolButton1: TToolButton;
+    ToolButton2: TToolButton;
+    SpeedButton9: TSpeedButton;
+    procedure btn_FiltrarClick(Sender: TObject);
+    procedure edt_ConsultaLeftButtonClick(Sender: TObject);
+    procedure edt_ConsultaRightButtonClick(Sender: TObject);
+    procedure dbg_DadosTitleClick(Column: TColumn);
+    procedure FormShow(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure acl_InserirUpdate(Sender: TObject);
+    procedure acl_GravarUpdate(Sender: TObject);
+    procedure dbg_DadosDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure sbt_PesquisarClick(Sender: TObject);
+    procedure sbt_InserirClick(Sender: TObject);
+    procedure sbt_GravarClick(Sender: TObject);
+    procedure acl_InserirExecute(Sender: TObject);
+    procedure edt_DataAberturaKeyPress(Sender: TObject; var Key: Char);
+
+
+  private
+    { Private declarations }
+
+    procedure DoAfterScroll(DataSet: TDataSet);
+
+    procedure PopularCombo;
+
+    protected
+
+    // Objeto utilizado na rotina de filtro
+    FieldFilter: TField;
+
+    // função que retorna o campo chave do DataSet CRUD
+    function GetKeyFiled: String;virtual;abstract;
+
+    //Função que retorna o nome do campo chave para filtrar o registro no DataSet de CRUD
+    function GetQuerykeyFiled: String;virtual;abstract;
+
+  public
+      iModo : Integer;
+    { Public declarations }
+  end;
+
+var
+  frm_RegLancamentos: Tfrm_RegLancamentos;
+  dtLancam: TDate;
+
+implementation
+
+{$R *.dfm}
+
+uses uDM_Dados, uFuncoes;
+
+
+
+procedure Tfrm_RegLancamentos.DoAfterScroll(DataSet: TDataSet);
+begin
+//
+end;
+
+procedure Tfrm_RegLancamentos.acl_InserirExecute(Sender: TObject);
+begin
+//
+
+end;
+
+procedure Tfrm_RegLancamentos.acl_InserirUpdate(Sender: TObject);
+begin
+{ HABILITA BOTOES
+  acl_Inserir.Enabled := ds_Tabela.State in [dsBrowse,dsInactive];
+}
+ end;
+
+procedure Tfrm_RegLancamentos.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+{
+    if TClientDataSet(ds_Dizimo.DataSet).RecordCount > 0 then
+    begin
+      edt_CDFicha.Text := TClientDataSet(ds_Dizimo.DataSet).FieldByName('CDFICHA').Value;
+      edt_Nome.Text    := TClientDataSet(ds_Dizimo.DataSet).FieldByName('NOME').AsString;
+//    btnInserir.SetFocus;
+    end
+    else
+    begin
+      messagedlg('Dizimista não cadastrado',mtinformation, [mbok],0);
+      Exit;
+    end;
+ }
+end;
+
+
+
+procedure Tfrm_RegLancamentos.acl_GravarUpdate(Sender: TObject);
+begin
+  acl_Gravar.Enabled := ds_Tabela.State in [dsInsert,dsEdit];
+end;
+
+
+
+procedure Tfrm_RegLancamentos.sbt_PesquisarClick(Sender: TObject);
+begin
+  edt_Pesquisar.Clear;
+  with TClientDataSet(ds_Tabela.DataSet) do
+  begin
+    close;
+	  CommandText := 'SELECT * FROM LANCAMENTO ORDER BY ID';
+	  Open;
+  end;
+
+end;
+
+procedure Tfrm_RegLancamentos.btn_FiltrarClick(Sender: TObject);
+begin
+  if edt_Pesquisar.Text = '' then
+  begin
+    Application.MessageBox('Informe um valor a ser pesquisado ou clique em Pesquisar.','Atenção',0+48);
+    edt_Pesquisar.SetFocus;
+    Abort;
+  end;
+
+  with TClientDataSet(ds_Tabela.DataSet) do
+  begin
+    Close;
+    case cbx_Pesquisar.ItemIndex of
+      0 : CommandText := 'SELECT * FROM LANCAMENTO WHERE CDFICHA LIKE '   +QuotedStr(Trim(edt_Pesquisar.Text));
+      1 : CommandText := 'SELECT * FROM LANCAMENTO WHERE NOMEDIZ LIKE '   +QuotedStr('%'+edt_Pesquisar.Text+'%');
+    end;
+     Open;
+ end;
+end;
+
+// Consultas com o TButtonedEdit
+
+procedure Tfrm_RegLancamentos.dbg_DadosTitleClick(Column: TColumn);
+begin
+
+  if Column.Field.FieldKind = fkData then
+  begin
+    FieldFilter := Column.Field;
+    edt_Consulta.Clear;
+    edt_Consulta.TextHint := 'Digite aqui para Pesquisar por: '+Column.Title.Caption;
+  end;
+end;
+
+procedure Tfrm_RegLancamentos.edt_ConsultaLeftButtonClick(Sender: TObject);
+begin
+
+  edt_Consulta.Clear;
+  TClientDataSet(ds_Tabela.DataSet).Filtered := False;
+  TClientDataSet(ds_Tabela.DataSet).Refresh;
+end;
+
+
+procedure Tfrm_RegLancamentos.edt_ConsultaRightButtonClick(Sender: TObject);
+var
+  Filter: String;
+begin
+
+  if Assigned(FieldFilter) then
+  begin
+    case FieldFilter.DataType of
+      ftUnknown: ;
+      ftBoolean: ;
+
+      ftString, ftFixedChar,
+      ftWideString, ftFixedWideChar,
+      ftWideMemo, ftMemo: Filter := 'upper('+FieldFilter.FieldName + ') LIKE ' +
+                                            QuotedStr(UpperCase(edt_Consulta.Text + '%'));
+
+      ftSmallint, ftInteger,
+      ftWord, ftLargeint,
+      ftLongWord, ftShortint,
+      ftBytes, ftByte: Filter := FieldFilter.FieldName + ' = ' +
+                           IntToStr(StrToIntDef(edt_Consulta.Text,0));
+
+      ftFloat, ftCurrency, ftBCD,
+      ftFMTBcd, ftExtended, ftSingle: Filter := FieldFilter.FieldName +
+                           ' = ' + FloatToStr(StrToIntDef(edt_Consulta.Text,0));
+
+      ftDate, ftTime, ftDateTime: Filter := FieldFilter.FieldName + ' = ' + QuotedStr(edt_Consulta.Text);
+    end;
+    TClientDataSet(ds_Tabela.DataSet).Filter   := Filter;
+    TClientDataSet(ds_Tabela.DataSet).Filtered := True;
+    stb_CadBasico.Panels[3].Text := 'Total de Registros: '+IntToStr(TClientDataSet(ds_Tabela.DataSet).RecordCount);
+  end;
+end;
+
+
+procedure Tfrm_RegLancamentos.edt_DataAberturaKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  TabEnter(Self,key);
+  if key = #13 then
+  begin
+    edt_CDFicha.SetFocus;
+  end;
+
+end;
+
+procedure Tfrm_RegLancamentos.sbt_GravarClick(Sender: TObject);
+begin
+
+  if Trim(edt_CDFicha.Text) = '' then
+  begin
+    Application.MessageBox('Preencha o campo Nº Ficha.','Atenção!',MB_OK+MB_ICONWARNING);
+    edt_CDFicha.SetFocus;
+    Abort;
+  end;
+
+   with TClientDataSet(ds_Tabela.DataSet) do
+   begin
+    if ds_Tabela.State in [dsInsert,dsEdit] then
+
+     FieldByName('ID').AsInteger         := GetId('ID', 'LANCAMENTO');
+     FieldByName('CDFICHA').AsInteger    := StrToInt(Trim(edt_CDFicha.Text));
+     FieldByName('NOMEDIZ').AsAnsiString := Trim(edt_Nome.Text);
+     FieldByName('VLRDOACAO').AsCurrency := StrToFloat(edt_Valor.Text);
+     FieldByName('REFERENCIA').AsAnsiString := Trim(cbx_Referencia.Text);
+     FieldByName('DTLANCAMENTO').AsDateTime := StrToDate(edt_DataLancam.Text);
+   end;
+
+  try
+    TClientDataSet(ds_Tabela.DataSet).Post;
+    TClientDataSet(ds_Tabela.DataSet).ApplyUpdates(0);
+
+    case iModo of
+      0 : Application.MessageBox('Registro inserido com sucesso!','Informação',MB_OK+MB_ICONINFORMATION);
+      1 : Application.MessageBox('Registro atualizado com sucesso!','Informação',MB_OK+MB_ICONINFORMATION);
+    end;
+
+    //Limpar os campos
+    LimparTudo;
+    TClientDataSet(ds_Tabela.DataSet).Open;
+    pgc_CadBasico.ActivePage := tbs_Cadastro;
+  except on E : Exception do
+    raise Exception.Create('Erro ao Gravar registro: '+E.Message);
+  end;
+  edt_CDFicha.SetFocus;
+end;
+
+procedure Tfrm_RegLancamentos.sbt_InserirClick(Sender: TObject);
+begin
+
+  iModo := 0;
+  if pgc_CadBasico.ActivePage = tbs_Pesquisar then
+  begin
+    tbs_Cadastro.TabVisible  := True;
+    lbl_Atividade.Caption    := 'Lançando arrecadação do Dízimo.';
+    tbs_Pesquisar.TabVisible := False;
+    pgc_CadBasico.ActivePage := tbs_Cadastro;
+  end;
+  if not TClientDataSet(ds_Tabela.DataSet).Active then
+         TClientDataSet(ds_Tabela.DataSet).Open;
+         TClientDataSet(ds_Tabela.DataSet).Insert;
+         TClientDataSet(ds_Tabela.DataSet).Last;
+
+    edt_CapituraFicha.Text := IntToStr(GetId('ID','LANCAMENTO'));
+    edt_CDFicha.Text := '';
+    edt_Nome.Text    := '';
+    edt_Valor.Text   := '';
+    cbx_Referencia.Text := '';
+
+    stb_CadBasico.Panels[3].Text := 'Total de Registros: '+IntToStr(TClientDataSet(ds_Tabela.DataSet).RecordCount);
+end;
+
+
+procedure Tfrm_RegLancamentos.FormShow(Sender: TObject);
+begin
+
+  PopularCombo;
+  edt_DataAbertura.SetFocus;
+
+end;
+
+procedure Tfrm_RegLancamentos.PopularCombo;
+begin
+  TClientDataSet(ds_Referencia.DataSet).Open;
+  TClientDataSet(ds_Referencia.DataSet).CommandText := 'SELECT * FROM MES_REFERENCIA ORDER BY DESCRICAO';
+  ds_Referencia.DataSet := DM_Dados.cds_Referencia;
+  ds_Referencia.DataSet.First;
+  while not ds_Referencia.DataSet.Eof  do
+  begin
+    cbx_Referencia.Items.AddObject(ds_Referencia.DataSet.FieldByName('DESCRICAO').AsString,
+        TObject(ds_Referencia.DataSet.FieldByName('ID').AsInteger));
+    ds_Referencia.DataSet.Next;
+  end;
+    cbx_Referencia.ItemIndex := 0;
+end;
+
+
+procedure Tfrm_RegLancamentos.dbg_DadosDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+ZebrarDBGrid(ds_Tabela,dbg_Dados,State,Rect,Column);
+end;
+
+
+
+
+
+end.

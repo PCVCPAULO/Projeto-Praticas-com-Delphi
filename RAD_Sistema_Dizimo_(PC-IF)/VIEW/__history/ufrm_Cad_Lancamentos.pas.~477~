@@ -1,0 +1,616 @@
+unit ufrm_Cad_Lancamentos;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
+  System.ImageList, Vcl.ImgList, Vcl.ComCtrls, Vcl.ToolWin, Data.DB, Vcl.Mask,
+  Vcl.Grids, Datasnap.DBClient, tpEdit, Vcl.DBCtrls, sComboBox, Data.SqlExpr,
+  Data.FMTBcd, sSkinManager, Vcl.DBGrids;
+
+type
+  Tfrm_Cad_Lancamentos = class(TForm)
+    pnl_Executando: TPanel;
+    Label2: TLabel;
+    lbl_Atividade: TLabel;
+    pnl3_DaDireita: TPanel;
+    pnl_ToolBar_Botoes: TPanel;
+    pnl_ToolBar: TToolBar;
+    btn0_Inserir: TButton;
+    ToolButton1: TToolButton;
+    ToolButton2: TToolButton;
+    img_Cadastro: TImageList;
+    btn2_Excluir: TButton;
+    btn1_Editar: TButton;
+    btn3_Gravar: TButton;
+    btn4_Cancelar: TButton;
+    btn5_Pesquisar: TButton;
+    brn7_FecharFrom: TButton;
+    btn6_Imprimir: TButton;
+    pnl_Fundo: TPanel;
+    pgc_Lancam: TPageControl;
+    tbs_Lancamentos: TTabSheet;
+    tbs_Pesquisa: TTabSheet;
+    Label9: TLabel;
+    Label8: TLabel;
+    Label7: TLabel;
+    Label6: TLabel;
+    Label5: TLabel;
+    Label3: TLabel;
+    cbx_Pesquisar: TComboBox;
+    Label1: TLabel;
+    edt_Pesquisar: TEdit;
+    btn_Filtrar: TButton;
+    ds_Referencia: TDataSource;
+    ds_Banco_Dizimo: TDataSource;
+    pnl_Data_Abertura: TPanel;
+    Label11: TLabel;
+    edt_DataAbertura: TMaskEdit;
+    pnl_Cacalho: TPanel;
+    dbg_Lancamentos: TDBGrid;
+    dbg_PesqLancamentos: TDBGrid;
+    tmr_Lancam: TTimer;
+    edt_CDFicha: TEdit;
+    edt_Nome: TEdit;
+    edt_Valor: TtpEdit;
+    cbx_Referencia: TsComboBox;
+    ds_Tabela: TDataSource;
+    Label10: TLabel;
+    pnl_StatusBar: TPanel;
+    edt_Hora: TEdit;
+    edt_ContaRegistros: TEdit;
+    edt_Data: TEdit;
+    edt_VLR_Total: TEdit;
+    edt_Total: TEdit;
+    edt_DataLancam: TMaskEdit;
+    Edit1: TEdit;
+    procedure brn7_FecharFromClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure tmr_LancamTimer(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure dbg_LancamentosDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure dbg_PesqLancamentosDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
+    procedure edt_CDFichaKeyPress(Sender: TObject; var Key: Char);
+    procedure edt_ValorKeyPress(Sender: TObject; var Key: Char);
+    procedure cbx_ReferenciaKeyPress(Sender: TObject; var Key: Char);
+    procedure btn0_InserirClick(Sender: TObject);
+    procedure cbx_ReferenciaClick(Sender: TObject);
+    procedure btn3_GravarKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure btn3_GravarClick(Sender: TObject);
+    procedure btn1_EditarClick(Sender: TObject);
+    procedure btn5_PesquisarClick(Sender: TObject);
+    procedure btn_FiltrarClick(Sender: TObject);
+    procedure cbx_PesquisarClick(Sender: TObject);
+    procedure btn2_ExcluirClick(Sender: TObject);
+    procedure btn4_CancelarClick(Sender: TObject);
+    procedure edt_PesquisarKeyPress(Sender: TObject; var Key: Char);
+    procedure btn3_GravarExit(Sender: TObject);
+    procedure edt_DataAberturaKeyPress(Sender: TObject; var Key: Char);
+    procedure btn6_ImprimirClick(Sender: TObject);
+    procedure Edit1KeyPress(Sender: TObject; var Key: Char);
+  private
+    procedure PopularCombo;
+
+  public
+
+    iModo : Integer;
+    procedure LimparLancamentos;
+
+    { Public declarations }
+  end;
+
+var
+  frm_Cad_Lancamentos: Tfrm_Cad_Lancamentos;
+  dtBanco: TDate;
+
+
+implementation
+
+{$R *.dfm}
+
+uses uDM_Dados, uFuncoes, uFrm_ConsultaLancamentos;
+
+procedure Tfrm_Cad_Lancamentos.brn7_FecharFromClick(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure Tfrm_Cad_Lancamentos.btn0_InserirClick(Sender: TObject);
+
+begin
+  iModo := 0;
+  if pgc_Lancam.ActivePage = tbs_Pesquisa then
+  begin
+    tbs_Lancamentos.TabVisible := True;
+    lbl_Atividade.Caption      := 'Lançando arrecadação do Dízimo.';
+    tbs_Pesquisa.TabVisible    := False;
+    pgc_Lancam.ActivePage      := tbs_Lancamentos;
+  end;
+  if not TClientDataSet(ds_Tabela.DataSet).Active then
+         TClientDataSet(ds_Tabela.DataSet).Open;
+         TClientDataSet(ds_Tabela.DataSet).Append;
+
+  edt_Valor.Text      := '';
+  edt_Valor.SetFocus;
+  cbx_Referencia.Text := '';
+
+  //Validações
+  if trim(edt_CDFicha.Text) = '' then
+  begin
+    Application.MessageBox('Preencha o campo Nº da Ficha.','Atenção',MB_OK+MB_ICONWARNING);
+    edt_DataAbertura.SetFocus;
+    Abort;
+  end;
+  edt_ContaRegistros.Text := 'Total de Registros: '+IntToStr(TClientDataSet(ds_Tabela.DataSet).RecordCount);
+
+end;
+
+procedure Tfrm_Cad_Lancamentos.btn1_EditarClick(Sender: TObject);
+begin
+  iModo := 1;
+  if pgc_Lancam.ActivePage = tbs_Pesquisa then
+  begin
+    tbs_Lancamentos.TabVisible  := True;
+    tbs_Pesquisa.TabVisible := False;
+    pgc_Lancam.ActivePage  := tbs_Lancamentos;
+    lbl_Atividade.Caption    := 'Alterando dados de Lançamento do Dizimo';
+  end;
+  if not TClientDataSet(ds_Tabela.DataSet).Active then
+         TClientDataSet(ds_Tabela.DataSet).Open;
+         TClientDataSet(ds_Tabela.DataSet).Edit;
+
+  with TClientDataSet(ds_Tabela.DataSet) do
+  begin
+    edt_CDFicha.Text    := InttoStr(FieldByName('CDFICHA').AsInteger);
+    edt_Nome.Text       := FieldByName('NOMEDIZ').AsAnsiString;
+    edt_Valor.Text      := FloatToStr(FieldByName('VLRDOACAO').AsFloat);
+    cbx_Referencia.Text := FieldByName('REFERENCIA').AsAnsiString;
+    edt_DataAbertura.Text := DateToStr(FieldByName('DTLANCAMENTO').AsDateTime);
+    edt_DataLancam.Text   := DateToStr(FieldByName('DTLANCAMENTO').AsDateTime);
+    edt_CDFicha.Enabled := False;
+    edt_Nome.Enabled    := False;
+  end;
+  edt_Valor.SetFocus;
+end;
+
+procedure Tfrm_Cad_Lancamentos.btn2_ExcluirClick(Sender: TObject);
+var
+  i: integer;
+begin
+  if Application.MessageBox('Deseja realmente excluir o registro?','Pergunta',MB_YESNO+MB_ICONQUESTION) = mrYes then
+  begin
+    begin
+      begin
+        for i := 0 to dbg_PesqLancamentos.SelectedRows.Count - 1 do
+        begin
+          TClientDataSet(ds_Tabela.DataSet).GotoBookmark(dbg_PesqLancamentos.SelectedRows.Items[i]);
+        end;
+      end;
+
+      try
+        TClientDataSet(ds_Tabela.DataSet).Delete;
+        TClientDataSet(ds_Tabela.DataSet).ApplyUpdates(0);
+        Application.MessageBox('Registro excluído com sucesso!','Informação',0+64);
+        TClientDataSet(ds_Tabela.DataSet).Open;
+      except on E : Exception do
+        raise Exception.Create('Erro ao excluir registro: '+E.Message);
+      end;
+    end;
+   end;
+end;
+
+
+
+procedure Tfrm_Cad_Lancamentos.btn3_GravarClick(Sender: TObject);
+begin
+  //Validações
+  if trim(edt_CDFicha.Text) = '' then
+  begin
+    Application.MessageBox('Preencha o campo Nº da Ficha.','Atenção',MB_OK+MB_ICONWARNING);
+    edt_CDFicha.SetFocus;
+    Abort;
+  end;
+
+  if StringParaFloat(edt_Valor.Text) <= 0 then
+  begin
+    Application.MessageBox('Informe um valor maior que ZERO.','Atenção',0+48);
+    edt_Valor.SetFocus;
+    abort;
+  end;
+
+  with TClientDataSet(ds_Tabela.DataSet) do
+    begin
+    try
+       FieldByName('ID').AsInteger         := GetId('ID', 'LANCAMENTO');
+       FieldByName('CDFICHA').AsInteger    := StrToInt(Trim(edt_CDFicha.Text));
+       FieldByName('NOMEDIZ').AsAnsiString := Trim(edt_Nome.Text);
+       FieldByName('VLRDOACAO').AsCurrency := StringParaFloat(edt_Valor.Text);
+       FieldByName('REFERENCIA').AsAnsiString := Trim(cbx_Referencia.Text);
+       FieldByName('DTLANCAMENTO').AsDateTime := StrToDate(edt_DataLancam.Text);
+
+      TClientDataSet(ds_Tabela.DataSet).Post;
+      TClientDataSet(ds_Tabela.DataSet).ApplyUpdates(0);
+
+      case iModo of
+        0 : Application.MessageBox('Registro inserido com sucesso!','Informação',MB_OK+MB_ICONINFORMATION);
+        1 : Application.MessageBox('Registro atualizado com sucesso!','Informação',0+64);
+      end;
+
+      //Limpar os campos
+      LimparLancamentos;
+      TClientDataSet(ds_Tabela.DataSet).Close;
+      TClientDataSet(ds_Tabela.DataSet).Open;
+      pgc_Lancam.ActivePage := tbs_Lancamentos;
+
+      except on E : Exception do
+        raise Exception.Create('Erro ao Gravar registro: '+E.Message);
+      end;
+  end;
+  edt_CDFicha.SetFocus;
+
+end;
+
+procedure Tfrm_Cad_Lancamentos.btn3_GravarExit(Sender: TObject);
+var
+  Soma: Double;
+  i: Integer;
+  dtLancam: TDate;
+  dtFormata: String;
+begin
+  with TClientDataSet(ds_Tabela.DataSet) do
+  begin
+  dtLancam  := StrToDate(edt_DataAbertura.Text);
+  dtFormata := FormatDateTime('DD.MM.YYYY', dtLancam);
+
+    Close;
+    CommandText := '';
+    CommandText := 'select * from LANCAMENTO where DTLANCAMENTO = ' + #39 + dtFormata + #39;
+    Open;
+    Soma := 0;
+    First;
+    for i := 0 to RecordCount -1 do
+    begin
+      Soma := Soma + FieldByName('VLRDOACAO').AsFloat;
+      Next;
+    end;
+     edt_Total.Text := FormatFloat('###,##0.00',Soma);
+     edt_ContaRegistros.Text := 'Nº Lancamentos: '+IntToStr(TClientDataSet(ds_Tabela.DataSet).RecordCount);
+   end;
+
+end;
+
+procedure Tfrm_Cad_Lancamentos.btn3_GravarKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+
+begin
+  Click;
+  edt_CDFicha.SetFocus;
+end;
+
+procedure Tfrm_Cad_Lancamentos.btn4_CancelarClick(Sender: TObject);
+begin
+  TClientDataSet(ds_Tabela.DataSet).Cancel;
+  TClientDataSet(ds_Tabela.DataSet).Open;
+  TClientDataSet(ds_Tabela.DataSet).Edit;
+  LimparLancamentos;
+  lbl_Atividade.Caption := 'Pesquisa';
+end;
+
+procedure Tfrm_Cad_Lancamentos.btn5_PesquisarClick(Sender: TObject);
+begin
+  edt_Pesquisar.Clear;
+  lbl_Atividade.Caption   := 'Pesquisa no Lançamento do Dízimo.';
+  tbs_Lancamentos.TabVisible := False;
+  pgc_Lancam.ActivePage := tbs_Pesquisa;
+  edt_Pesquisar.SetFocus;
+
+  with TClientDataSet(ds_Tabela.DataSet) do
+  begin
+    close;
+	  CommandText := 'SELECT * FROM LANCAMENTO';
+	  Open;
+    edt_ContaRegistros.Text := 'Nº Registros: '+IntToStr(TClientDataSet(ds_Tabela.DataSet).RecordCount);
+  end;
+
+end;
+
+
+procedure Tfrm_Cad_Lancamentos.btn6_ImprimirClick(Sender: TObject);
+begin
+  CriarForm(Tfrm_ConsultaLancam,frm_ConsultaLancam);
+end;
+
+procedure Tfrm_Cad_Lancamentos.LimparLancamentos;
+begin
+    edt_CDFicha.Clear;
+    edt_Nome.Clear;
+    edt_Valor.Clear;
+    edt_DataLancam.Clear;
+end;
+
+
+procedure Tfrm_Cad_Lancamentos.cbx_PesquisarClick(Sender: TObject);
+begin
+  edt_Pesquisar.SetFocus;
+end;
+
+procedure Tfrm_Cad_Lancamentos.cbx_ReferenciaClick(Sender: TObject);
+begin
+    edt_DataLancam.SetFocus;
+    edt_DataLancam.Text := edt_DataAbertura.Text;
+end;
+
+procedure Tfrm_Cad_Lancamentos.cbx_ReferenciaKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if key = #13 then
+  begin
+    btn3_Gravar.SetFocus;
+    edt_DataLancam.Text := DateToStr(dtBanco);
+  end;
+end;
+
+procedure Tfrm_Cad_Lancamentos.edt_ValorKeyPress(Sender: TObject;
+  var Key: Char);
+
+begin
+  if key = #13 then
+  begin
+    cbx_Referencia.SetFocus;
+  end;
+end;
+
+procedure Tfrm_Cad_Lancamentos.dbg_LancamentosDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+
+  ZebrarDBGrid(ds_Tabela,dbg_Lancamentos,State,Rect,Column);
+
+end;
+
+procedure Tfrm_Cad_Lancamentos.dbg_PesqLancamentosDrawColumnCell(
+  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+
+  ZebrarDBGrid(ds_Tabela,dbg_PesqLancamentos,State,Rect,Column);
+
+end;
+
+procedure Tfrm_Cad_Lancamentos.Edit1KeyPress(Sender: TObject; var Key: Char);
+begin
+  if key = #13 then
+  btn_Filtrar.Click;
+end;
+
+procedure Tfrm_Cad_Lancamentos.edt_CDFichaKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if key = #13 then
+  begin
+    if edt_CDFicha.Text = '' then
+    begin
+      Application.MessageBox('Informe o Nº da Ficha para pesquisar o Nome.','Atenção',0+48);
+      Abort;
+    end;
+    edt_CDFicha.SetFocus;
+
+    with TClientDataSet(ds_Banco_Dizimo.DataSet) do
+    begin
+      begin
+        Close;
+        CommandText := '';
+        CommandText := 'SELECT * FROM TBL_PLANDADOS WHERE CDFICHA  = ' + #39 + edt_CDFicha.Text + #39;
+        Open;
+      end;
+
+      if (RecordCount <> 0) and (FieldByName('SITUACAO').AsString = 'A') then
+      begin
+        edt_Nome.Text := FieldByName('NOME').AsAnsiString;
+        btn0_Inserir.SetFocus;
+      end
+      else
+      begin
+        Application.MessageBox('Dizimista não cadastrado. '+ #13+
+                               'Ou sua Situação está como INATIVO.', 'Atenção!',MB_OK+MB_ICONWARNING);
+        edt_CDFicha.Clear;
+      end;
+    end;
+  end;
+end;
+
+
+procedure Tfrm_Cad_Lancamentos.edt_DataAberturaKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if key = #13 then
+  begin
+
+  iModo := 0;
+    if pgc_Lancam.ActivePage = tbs_Pesquisa then
+    begin
+      tbs_Lancamentos.TabVisible  := True;
+      lbl_Atividade.Caption    := 'Lançando arrecadação do Dízimo.';
+      tbs_Pesquisa.TabVisible := False;
+      pgc_Lancam.ActivePage := tbs_Lancamentos;
+    end;
+
+    dtBanco             := StrToDate(edt_DataAbertura.Text);
+    edt_DataLancam.Text := DateToStr(dtBanco);
+    edt_CDFicha.SetFocus;
+  end;
+
+end;
+
+procedure Tfrm_Cad_Lancamentos.btn_FiltrarClick(Sender: TObject);
+var
+  VLRTotLancado: Real;
+  ValorD: Real;
+  ValorFormatado: String;
+  i: Integer;
+  dtLancam,dtvalor: TDate;
+  dtFormatada, dtForma: String;
+  sqlData: String;
+
+begin
+  begin
+    if edt_Pesquisar.Text = '' then
+    begin
+      Application.MessageBox('Informe um valor a ser pesquisado ou clique em Pesquisar.','Atenção',0+48);
+      edt_Pesquisar.SetFocus;
+      Abort;
+    end;
+  end;
+
+
+  begin
+    if cbx_Pesquisar.ItemIndex = 0 then
+    begin
+      with TClientDataSet(ds_Tabela.DataSet) do
+      begin
+        Close;
+        CommandText := '';
+        CommandText := 'SELECT * FROM LANCAMENTO WHERE CDFICHA = '+ #39 + edt_Pesquisar.Text + #39;
+        Open;
+        VLRTotLancado := 0;
+        First;
+        for i := 0 to RecordCount -1 do
+        begin
+            VLRTotLancado := VLRTotLancado + FieldByName('VLRDOACAO').AsFloat;
+            Next;
+        end;
+        edt_Total.Text := FormatFloat('###,##0.00',VLRTotLancado);
+        edt_ContaRegistros.Text := 'Nº Lancamentos: '+IntToStr(TClientDataSet(ds_Tabela.DataSet).RecordCount);
+      end;
+     end;
+   end;
+
+  begin
+    if cbx_Pesquisar.ItemIndex = 1 then
+    begin
+      with TClientDataSet(ds_Tabela.DataSet) do
+      begin
+        dtLancam       := StrToDate(edt_Pesquisar.Text);
+        dtFormatada    := FormatDateTime('DD.MM.YYYY', dtLancam);
+        Close;
+        CommandText := '';
+        CommandText := 'SELECT * FROM LANCAMENTO WHERE DTLANCAMENTO = ' + #39 + dtFormatada + #39;
+
+        Open;
+        VLRTotLancado := 0;
+        First;
+        for i := 0 to RecordCount -1 do
+        begin
+          VLRTotLancado := VLRTotLancado + FieldByName('VLRDOACAO').AsFloat;
+          Next;
+        end;
+       edt_Total.Text := FormatFloat('###,##0.00',VLRTotLancado);
+       edt_ContaRegistros.Text := 'Nº Lancamentos: '+IntToStr(TClientDataSet(ds_Tabela.DataSet).RecordCount);
+       end;
+    end;
+  end;
+
+  begin
+    if cbx_Pesquisar.ItemIndex = 2 then
+    begin
+      with TClientDataSet(ds_Tabela.DataSet) do
+      begin
+        ValorD         := StrToFloat(edt_Pesquisar.Text);
+        ValorFormatado := FormatFloat('##0.00',ValorD);
+        dtvalor        := StrToDate(edit1.Text);
+        dtForma        := FormatDateTime('DD.MM.YYYY', dtvalor);
+
+        Filtered := False;
+        Filter   := 'VLRDOACAO = ' + #39 + ValorFormatado + #39;
+        Filtered := True;
+          Close;
+          CommandText := '';
+          CommandText := 'SELECT * FROM LANCAMENTO WHERE DTLANCAMENTO = ' + #39 + dtForma + #39;
+          Open;
+
+        VLRTotLancado := 0;
+        First;
+        for i := 0 to RecordCount -1 do
+        begin
+          VLRTotLancado := VLRTotLancado + FieldByName('VLRDOACAO').AsFloat;
+          Next;
+        end;
+       edt_Total.Text := FormatFloat('###,##0.00',VLRTotLancado);
+       edt_ContaRegistros.Text := 'Nº Lancamentos: '+IntToStr(TClientDataSet(ds_Tabela.DataSet).RecordCount);
+      end;
+    end;
+  end;
+end;
+
+
+
+
+procedure Tfrm_Cad_Lancamentos.edt_PesquisarKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if key = #13 then
+  case cbx_Pesquisar.ItemIndex of
+   0 : btn_Filtrar.Click;
+   1 : btn_Filtrar.Click;
+   2 : edit1.Setfocus;
+  end;
+
+end;
+
+procedure Tfrm_Cad_Lancamentos.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+    TClientDataSet(ds_Referencia.DataSet).Cancel;
+    TClientDataSet(ds_Referencia.DataSet).Close;
+    Action := caFree;
+    frm_Cad_Lancamentos := nil;
+end;
+
+
+
+procedure Tfrm_Cad_Lancamentos.FormShow(Sender: TObject);
+begin
+  PopularCombo;
+  pnl_Data_Abertura.Enabled := True;
+  edt_DataAbertura.SetFocus;
+  lbl_Atividade.Caption   := 'Lançamento da arrecadação do Dízimo.';
+  edt_Data.Text := FormatDateTime(' dddd ", " dd " de " mmmm " de " yyyy'+'.',now);
+  btn5_Pesquisar.Click;
+end;
+
+
+
+procedure Tfrm_Cad_Lancamentos.PopularCombo;
+begin
+  TClientDataSet(ds_Referencia.DataSet).Open;
+  TClientDataSet(ds_Referencia.DataSet).CommandText := 'SELECT * FROM MES_REFERENCIA ORDER BY DESCRICAO';
+  ds_Referencia.DataSet := DM_Dados.cds_Referencia;
+  ds_Referencia.DataSet.First;
+  while not ds_Referencia.DataSet.Eof  do
+  begin
+    cbx_Referencia.Items.AddObject(ds_Referencia.DataSet.FieldByName('DESCRICAO').AsString,
+        TObject(ds_Referencia.DataSet.FieldByName('ID').AsInteger));
+    ds_Referencia.DataSet.Next;
+  end;
+    cbx_Referencia.ItemIndex := 0;
+end;
+
+
+procedure Tfrm_Cad_Lancamentos.tmr_LancamTimer(Sender: TObject);
+begin
+  edt_Hora.Text := ' ' + FormatDateTime(' hh:nn:ss', now);
+end;
+
+procedure Tfrm_Cad_Lancamentos.FormCreate(Sender: TObject);
+begin
+  pgc_Lancam.ActivePageIndex := 0;
+end;
+
+
+end.

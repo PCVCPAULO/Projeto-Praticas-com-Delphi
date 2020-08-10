@@ -1,0 +1,6 @@
+procedure TForm1.Image2Click(Sender: TObject);
+begin
+	if SplitView1.Opened then
+		SplitView1.close;
+	else
+		SPlitView1.Open;

@@ -1,0 +1,201 @@
+unit uFuncoes;
+
+interface
+// DECLARA FUNÇÕES E VARIÁVEIS
+
+
+uses SysUtils, Classes, FireDAC.Comp.DataSet, Data.SqlExpr, uDM_Dados, Data.DB,
+     FireDAC.Comp.Client, FireDAC.Stan.Param,  Vcl.ComCtrls, Vcl.StdCtrls, Vcl.Dialogs,
+     DBGrids, Grids, Types, Forms, Messages;
+
+  procedure CriarForm(T : TComponentClass; Form : TForm);
+  procedure ZebrarDBGrid(DataSource : TDataSource; Sender : TDBGrid; State : TGridDrawState; Rect : TRect; Column : TColumn);
+
+  function GetId(Campo, Tabela : String) : Integer;
+  function GetCDFICHA(Campo, Tabela : String) : Integer;
+
+  function GetLoginCadastrado(Login : String) : Boolean;
+
+  function GetFichaCadastrada(Ficha : Integer) : Boolean;
+
+  function StringParaFloat(s : string) : Extended;
+
+  procedure TabEnter(auxForm: TForm; var Key: Char);
+
+  function TestarPermissao(NOME_FORM: String): Boolean;
+
+implementation
+// onde implementa as funções
+
+
+
+// funcao que testa permissao do usuario
+function TestarPermissao(NOME_FORM: String): Boolean;
+begin
+
+  Result := True;
+  if Result = False then
+  ShowMessage('Formulário já está aberto.');
+
+end;
+
+
+procedure CriarForm(T : TComponentClass ;Form : TForm);
+begin
+    Application.CreateForm(T,Form);
+    try
+      Form.ShowModal;
+    finally
+      FreeAndNil(Form);
+    end;
+end;
+
+
+function GetId(Campo, Tabela : String) : Integer;
+begin
+
+	with TSQLQuery.Create(nil) do
+	try
+	  SQLConnection := DM_Dados.Conexao;
+	  Sql.Add('SELECT '+Campo+' FROM '+Tabela+' ORDER BY '+Campo+' DESC ');
+	  Open;
+	  Result := Fields[0].AsInteger + 1 ;
+  finally
+	  Close;
+	  Free;
+	end;
+
+end;
+
+function GetCDFICHA(Campo, Tabela : String) : Integer;
+begin
+  {
+	with TSQLQuery.Create(nil) do
+	try
+	  SQLConnection := DM_Dados.Conexao;
+	  Sql.Add('SELECT '+Campo+' FROM '+Tabela+' ORDER BY '+Campo+' DESC ');
+	  Open;
+	  Result := Fields[0].AsInteger + 1 ;
+  finally
+	  Close;
+	  Free;
+	end;
+   }
+end;
+
+
+function GetFichaCadastrada(Ficha : Integer) : Boolean;
+begin
+  {
+  result := false;
+  with TSQLQuery.Create(nil) do
+  try
+     SQLConnection := DM_Dados.Conexao;
+     SQL.Add('SELECT CDFICHA FROM TBL_DADOS WHERE CDFICHA = :FICHA');
+     Params[0].AsInteger := Ficha;
+     Open;
+     if not IsEmpty then
+       result := True;
+  finally
+     Close;
+     Free;
+  end;
+   }
+end;
+
+
+function GetLoginCadastrado(Login : String) : Boolean;
+begin
+  result := false;
+  with TSQLQuery.Create(nil) do
+  try
+     SQLConnection := DM_Dados.Conexao;
+     SQL.Add('SELECT ID FROM USUARIOS WHERE LOGIN = :LOGIN');
+     Params[0].AsString := Login;
+     Open;
+     if not IsEmpty then
+       result := True;
+  finally
+     Close;
+     Free;
+  end;
+end;
+
+
+
+procedure ZebrarDBGrid(DataSource : TDataSource; Sender : TDBGrid;
+               State : TGridDrawState; Rect : TRect; Column : TColumn);
+begin
+  If not odd(DataSource.DataSet.RecNo) then
+  begin
+    If not (gdSelected in State) then
+    begin
+      Sender.Canvas.Brush.Color := $00FFEFDF;
+      Sender.Canvas.FillRect(Rect);
+      Sender.DefaultDrawDataCell(rect,Column.Field,State);
+    end;
+  end;
+end;
+
+{Procedimento para trocar Tab por Enter}
+procedure TabEnter(auxForm: TForm; var Key: Char);
+begin
+  with auxForm do
+  begin
+    if key = #27 then
+    Close;
+    if key = #13 then
+    begin
+      if not (ActiveControl is TDBGrid) then
+      begin
+        key := #0;
+        Perform(WM_NEXTDLGCTL,0,0);
+      end;
+    end;
+  end;
+end;
+
+
+function StringParaFloat(s : string) : Extended;
+{ Filtra uma string qualquer, convertendo as suas partes
+  numéricas para sua representação decimal, por exemplo:
+  'R$ 1.200,00' para 1200,00 '1AB34TZ' para 134}
+var
+  i :Integer;
+  t : string;
+  SeenDecimal,SeenSgn : Boolean;
+begin
+   t := '';
+   SeenDecimal := False;
+       SeenSgn := False;
+
+   {Percorre os caracteres da string:}
+   for i := Length(s) downto 0 do
+
+  {Filtra a string, aceitando somente números e separador decimal:}
+
+     if (s[i] in ['0'..'9', '-','+',',']) then
+     begin
+        if (s[i] = ',') and (not SeenDecimal) then
+        begin
+           t := s[i] + t;
+           SeenDecimal := True;
+        end
+        else if (s[i] in ['+','-']) and (not SeenSgn) and (i = 1) then
+        begin
+           t := s[i] + t;
+           SeenSgn := True;
+        end
+        else if s[i] in ['0'..'9'] then
+        begin
+           t := s[i] + t;
+        end;
+     end;
+   Result := StrToFloat(t);
+end;
+
+
+
+
+
+end.

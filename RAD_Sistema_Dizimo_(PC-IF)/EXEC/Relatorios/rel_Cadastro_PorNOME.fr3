@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<TfrxReport Version="6.3.1" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="167935" PreviewOptions.Zoom="1" PrintOptions.Printer="Padrão" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="43770,6194560648" ReportOptions.Description.Text="" ReportOptions.LastChange="43773,3252158565" ScriptLanguage="PascalScript" ScriptText.Text="begin&#13;&#10;&#13;&#10;end.">
+  <Datasets>
+    <item DataSet="frxDBD_Cadastro" DataSetName="tbl_Cadastro"/>
+  </Datasets>
+  <TfrxDataPage Name="Data" Height="1000" Left="0" Top="0" Width="1000"/>
+  <TfrxReportPage Name="rel_CadastroPorNome" PaperWidth="210" PaperHeight="297" PaperSize="9" LeftMargin="10" RightMargin="10" TopMargin="10" BottomMargin="10" ColumnWidth="0" ColumnPositions.Text="" Frame.Typ="0" MirrorMode="0" HGuides.Text="" VGuides.Text="">
+    <TfrxReportTitle Name="ReportTitle1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="0" Left="0" Top="18,89765" Width="718,1107"/>
+    <TfrxPageHeader Name="PageHeader1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="64,2519978" Left="0" Top="41,57483" Width="718,1107">
+      <TfrxMemoView Name="Memo3" AllowVectorExport="True" Left="3,77953" Top="41" Width="71,81107" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Calibri" Font.Style="1" Frame.Typ="12" ParentFont="False" Text="Ficha Nº"/>
+      <TfrxMemoView Name="Memo4" AllowVectorExport="True" Left="75,5906" Top="41" Width="415,7483" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Calibri" Font.Style="1" Frame.Typ="12" ParentFont="False" Text="Nome do Dizimista"/>
+      <TfrxMemoView Name="Memo5" AllowVectorExport="True" Left="491,3389" Top="41" Width="105,82684" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Calibri" Font.Style="1" Frame.Typ="12" ParentFont="False" Text="Dt. Nascimento"/>
+      <TfrxMemoView Name="Memo6" AllowVectorExport="True" Left="597,16574" Top="41" Width="117,16543" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Calibri" Font.Style="1" Frame.Typ="12" ParentFont="False" Text=" Telefone"/>
+      <TfrxMemoView Name="Memo7" AllowVectorExport="True" Left="226,7718" Top="20,11812" Width="264,5671" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Calibri" Font.Style="0" Frame.Typ="0" HAlign="haCenter" ParentFont="False" Text="Comunidade Matriz &#34;Santo Antônio&#34;"/>
+      <TfrxMemoView Name="Memo8" AllowVectorExport="True" Left="3,77953" Top="0" Width="710,55164" Height="30,23624" Font.Charset="1" Font.Color="0" Font.Height="-19" Font.Name="Arial" Font.Style="1" Frame.Typ="0" HAlign="haCenter" ParentFont="False" Text="CONTROLE DE RECEBIMENTO DO DÍZIMO"/>
+    </TfrxPageHeader>
+    <TfrxMasterData Name="md_Campos" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="15,11812" Left="0" Top="166,29932" Width="718,1107" ColumnWidth="0" ColumnGap="0" DataSet="frxDBD_Cadastro" DataSetName="tbl_Cadastro" RowCount="0">
+      <TfrxMemoView Name="tbl_CadastroCDFICHA" IndexTag="1" AllowVectorExport="True" Left="3,77953" Top="-2" Width="64,25201" Height="18,89765" DataField="CDFICHA" DataSet="frxDBD_Cadastro" DataSetName="tbl_Cadastro" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Calibri" Font.Style="0" Frame.Typ="0" ParentFont="False" Text="[tbl_Cadastro.&#34;CDFICHA&#34;]"/>
+      <TfrxMemoView Name="tbl_CadastroNOME" IndexTag="1" AllowVectorExport="True" Left="75,5906" Top="-2" Width="408,18924" Height="18,89765" DataField="NOME" DataSet="frxDBD_Cadastro" DataSetName="tbl_Cadastro" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Calibri" Font.Style="0" Frame.Typ="0" ParentFont="False" Text="[tbl_Cadastro.&#34;NOME&#34;]"/>
+      <TfrxMemoView Name="tbl_CadastroDT_NASC" IndexTag="1" AllowVectorExport="True" Left="491,3389" Top="-2" Width="105,82684" Height="18,89765" DataField="DT_NASC" DataSet="frxDBD_Cadastro" DataSetName="tbl_Cadastro" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Calibri" Font.Style="0" Frame.Typ="0" ParentFont="False" Text="[tbl_Cadastro.&#34;DT_NASC&#34;]"/>
+      <TfrxMemoView Name="tbl_CadastroFONE_MOVEL" IndexTag="1" AllowVectorExport="True" Left="597,16574" Top="-2" Width="117,16543" Height="18,89765" DataField="FONE_MOVEL" DataSet="frxDBD_Cadastro" DataSetName="tbl_Cadastro" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Calibri" Font.Style="0" Frame.Typ="0" ParentFont="False" Text="[tbl_Cadastro.&#34;FONE_MOVEL&#34;]"/>
+    </TfrxMasterData>
+    <TfrxPageFooter Name="PageFooter1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="45,3543478" Left="0" Top="241,88992" Width="718,1107">
+      <TfrxMemoView Name="Date" IndexTag="1" AllowVectorExport="True" Left="3,77953" Top="-1" Width="627,40198" Height="18,89765" DisplayFormat.FormatStr="dd/mm/yyyy" DisplayFormat.Kind="fkDateTime" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Calibri" Font.Style="0" Frame.Typ="4" ParentFont="False" Text="[Date]"/>
+      <TfrxMemoView Name="Page" IndexTag="1" AllowVectorExport="True" Left="632,16574" Top="-1" Width="52,91342" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Calibri" Font.Style="0" Frame.Typ="4" HAlign="haRight" ParentFont="False" Text="Pág.: [Page]"/>
+      <TfrxMemoView Name="TotalPages" IndexTag="1" AllowVectorExport="True" Left="684,09493" Top="-1" Width="30,23624" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Calibri" Font.Style="0" Frame.Typ="4" ParentFont="False" Text="/[TotalPages#]"/>
+      <TfrxMemoView Name="Memo9" AllowVectorExport="True" Left="3,77953" Top="22,67718" Width="124,72449" Height="18,89765" Frame.Typ="0" Text="Total de Dizimistas: "/>
+      <TfrxSysMemoView Name="SysMemo1" AllowVectorExport="True" Left="132,28355" Top="22,67718" Width="147,40167" Height="18,89765" Frame.Typ="0" Text="[COUNT(md_Campos)]"/>
+    </TfrxPageFooter>
+  </TfrxReportPage>
+</TfrxReport>

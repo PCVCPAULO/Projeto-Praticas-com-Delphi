@@ -1,0 +1,20 @@
+  with TClientDataSet(ds_Tabela.DataSet) do
+  begin
+    Close;
+    CommandText := '';
+    case cbx_Pesquisar.ItemIndex of
+      0 : CommandText := 'SELECT * FROM LANCAMENTO WHERE CDFICHA = ' + #39 + edt_Pesquisar.Text + #39;
+      1 : CommandText := 'SELECT * FROM LANCAMENTO WHERE NOMEDIZ LIKE '+QuotedStr('%'+edt_Pesquisar.Text+'%');
+      2 : CommandText := 'SELECT * FROM LANCAMENTO WHERE DTLANCAMENTO = ' + #39 + edt_Pesquisar.Text + #39;
+    end;
+    Open;
+    VLRTotLancado := 0;
+    First;
+    for i := 0 to RecordCount -1 do
+    begin
+      VLRTotLancado := VLRTotLancado + FieldByName('VLRDOACAO').AsFloat;
+      Next;
+    end;
+   edt_Total.Text := FormatFloat('###,##0.00',VLRTotLancado);
+   edt_ContaRegistros.Text := 'Nº Lancamentos: '+IntToStr(TClientDataSet(ds_Tabela.DataSet).RecordCount);
+   end;

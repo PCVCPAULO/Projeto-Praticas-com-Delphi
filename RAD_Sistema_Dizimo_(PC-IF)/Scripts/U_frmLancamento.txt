@@ -1,0 +1,729 @@
+unit U_frmLancamento;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Grids, DBGrids, ComCtrls, StdCtrls, Mask, DBCtrls, Buttons,
+  DBActns, ActnList, XPStyleActnCtrls, ActnMan, ExtCtrls,DB, ToolWin,
+  ActnCtrls, ImgList;
+
+type
+  Tfrm_Lancamento = class(TForm)
+    pgc_Lancam: TPageControl;
+    tbs_Consulta: TTabSheet;
+    Label1: TLabel;
+    Label2: TLabel;
+    lblFechamento: TLabel;
+    lblTotal: TLabel;
+    lblValorTotal: TLabel;
+    lblSubPeriodo1: TLabel;
+    lblPeriodo1: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    spbLimpar: TSpeedButton;
+    DBGrid1: TDBGrid;
+    edt_BuscaFicha: TEdit;
+    edt_BuscaNome: TEdit;
+    mkeInicial: TMaskEdit;
+    mkeFinal: TMaskEdit;
+    tbs_Lancamento: TTabSheet;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    dbcbxReferencia: TDBComboBox;
+    DBGrid2: TDBGrid;
+    dbe_Valor: TDBEdit;
+    dbe_Data: TDBEdit;
+    edt_FichaLancam: TEdit;
+    edNome: TEdit;
+    Panel2: TPanel;
+    spbFechar: TSpeedButton;
+    btn_Novo: TBitBtn;
+    btn_Alterar: TBitBtn;
+    btn_Cancelar: TBitBtn;
+    btn_Gravar: TBitBtn;
+    btn_Excluir: TBitBtn;
+    DBNavigator1: TDBNavigator;
+    lblLancam_ValTotal: TLabel;
+    lblLancam_Fechto: TLabel;
+    DBNavigator2: TDBNavigator;
+    Label15: TLabel;
+    spbExtrato: TSpeedButton;
+    Label10: TLabel;
+    tbsAlterarLancam: TTabSheet;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
+    Label16: TLabel;
+    DBGrid3: TDBGrid;
+    edt_AlteraLancam: TDBEdit;
+    DBNavigator3: TDBNavigator;
+    dbe_AlteraNome: TDBEdit;
+    dbe_AlteraValor: TDBEdit;
+    dbe_AlteraData: TDBEdit;
+    btnConfirmar: TBitBtn;
+    BitBtn1: TBitBtn;
+    dbcbx_Altera: TDBComboBox;
+    btnRetornar: TBitBtn;
+    mske_DtaLancamento: TMaskEdit;
+    spb_Sair: TSpeedButton;
+    StatusBar1: TStatusBar;
+    lbl_TotalDiz: TLabel;
+    StatusBar2: TStatusBar;
+    StatusBar3: TStatusBar;
+    lblLancam_Perido1: TLabel;
+    lbl_Lancam_SubPeriodo: TLabel;
+    lblLancam_Total: TLabel;
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure edt_BuscaFichaKeyPress(Sender: TObject; var Key: Char);
+    procedure edt_BuscaNomeKeyPress(Sender: TObject; var Key: Char);
+    procedure DataSetPost1Execute(Sender: TObject);
+    procedure dsi_NovoExecute(Sender: TObject);
+    procedure spbLimparClick(Sender: TObject);
+    procedure SpeedButton6Click(Sender: TObject);
+    procedure SpeedButton7Click(Sender: TObject);
+    procedure spb_SairClick(Sender: TObject);
+    procedure pgc_LancamExit(Sender: TObject);
+    procedure DBGrid1CellClick(Column: TColumn);
+    procedure DataSetDelete1Execute(Sender: TObject);
+    procedure dbe_DataKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure spbFecharClick(Sender: TObject);
+    procedure dbe_ValorKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure dbcbxReferenciaKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure tbs_LancamentoShow(Sender: TObject);
+    procedure edt_FichaLancamKeyPress(Sender: TObject; var Key: Char);
+    procedure LimpaCampos;
+    procedure mkeInicialKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure mkeFinalKeyPress(Sender: TObject; var Key: Char);
+    procedure spbExtratoClick(Sender: TObject);
+    procedure pgc_LancamChange(Sender: TObject);
+    procedure btnConfirmarClick(Sender: TObject);
+    procedure edt_AlteraLancamKeyPress(Sender: TObject; var Key: Char);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure btnRetornarClick(Sender: TObject);
+    procedure mske_DtaLancamentoKeyPress(Sender: TObject; var Key: Char);
+    procedure btn_GravarClick(Sender: TObject);
+    procedure btn_AlterarClick(Sender: TObject);
+    procedure btn_ExcluirClick(Sender: TObject);
+    procedure btn_CancelarClick(Sender: TObject);
+    procedure btn_NovoClick(Sender: TObject);
+    procedure btn_NovoKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure btn_NovoExit(Sender: TObject);
+    procedure btn_NovoEnter(Sender: TObject);
+
+
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+
+
+  end;
+
+var
+  frm_Lancamento: Tfrm_Lancamento;
+  dtLanca : TDateTime;
+
+implementation
+
+uses U_dmDadosDiz, U_TelaInicial, U_frmCadastro, U_frmRelExtrato;
+
+{$R *.dfm}
+
+procedure Tfrm_Lancamento.FormCreate(Sender: TObject);
+begin
+    with dm_Diz do
+    begin
+    sqlqry_Lancam.Active := True;
+    cds_Lancam.Active := True;
+    sqlM_Dados.Active := True;
+    sqlD_Lancam.Active := True;
+    cdsM_Dados.Active := True;
+    cdsD_Lancam.Active := True;
+    pgc_Lancam.ActivePageIndex := 1;
+    end;
+end;
+
+procedure Tfrm_Lancamento.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+    with dm_Diz do
+    begin
+    sqlqry_Lancam.Active := false;
+    cds_Lancam.Active := false;
+    sqlM_Dados.Active := false;
+    sqlD_Lancam.Active := false;
+    cdsM_Dados.Active := false;
+    cdsD_Lancam.Active := false;
+    Action := caFree;
+    frm_Lancamento := nil;
+    end;
+end;
+
+procedure Tfrm_Lancamento.edt_BuscaFichaKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+//----------------buscar Ficha no Menu Consulta
+   if key = #13 then
+
+   with dm_Diz.cds_Lancam do
+   begin
+   IndexFieldNames := 'CDFICHA';
+   if Not dm_Diz.cds_Lancam.FindKey([edt_BuscaFicha.Text]) then
+          showmessage('Nº de Ficha não cadastrada!');
+      Open;
+   end;
+end;
+
+
+
+procedure Tfrm_Lancamento.edt_BuscaNomeKeyPress(Sender: TObject; var Key: Char);
+begin
+//----------------buca Nome no menu Consulta
+    if key = #13 then
+
+    begin
+
+    with dm_Diz.sqlqry_Lancam do
+
+     begin
+      Close;
+      dm_Diz.cds_Lancam.Close;
+      SQL.Clear;
+      SQL.Add('select * from LANCAMENTO');
+      SQL.Add('where NOMEDIZ like :pnome');
+      ParamByName('pnome').Value := edt_BuscaNome.Text + '%';
+      Active := true;
+      dm_Diz.cds_Lancam.Active := true;
+      Open;
+    end;
+    end;
+end;
+
+procedure Tfrm_Lancamento.dsi_NovoExecute(Sender: TObject);
+//------------------------spb_Novo
+
+begin
+        dm_Diz.cdsD_Lancam.Open;
+        dm_Diz.cdsD_Lancam.Insert;
+        dbe_Valor.Text := '';
+        dbcbxReferencia.Text := '';
+        dbe_Data.Text := '';
+        dbe_Data.Text := '';
+        dbe_Valor.SetFocus;
+        dtlanca := StrToDate(mske_DtaLancamento.Text);     
+        dbe_Data.Text := DateToStr(dtLanca);
+end;
+
+procedure Tfrm_Lancamento.spbLimparClick(Sender: TObject);
+begin
+    edt_BuscaFicha.Clear;
+    edt_BuscaNome.Clear;
+    mkeInicial.Clear;
+    mkeFinal.Clear;
+    dm_Diz.cds_Lancam.Close;
+    dm_Diz.cds_Lancam.Open;
+end;
+
+procedure Tfrm_Lancamento.SpeedButton6Click(Sender: TObject);
+begin
+      dm_Diz.cdsD_Lancam.Edit;
+      dbe_Valor.SetFocus;
+      dm_Diz.cdsD_LancamVLRDOACAO.AsFloat := StrToFloat(dbe_Valor.Text);
+      dm_Diz.cdsD_LancamREFERENCIA.AsString := dbcbxReferencia.Text;
+      dm_Diz.cdsD_LancamDTLANCAMENTO.AsDateTime := StrToDate(dbe_Data.Text);
+      edt_FichaLancam.SetFocus;
+end;
+
+procedure Tfrm_Lancamento.SpeedButton7Click(Sender: TObject);
+begin
+
+    dm_Diz.cdsD_Lancam.Cancel;
+    edt_FichaLancam.Text := dm_Diz.cdsD_LancamCDFICHA.AsString;
+
+end;
+
+procedure Tfrm_Lancamento.spb_SairClick(Sender: TObject);
+begin
+    close;
+end;
+
+procedure Tfrm_Lancamento.pgc_LancamExit(Sender: TObject);
+begin
+    dm_Diz.cdsD_Lancam.Close;
+    dm_Diz.cdsD_Lancam.Open;
+end;
+
+procedure Tfrm_Lancamento.DBGrid1CellClick(Column: TColumn);
+begin
+//=============Analisar para botar para funcinar...
+ if frm_Lancamento <> nil  then
+ begin
+  frm_Lancamento.edt_BuscaFicha.Text:=dm_Diz.cdsD_LancamCDFICHA.AsString;
+ end;
+
+end;
+
+procedure Tfrm_Lancamento.DataSetDelete1Execute(Sender: TObject);
+begin
+
+    If messagedlg('Tem certeza que deseja excluir o registro?',
+                   mtinformation,[mbyes,mbno],0)=mryes
+    then begin
+         try
+            dm_Diz.cdsD_Lancam.Delete;
+            dm_Diz.cdsD_Lancam.ApplyUpdates(0);
+       except
+            messagedlg('Este registro não pode ser excluído, pois está sendo utilizado em outro cadastro',
+                          mtinformation,[mbok],0);
+         end;
+    end;
+    edt_FichaLancam.SetFocus;
+
+end;
+
+
+procedure Tfrm_Lancamento.dbe_DataKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+    dbe_Data.Text := DateToStr(dtLanca);
+    btn_Gravar.SetFocus;
+end;
+
+
+procedure Tfrm_Lancamento.spbFecharClick(Sender: TObject);
+begin
+    Close;
+end;
+
+
+procedure Tfrm_Lancamento.dbe_ValorKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if key = Vk_Return then Perform(Wm_NextDlgCtl,0,0);
+end;
+
+
+
+procedure Tfrm_Lancamento.dbcbxReferenciaKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+    if key = Vk_Return then Perform(Wm_NextDlgCtl,0,0);
+    dbe_Data.Text := DateToStr(dtLanca);
+end;
+
+
+
+procedure Tfrm_Lancamento.DataSetPost1Execute(Sender: TObject);
+begin
+     if edt_FichaLancam.Text = '' then
+     begin
+        ShowMessage('INFORME UM Nº DE FICHA!!!');
+        edt_FichaLancam.SetFocus;
+        exit;
+     end;
+     if dm_Diz.cdsD_Lancam.State = dsInsert then
+        dm_Diz.cdsD_Lancam.Post;
+        dm_Diz.cdsD_Lancam.ApplyUpdates(0);
+        ShowMessage('Informações enviadas para o Banco de Dados e gravada com sucesso!');
+        edt_FichaLancam.SetFocus;
+end;
+
+procedure Tfrm_Lancamento.tbs_LancamentoShow(Sender: TObject);
+begin
+    edt_FichaLancam.SetFocus;
+end;
+
+procedure Tfrm_Lancamento.edt_FichaLancamKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+    if key = #13 then
+    begin
+    dm_Diz.cdsM_Dados.IndexFieldNames := 'CDFICHA';
+    if Not dm_Diz.cdsM_Dados.FindKey([edt_FichaLancam.Text]) then
+           showmessage('Nº de Ficha não cadastrada!');
+    dm_Diz.cdsM_Dados.Open;
+    edNome.Text := dm_Diz.cdsM_Dados.FieldByName('Nome').AsString;
+    dbe_Valor.Text := '';
+    dbcbxReferencia.Text := '';
+    dbe_Data.Text := DateToStr(dtLanca);
+    
+    btn_Novo.SetFocus;
+    end;
+ 
+end;
+
+procedure Tfrm_Lancamento.LimpaCampos;
+begin
+   edt_FichaLancam.Clear;
+   edNome.Clear;
+   dbe_Valor.Clear;
+   dbcbxReferencia.Text := '';
+   dbe_Data.Clear;
+end;
+
+procedure Tfrm_Lancamento.mkeInicialKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+    if key = Vk_Return then Perform(Wm_NextDlgCtl,0,0);
+end;
+
+procedure Tfrm_Lancamento.mkeFinalKeyPress(Sender: TObject; var Key: Char);
+
+var
+ Soma : real;
+ Soma1: real;
+ dt_Ini, dt_Fim : TDateTime;
+
+begin
+ if key = #13 then
+  begin
+    //----------DateTimePicker1 foi nomeado para dt_Inicial
+   //----------DateTimePicker1 foi nomeado para dt_Final
+   // Da aba de consulta lançamento
+
+   dt_Ini := StrToDate(mkeInicial.Text);
+   dt_Fim := StrtoDate(mkeFinal.Text);
+
+   if dt_Fim < dt_Ini then
+   begin
+     ShowMessage('Data Final NÃO PODE SER MENOR que a Data Incial!');
+     mkeInicial.SetFocus;
+   end
+   else
+   begin
+   dm_diz.cds_Lancam.Filter:='DTLANCAMENTO >='+QuotedStr(DateToStr(dt_Ini))
+                +' and DTLANCAMENTO <='+QuotedStr(DateToStr(dt_Fim));
+   dm_diz.cds_Lancam.Filtered := true;
+
+   if dm_diz.cds_Lancam.RecordCount = 0 then
+   begin
+      ShowMessage('Não Existe Dados no Período Solicitado !');
+      mkeInicial.SetFocus;
+   end else
+      dm_diz.cds_Lancam.First;
+      Soma := 0;
+      while not dm_diz.cds_Lancam.Eof do
+      begin
+        Soma := Soma  + dm_diz.cds_LancamVLRDOACAO.AsFloat;
+        dm_diz.cds_Lancam.Next;
+      end;
+     lblFechamento.Visible:= true;
+     lblTotal.Visible     := true;
+     lblValorTotal.Visible:= True;
+
+     lblFechamento.Caption := 'Período de Fechamento: '+DateToStr(dt_Fim);
+     lblTotal.Caption := 'Total Dizimistas no mês: '+IntToStr(dm_diz.cds_Lancam.RecordCount);
+     lblValorTotal.Caption := 'Valor Total do Dízimo no Mês: R$ '+FormatFloat('###,##0.00',Soma);
+
+    end;
+
+   if DateToStr(dt_Fim) = '' then
+   begin
+     ShowMessage('Entre com uma data para a realização do cálculo!');
+     mkeInicial.SetFocus;
+   end
+   else
+   begin
+      dm_diz.cds_Lancam.Filter:='DTLANCAMENTO ='+QuotedStr(DateToStr(dt_Fim));
+      dm_diz.cds_Lancam.Filtered := true;
+
+      if dm_diz.cds_Lancam.RecordCount = 0 then
+       begin
+         ShowMessage('Não Existe Dados no Período Solicitado!');
+         mkeInicial.SetFocus;
+       end
+       else
+         dm_diz.cds_Lancam.First;
+         Soma1 := 0;
+         while not dm_diz.cds_Lancam.Eof do
+         begin
+           Soma1 := Soma1  + dm_diz.cds_LancamVLRDOACAO.AsFloat;
+           dm_diz.cds_Lancam.Next;
+         end;
+         lblPeriodo1.Visible   := True;
+         lblSubPeriodo1.Visible:= True;
+
+         lblPeriodo1.Caption   := 'Nº de Dizimistas: '+IntToStr(dm_diz.cds_Lancam.RecordCount);
+         lblSubPeriodo1.Caption:= 'Valor Total: R$ '+FormatFloat('###,##0.00',Soma1);
+       end;
+
+    end;
+end;
+
+procedure Tfrm_Lancamento.spbExtratoClick(Sender: TObject);
+
+begin
+   with dm_Diz.cds_Lancam do
+   begin
+   IndexFieldNames := 'CDFICHA';
+   if Not dm_Diz.cds_Lancam.FindKey([edt_FichaLancam.Text]) then
+          showmessage('Nº de Ficha não cadastrada!');
+          Open;
+   end;
+
+   Application.CreateForm(Tfrm_Extrato,frm_Extrato);
+   frm_Extrato.qkr_Extrato.Preview;
+end;
+
+procedure Tfrm_Lancamento.pgc_LancamChange(Sender: TObject);
+begin
+    if dm_Diz.cds_Lancam.Active = false then
+    begin
+        dm_Diz.cds_Lancam.Active := true;
+        dm_Diz.cds_Lancam.Edit;
+        dm_Diz.cds_Lancam.Insert;
+        dm_Diz.cds_Lancam.IndexFieldNames := 'ID';
+        if dm_Diz.cds_Lancam.Locate('CDFICHA',edt_AlteraLancam.Text,[])
+        then begin
+          pgc_Lancam.ActivePageIndex := 2;
+          edt_AlteraLancam.SetFocus;
+        end;
+     end;
+
+end;
+
+
+procedure Tfrm_Lancamento.btnConfirmarClick(Sender: TObject);
+begin
+    if messageDlg('Você confirma a alteração desse Dizimista?',
+       mtConfirmation,[mbYes,mbNo],0) = mrYes
+    then begin
+       If dm_Diz.cds_Lancam.State in [dsEdit,dsInsert] then
+        try
+          dm_Diz.cds_Lancam.Post;
+          dm_Diz.cds_Lancam.ApplyUpdates(0);
+ //         dm_Diz.cds_Lancam.Close;
+          dbe_AlteraValor.SetFocus;
+        except
+            messagedlg('Houve problemas na gravação, verifique os dados...',
+                    mtinformation, [mbok],0);
+        end;
+    end
+    else begin
+       dm_Diz.cds_Lancam.Cancel;
+       dm_Diz.cds_Lancam.Close;
+       edt_AlteraLancam.SetFocus;
+    end;
+
+    dm_Diz.cds_Lancam.Open;
+
+end;
+
+procedure Tfrm_Lancamento.edt_AlteraLancamKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+//----------------buscar Ficha
+    if key = #13 then
+
+    begin
+
+      dm_Diz.cds_Lancam.IndexFieldNames := 'ID';
+      if Not dm_Diz.cds_Lancam.FindKey([edt_AlteraLancam.Text]) then
+            showmessage('Nº de Ficha não lançada no Controle!');
+         dm_Diz.cds_Lancam.Open;
+
+     end;
+
+end;
+
+procedure Tfrm_Lancamento.BitBtn1Click(Sender: TObject);
+begin
+    edt_AlteraLancam.Clear;
+    dbe_AlteraNome.Clear;
+    dbcbx_Altera.Clear;
+    dbe_AlteraValor.Clear;
+    dbe_AlteraData.Clear;
+end;
+
+procedure Tfrm_Lancamento.btnRetornarClick(Sender: TObject);
+begin
+     Close;
+end;
+
+procedure Tfrm_Lancamento.mske_DtaLancamentoKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+    if key = #13 then // Perform(Wm_NextDlgCtl,0,0);
+    edt_FichaLancam.SetFocus;
+end;
+
+
+
+procedure Tfrm_Lancamento.btn_GravarClick(Sender: TObject);
+var
+//  soma2 : real;
+  TOTAL: Double;
+  dtLanca: TDateTime;
+
+begin
+
+     if edt_FichaLancam.Text = '' then
+     begin
+        ShowMessage('INFORME UM Nº DE FICHA!!!');
+        edt_FichaLancam.SetFocus;
+        exit;
+     end;
+     if dm_Diz.cdsD_Lancam.State = dsInsert then
+        dm_Diz.cdsD_Lancam.Post;
+        ShowMessage('Informações enviadas para o Banco de Dados e gravada com sucesso!');
+        LimpaCampos;
+        dm_Diz.cdsD_Lancam.ApplyUpdates(0);
+        edt_FichaLancam.SetFocus;
+        dbcbxReferencia.ClearSelection;
+
+//------------ Realiza o calculo
+
+   if dm_Diz.cds_Lancam.Active = False then
+   dm_Diz.cds_Lancam.Close;
+   begin
+
+    dtLanca := StrToDate(mske_DtaLancamento.Text);
+
+    dm_Diz.cds_Lancam.Open;
+    dm_diz.cds_Lancam.Filter:='DTLANCAMENTO ='+QuotedStr(DateToStr(dtLanca));
+    dm_diz.cds_Lancam.Filtered := true;
+
+    if dm_Diz.cds_LancamDTLANCAMENTO.Value <> dtLanca then
+    ShowMessage('Entre com a Data de Lançamento correta.')
+
+    else
+    begin
+
+      dm_Diz.cds_Lancam.First;
+      TOTAL:=0;
+
+      while not dm_Diz.cds_Lancam.Eof do
+      begin
+
+      TOTAL := TOTAL + dm_Diz.cds_LancamVLRDOACAO.AsFloat;
+
+      dm_Diz.cds_Lancam.Next;
+      end;
+    end;
+    lbl_TotalDiz.Caption:=FormatFloat('R$ ###,##0.00',TOTAL);
+    dm_Diz.cds_Lancam.Close;
+
+  end;
+
+
+
+   if dm_diz.cdsD_Lancam.RecordCount = 0 then
+   begin
+    lblLancam_Perido1.Caption := 'Nº de Dizimistas: '+IntToStr(dm_diz.cdsD_Lancam.RecordCount);
+   end;
+//      dm_diz.cdsD_Lancam.First;
+//      Soma2 := 0;
+//      while not dm_diz.cdsD_Lancam.Eof do
+//      begin
+//          Soma2 := Soma2 + dm_diz.cdsD_LancamVLRDOACAO.AsFloat;
+//          dm_diz.cdsD_Lancam.Next;
+//      end;
+//
+   lblLancam_Fechto.Visible     := True;
+   lblLancam_Perido1.Visible    := True;
+   lbl_Lancam_SubPeriodo.Visible:= False;
+//   lblLancam_Total.Visible      := True;
+   lblLancam_ValTotal.Visible   := True;
+
+   lblLancam_Fechto.Caption := 'Período de Fechamento: '
+              +DateToStr(dm_Diz.cdsD_Lancam.FieldByName('DTLANCAMENTO').Value);
+   lblLancam_Perido1.Caption := 'Nº de Dizimistas: '+IntToStr(dm_diz.cdsD_Lancam.RecordCount);
+// lbl_Lancam_SubPeriodo.Caption := 'Valor Total: R$ '+FormatFloat('###,##0.00',Soma2);
+   lblLancam_Total.Caption := 'Total Dizimistas no mês: '+IntToStr(dm_diz.cdsD_Lancam.RecordCount);
+   lblLancam_ValTotal.Caption := 'Valor Total do Dízimo no Mês: R$ '+FormatFloat('###,##0.00',TOTAL);
+//   end;
+   
+end;
+
+procedure Tfrm_Lancamento.btn_AlterarClick(Sender: TObject);
+begin
+    with dm_Diz.cds_Lancam do
+    begin
+    Close;
+    Open;
+    Locate('CDFICHA',dm_Diz.cds_LancamCDFICHA.Value,[]);
+    end;
+end;
+
+
+procedure Tfrm_Lancamento.btn_ExcluirClick(Sender: TObject);
+var
+    soma3 : real;
+begin
+
+    If messagedlg('Tem certeza que deseja excluir o registro?',
+                   mtinformation,[mbyes,mbno],0)=mryes
+    then begin
+      try
+        soma3 := dm_diz.cdsD_LancamVLRDOACAO.AsFloat;
+        Soma3 := Soma3 - dm_diz.cdsD_LancamVLRDOACAO.AsFloat;
+        dm_Diz.cdsD_Lancam.Delete;
+        dm_Diz.cdsD_Lancam.ApplyUpdates(0);
+
+        lblLancam_Perido1.Caption := 'Nº de Dizimistas: '+IntToStr(dm_diz.cdsD_Lancam.RecordCount);
+        lbl_Lancam_SubPeriodo.Caption := 'Valor Total: R$ '+FormatFloat('###,##0.00',Soma3);
+      except
+        messagedlg('Este registro não pode ser excluído, pois está sendo utilizado em outro cadastro',
+                          mtinformation,[mbok],0);
+      end;
+    end;
+    LimpaCampos;
+    edt_FichaLancam.SetFocus;
+  
+end;
+
+
+procedure Tfrm_Lancamento.btn_CancelarClick(Sender: TObject);
+begin
+    dm_Diz.cdsD_Lancam.Cancel;
+end;
+
+procedure Tfrm_Lancamento.btn_NovoClick(Sender: TObject);
+begin
+
+    with dm_Diz.cdsD_Lancam do
+    Begin
+    Open;
+    Insert;
+    dbe_Valor.Text := '';
+    dbcbxReferencia.Text := '';
+    dbe_Data.Text := '';
+    dtlanca := StrToDate(mske_DtaLancamento.Text);
+    dbe_Valor.SetFocus;
+    dbe_Data.Text := DateToStr(dtLanca);
+
+    end;
+
+end;
+
+procedure Tfrm_Lancamento.btn_NovoKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+
+  if key = Vk_Return then Perform(Wm_NextDlgCtl,0,0);
+  dbe_Valor.SetFocus;
+
+end;
+
+procedure Tfrm_Lancamento.btn_NovoExit(Sender: TObject);
+begin
+  btn_Novo.Font.Color := clBlue;
+end;
+
+procedure Tfrm_Lancamento.btn_NovoEnter(Sender: TObject);
+begin
+  btn_Novo.Font.Color := clBlue;
+end;
+
+End.

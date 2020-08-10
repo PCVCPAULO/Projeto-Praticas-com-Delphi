@@ -1,0 +1,531 @@
+object DM_Dados: TDM_Dados
+  OldCreateOrder = False
+  Height = 471
+  Width = 973
+  object qry_Usuarios: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT * FROM USUARIOS')
+    SQLConnection = Conexao
+    Left = 72
+    Top = 128
+  end
+  object qry_BancoDizimo: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT * FROM TBL_PLANDADOS')
+    SQLConnection = Conexao
+    Left = 72
+    Top = 208
+  end
+  object dsp_Usuarios: TDataSetProvider
+    DataSet = qry_Usuarios
+    Options = [poAllowCommandText]
+    Left = 184
+    Top = 128
+  end
+  object dsp_BancoDizimo: TDataSetProvider
+    DataSet = qry_BancoDizimo
+    Options = [poAllowCommandText]
+    Left = 184
+    Top = 208
+  end
+  object cds_Usuarios: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dsp_Usuarios'
+    Left = 304
+    Top = 128
+    object cds_UsuariosID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cds_UsuariosNOME: TStringField
+      FieldName = 'NOME'
+      Size = 50
+    end
+    object cds_UsuariosLOGIN: TStringField
+      FieldName = 'LOGIN'
+    end
+    object cds_UsuariosSENHA: TStringField
+      FieldName = 'SENHA'
+    end
+    object cds_UsuariosDATA: TDateField
+      FieldName = 'DATA'
+    end
+  end
+  object cds_BancoDizimo: TClientDataSet
+    Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'CDFICHA'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'NOME'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 85
+      end
+      item
+        Name = 'DT_NASC'
+        DataType = ftDate
+      end
+      item
+        Name = 'COMUNIDADE'
+        DataType = ftString
+        Size = 35
+      end
+      item
+        Name = 'END_RUA'
+        DataType = ftString
+        Size = 85
+      end
+      item
+        Name = 'END_NR'
+        DataType = ftInteger
+      end
+      item
+        Name = 'END_COMPLEM'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'END_BAIRRO'
+        DataType = ftString
+        Size = 35
+      end
+      item
+        Name = 'END_CEP'
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'END_CIDADE'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'END_UF'
+        DataType = ftString
+        Size = 3
+      end
+      item
+        Name = 'FONE_FIXO'
+        DataType = ftString
+        Size = 16
+      end
+      item
+        Name = 'FONE_MOVEL'
+        DataType = ftString
+        Size = 16
+      end
+      item
+        Name = 'EMAIL'
+        DataType = ftString
+        Size = 85
+      end
+      item
+        Name = 'GENERO'
+        DataType = ftString
+        Size = 15
+      end
+      item
+        Name = 'ESTADO_CIVIL'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'NOME_CONJ'
+        DataType = ftString
+        Size = 85
+      end
+      item
+        Name = 'NASCONJUGE'
+        DataType = ftDate
+      end
+      item
+        Name = 'DATACASAMENTO'
+        DataType = ftDate
+      end
+      item
+        Name = 'DATACADASTRO'
+        DataType = ftDate
+      end
+      item
+        Name = 'SITUACAO'
+        DataType = ftString
+        Size = 10
+      end>
+    IndexDefs = <>
+    Params = <>
+    ProviderName = 'dsp_BancoDizimo'
+    StoreDefs = True
+    Left = 304
+    Top = 208
+    object cds_BancoDizimoCDFICHA: TIntegerField
+      FieldName = 'CDFICHA'
+      Required = True
+    end
+    object cds_BancoDizimoNOME: TStringField
+      FieldName = 'NOME'
+      Required = True
+      Size = 85
+    end
+    object cds_BancoDizimoDT_NASC: TDateField
+      FieldName = 'DT_NASC'
+    end
+    object cds_BancoDizimoCOMUNIDADE: TStringField
+      FieldName = 'COMUNIDADE'
+      Size = 35
+    end
+    object cds_BancoDizimoEND_RUA: TStringField
+      FieldName = 'END_RUA'
+      Size = 85
+    end
+    object cds_BancoDizimoEND_NR: TIntegerField
+      FieldName = 'END_NR'
+    end
+    object cds_BancoDizimoEND_COMPLEM: TStringField
+      FieldName = 'END_COMPLEM'
+    end
+    object cds_BancoDizimoEND_BAIRRO: TStringField
+      FieldName = 'END_BAIRRO'
+      Size = 35
+    end
+    object cds_BancoDizimoEND_CEP: TStringField
+      FieldName = 'END_CEP'
+      Size = 10
+    end
+    object cds_BancoDizimoEND_CIDADE: TStringField
+      FieldName = 'END_CIDADE'
+    end
+    object cds_BancoDizimoEND_UF: TStringField
+      FieldName = 'END_UF'
+      Size = 3
+    end
+    object cds_BancoDizimoFONE_FIXO: TStringField
+      FieldName = 'FONE_FIXO'
+      Size = 16
+    end
+    object cds_BancoDizimoFONE_MOVEL: TStringField
+      FieldName = 'FONE_MOVEL'
+      Size = 16
+    end
+    object cds_BancoDizimoEMAIL: TStringField
+      FieldName = 'EMAIL'
+      Size = 85
+    end
+    object cds_BancoDizimoGENERO: TStringField
+      FieldName = 'GENERO'
+      Size = 15
+    end
+    object cds_BancoDizimoESTADO_CIVIL: TStringField
+      FieldName = 'ESTADO_CIVIL'
+    end
+    object cds_BancoDizimoNOME_CONJ: TStringField
+      FieldName = 'NOME_CONJ'
+      Size = 85
+    end
+    object cds_BancoDizimoNASCONJUGE: TDateField
+      FieldName = 'NASCONJUGE'
+    end
+    object cds_BancoDizimoDATACASAMENTO: TDateField
+      FieldName = 'DATACASAMENTO'
+    end
+    object cds_BancoDizimoDATACADASTRO: TDateField
+      FieldName = 'DATACADASTRO'
+    end
+    object cds_BancoDizimoSITUACAO: TStringField
+      Alignment = taCenter
+      DisplayLabel = 'A/I'
+      FieldName = 'SITUACAO'
+      Size = 10
+    end
+  end
+  object Conexao: TSQLConnection
+    ConnectionName = 'Teste_Dizimo'
+    DriverName = 'Firebird'
+    LoginPrompt = False
+    Params.Strings = (
+      'DriverName=Firebird'
+      'DriverUnit=Data.DBXFirebird'
+      
+        'DriverPackageLoader=TDBXDynalinkDriverLoader,DbxCommonDriver260.' +
+        'bpl'
+      
+        'DriverAssemblyLoader=Borland.Data.TDBXDynalinkDriverLoader,Borla' +
+        'nd.Data.DbxCommonDriver,Version=24.0.0.0,Culture=neutral,PublicK' +
+        'eyToken=91d62ebb5b0d1b1b'
+      
+        'MetaDataPackageLoader=TDBXFirebirdMetaDataCommandFactory,DbxFire' +
+        'birdDriver260.bpl'
+      
+        'MetaDataAssemblyLoader=Borland.Data.TDBXFirebirdMetaDataCommandF' +
+        'actory,Borland.Data.DbxFirebirdDriver,Version=24.0.0.0,Culture=n' +
+        'eutral,PublicKeyToken=91d62ebb5b0d1b1b'
+      'LibraryName=dbxfb.dll'
+      'LibraryNameOsx=libsqlfb.dylib'
+      'VendorLib=fbclient.dll'
+      'VendorLibWin64=fbclient.dll'
+      'VendorLibOsx=/Library/Frameworks/Firebird.framework/Firebird'
+      
+        'Database=D:\MeusProjetos_PC_AsusCoreI3_9100F_GitHub\Projetos_Del' +
+        'phi_RAD\RAD_Sistema_Dizimo_(PC-IFES)\Banco_GDB\teste_Dizimo.fdb'
+      'User_Name=sysdba'
+      'Password=masterkey'
+      'Role=RoleName'
+      'MaxBlobSize=-1'
+      'LocaleCode=0000'
+      'IsolationLevel=ReadCommitted'
+      'SQLDialect=3'
+      'CommitRetain=False'
+      'WaitOnLocks=True'
+      'TrimChar=False'
+      'BlobSize=-1'
+      'ErrorResourceFile='
+      'RoleName=RoleName'
+      'ServerCharSet='
+      'Trim Char=False')
+    Connected = True
+    Left = 72
+    Top = 40
+  end
+  object qry_Lancamento: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT * FROM LANCAMENTO')
+    SQLConnection = Conexao
+    Left = 72
+    Top = 272
+  end
+  object dsp_Lancamento: TDataSetProvider
+    DataSet = qry_Lancamento
+    Options = [poAllowCommandText, poUseQuoteChar]
+    Left = 184
+    Top = 272
+  end
+  object cds_Lancamento: TClientDataSet
+    Aggregates = <
+      item
+        Visible = False
+      end>
+    AggregatesActive = True
+    Params = <>
+    ProviderName = 'dsp_Lancamento'
+    Left = 304
+    Top = 272
+    object cds_LancamentoID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cds_LancamentoCDFICHA: TIntegerField
+      DisplayLabel = 'Ficha N'#186
+      FieldName = 'CDFICHA'
+      Required = True
+    end
+    object cds_LancamentoNOMEDIZ: TStringField
+      DisplayLabel = 'Nome do Dizimista'
+      FieldName = 'NOMEDIZ'
+      Size = 85
+    end
+    object cds_LancamentoVLRDOACAO: TFMTBCDField
+      DisplayLabel = 'Valor (R$)'
+      FieldName = 'VLRDOACAO'
+      Required = True
+      DisplayFormat = '#,##0.00'
+      EditFormat = '#,##0.00'
+      Precision = 18
+      Size = 2
+    end
+    object cds_LancamentoID_REFERENCIA: TIntegerField
+      FieldName = 'ID_REFERENCIA'
+    end
+    object cds_LancamentoREFERENCIA: TStringField
+      DisplayLabel = 'Refer'#234'ncia (m'#234's)'
+      FieldName = 'REFERENCIA'
+      Size = 50
+    end
+    object cds_LancamentoDTLANCAMENTO: TDateField
+      Alignment = taCenter
+      DisplayLabel = 'Data'
+      FieldName = 'DTLANCAMENTO'
+      Required = True
+    end
+  end
+  object qry_Referencia: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'select * from MES_REFERENCIA')
+    SQLConnection = Conexao
+    Left = 72
+    Top = 336
+  end
+  object dsp_Referencia: TDataSetProvider
+    DataSet = qry_Referencia
+    Options = [poAllowCommandText, poUseQuoteChar]
+    Left = 184
+    Top = 336
+  end
+  object cds_Referencia: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dsp_Referencia'
+    Left = 304
+    Top = 336
+    object cds_ReferenciaID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cds_ReferenciaDESCRICAO: TStringField
+      FieldName = 'DESCRICAO'
+      Size = 100
+    end
+  end
+  object sql_Consultas: TSQLQuery
+    Active = True
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'select * from TBL_PLANDADOS')
+    SQLConnection = Conexao
+    Left = 552
+    Top = 32
+    object sql_ConsultasCDFICHA: TIntegerField
+      FieldName = 'CDFICHA'
+      Required = True
+    end
+    object sql_ConsultasNOME: TStringField
+      FieldName = 'NOME'
+      Required = True
+      Size = 85
+    end
+    object sql_ConsultasDT_NASC: TDateField
+      FieldName = 'DT_NASC'
+    end
+    object sql_ConsultasCOMUNIDADE: TStringField
+      FieldName = 'COMUNIDADE'
+      Size = 35
+    end
+    object sql_ConsultasEND_RUA: TStringField
+      FieldName = 'END_RUA'
+      Size = 85
+    end
+    object sql_ConsultasEND_NR: TIntegerField
+      FieldName = 'END_NR'
+    end
+    object sql_ConsultasEND_COMPLEM: TStringField
+      FieldName = 'END_COMPLEM'
+    end
+    object sql_ConsultasEND_BAIRRO: TStringField
+      FieldName = 'END_BAIRRO'
+      Size = 35
+    end
+    object sql_ConsultasEND_CEP: TStringField
+      FieldName = 'END_CEP'
+      Size = 10
+    end
+    object sql_ConsultasEND_CIDADE: TStringField
+      FieldName = 'END_CIDADE'
+    end
+    object sql_ConsultasEND_UF: TStringField
+      FieldName = 'END_UF'
+      Size = 3
+    end
+    object sql_ConsultasFONE_FIXO: TStringField
+      FieldName = 'FONE_FIXO'
+      Size = 16
+    end
+    object sql_ConsultasFONE_MOVEL: TStringField
+      FieldName = 'FONE_MOVEL'
+      Size = 16
+    end
+    object sql_ConsultasEMAIL: TStringField
+      FieldName = 'EMAIL'
+      Size = 85
+    end
+    object sql_ConsultasGENERO: TStringField
+      FieldName = 'GENERO'
+      Size = 15
+    end
+    object sql_ConsultasESTADO_CIVIL: TStringField
+      FieldName = 'ESTADO_CIVIL'
+    end
+    object sql_ConsultasNOME_CONJ: TStringField
+      FieldName = 'NOME_CONJ'
+      Size = 85
+    end
+    object sql_ConsultasNASCONJUGE: TDateField
+      FieldName = 'NASCONJUGE'
+    end
+    object sql_ConsultasDATACASAMENTO: TDateField
+      FieldName = 'DATACASAMENTO'
+    end
+    object sql_ConsultasDATACADASTRO: TDateField
+      FieldName = 'DATACADASTRO'
+    end
+    object sql_ConsultasSITUACAO: TStringField
+      FieldName = 'SITUACAO'
+      Size = 10
+    end
+  end
+  object dsp_Consultas: TDataSetProvider
+    DataSet = sql_Consultas
+    Options = [poAllowCommandText, poUseQuoteChar]
+    Left = 672
+    Top = 32
+  end
+  object sql_ConsultaLancam: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'select * from LANCAMENTO')
+    SQLConnection = Conexao
+    Left = 552
+    Top = 112
+    object sql_ConsultaLancamID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object sql_ConsultaLancamCDFICHA: TIntegerField
+      FieldName = 'CDFICHA'
+      Required = True
+    end
+    object sql_ConsultaLancamNOMEDIZ: TStringField
+      FieldName = 'NOMEDIZ'
+      Size = 85
+    end
+    object sql_ConsultaLancamVLRDOACAO: TFMTBCDField
+      FieldName = 'VLRDOACAO'
+      Required = True
+      Precision = 18
+      Size = 2
+    end
+    object sql_ConsultaLancamID_REFERENCIA: TIntegerField
+      FieldName = 'ID_REFERENCIA'
+    end
+    object sql_ConsultaLancamREFERENCIA: TStringField
+      FieldName = 'REFERENCIA'
+      Size = 50
+    end
+    object sql_ConsultaLancamDTLANCAMENTO: TDateField
+      FieldName = 'DTLANCAMENTO'
+      Required = True
+    end
+  end
+  object dsp_ConsultaLancam: TDataSetProvider
+    DataSet = sql_ConsultaLancam
+    Options = [poAllowCommandText, poUseQuoteChar]
+    Left = 672
+    Top = 112
+  end
+  object LocalConnection1: TLocalConnection
+    Left = 408
+    Top = 32
+  end
+end

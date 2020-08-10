@@ -1,0 +1,126 @@
+unit uExemplo_Panel;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.jpeg,
+  Vcl.StdCtrls, Vcl.WinXCtrls, Vcl.CategoryButtons, System.Actions,
+  Vcl.ActnList, System.ImageList, Vcl.ImgList, Vcl.ComCtrls, Vcl.Buttons, acPNG;
+
+type
+  Tfrm_Padrao = class(TForm)
+    pnl_Cabecalho: TPanel;
+    Image1: TImage;
+    lbl_Mostrahora: TLabel;
+    lbl_MostraData: TLabel;
+    Label3: TLabel;
+    Image4: TImage;
+    Label4: TLabel;
+    Label5: TLabel;
+    Image6: TImage;
+    ActionList1: TActionList;
+    ImageList1: TImageList;
+    act_Inicio: TAction;
+    act_Cadastro_: TAction;
+    act_Lancamento_: TAction;
+    act_Relatorios_: TAction;
+    act_Usuarios_: TAction;
+    act_Configuracao_: TAction;
+    act_Fechar_: TAction;
+    act_CadUsuario_: TAction;
+    act_CadDizimista_: TAction;
+    act_CadReferencia_: TAction;
+    img_AbreFecha_spv1_: TImage;
+    Timer1: TTimer;
+    Panel1: TPanel;
+    SplitView1_MenuPrincipal_: TSplitView;
+    CategoryButtons1_: TCategoryButtons;
+    SplitView2_MenuTrabalho_: TSplitView;
+    CategoryButtons3_: TCategoryButtons;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    procedure act_Cadastro_Execute(Sender: TObject);
+    procedure img_AbreFecha_spv1_Click(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
+    procedure act_Fechar_Execute(Sender: TObject);
+    procedure CategoryButtons3_Categories0Items0Click(Sender: TObject);
+    procedure act_Configuracao_Execute(Sender: TObject);
+    procedure act_CadUsuario_Execute(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_Padrao: Tfrm_Padrao;
+
+implementation
+
+{$R *.dfm}
+
+uses u_frmCadastro, uClasses, uFrm_CadastroUsuarios, uFrm_CadastroBasico,
+  uFrm_Principal;
+
+
+procedure Tfrm_Padrao.act_CadUsuario_Execute(Sender: TObject);
+begin
+   Frm_CadastroUsuarios := TFrm_CadastroUsuarios.Create(Self);
+   Frm_CadastroUsuarios.Parent := Panel2;
+   Frm_CadastroUsuarios.Show;
+end;
+
+procedure Tfrm_Padrao.act_Configuracao_Execute(Sender: TObject);
+begin
+   Frm_Principal := TFrm_Principal.Create(Self);
+   Frm_Principal.Parent := Panel2;
+   Frm_Principal.Show;
+end;
+
+procedure Tfrm_Padrao.act_Fechar_Execute(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure Tfrm_Padrao.CategoryButtons3_Categories0Items0Click(Sender: TObject);
+begin
+//   Frm_CadastroBasico := TFrm_CadastroBasico.Create(Self);
+//   Frm_CadastroBasico.Parent := Panel2;
+//   Frm_CadastroBasico.Show;
+end;
+
+procedure Tfrm_Padrao.img_AbreFecha_spv1_Click(Sender: TObject);
+begin
+	if SplitView1_MenuPrincipal_.Opened then
+		 SplitView1_MenuPrincipal_.close
+	else
+		SplitView1_MenuPrincipal_.Open;
+end;
+
+procedure Tfrm_Padrao.act_Cadastro_Execute(Sender: TObject);
+begin
+  if SplitView2_MenuTrabalho_.Opened then
+		 SplitView2_MenuTrabalho_.close
+	else
+		SplitView2_MenuTrabalho_.Open;
+end;
+
+procedure Tfrm_Padrao.Timer1Timer(Sender: TObject);
+var
+  MostraHora, MostraData : TDateTime;
+  strHora : string;
+  strData : String;
+begin
+  MostraHora := Time; // armazena date e hora atuais
+  strHora := TimeToStr(MostraHora); // converte a hora em uma string
+  lbl_MostraHora.Caption := strHora; // exibe a hora na legenda do formulário
+
+  MostraData := Date;
+  strData := DateToStr(MostraData);
+  lbl_MostraData.Caption := strData;
+
+end;
+
+
+end.

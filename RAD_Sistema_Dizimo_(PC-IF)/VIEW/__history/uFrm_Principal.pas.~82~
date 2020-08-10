@@ -1,0 +1,234 @@
+unit uFrm_Principal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, MidasLib,
+  Vcl.Imaging.pngimage, Vcl.ComCtrls, Vcl.Buttons, sSkinManager, sComboBoxes,
+  acPNG, System.ImageList, Vcl.ImgList, Vcl.Menus;
+
+type
+  Tfrm_Principal = class(TForm)
+    img_Usuario: TImage;
+    img_Lancamento: TImage;
+    img_Cadastro: TImage;
+    img_RelPagar: TImage;
+    img_Configura: TImage;
+    img_RelReceber: TImage;
+    img_RelCaixa: TImage;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    img_ConsultaDizimo: TImage;
+    StatusBar1: TStatusBar;
+    Timer1: TTimer;
+    ImageList1: TImageList;
+    CategoryPanelGroup1: TCategoryPanelGroup;
+    sSkinSelector1: TsSkinSelector;
+    mm_Principal: TMainMenu;
+    MenuPrincipal1: TMenuItem;
+    Usurios1: TMenuItem;
+    Dizimistas1: TMenuItem;
+    Lanamentos1: TMenuItem;
+    Relatrios1: TMenuItem;
+    N11: TMenuItem;
+    N21: TMenuItem;
+    N31: TMenuItem;
+    N41: TMenuItem;
+    Sistema1: TMenuItem;
+    N12: TMenuItem;
+    N22: TMenuItem;
+    CategoryPanel1: TCategoryPanel;
+    CategoryPanel2: TCategoryPanel;
+    ImageList_16x16: TImageList;
+    btn_CadUsuarios: TButton;
+    CategoryPanel3: TCategoryPanel;
+    btn_CadDizimo: TButton;
+    btn_Lancamento: TButton;
+    Label4: TLabel;
+    CategoryPanel4: TCategoryPanel;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    SpeedButton4: TSpeedButton;
+    SpeedButton5: TSpeedButton;
+    Image1: TImage;
+    CategoryPanel5: TCategoryPanel;
+    SpeedButton6: TSpeedButton;
+    SpeedButton7: TSpeedButton;
+    sSkinManager1: TsSkinManager;
+    AniversriodeCasamento1: TMenuItem;
+    RestauraBackup1: TMenuItem;
+    Sobre1: TMenuItem;
+    procedure Timer1Timer(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Image11Click(Sender: TObject);
+    procedure img_NavegadorClick(Sender: TObject);
+    procedure img_UsuarioClick(Sender: TObject);
+    procedure img_CaixaClick(Sender: TObject);
+    procedure img_CadastroClick(Sender: TObject);
+    procedure img_LancamentoClick(Sender: TObject);
+    procedure btn_LancamentoClick(Sender: TObject);
+    procedure btn_CadUsuariosClick(Sender: TObject);
+    procedure btn_CadDizimoClick(Sender: TObject);
+    procedure Lanamentos1Click(Sender: TObject);
+    procedure Usurios1Click(Sender: TObject);
+    procedure Dizimistas1Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure SpeedButton7Click(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure SpeedButton4Click(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton5Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_Principal: Tfrm_Principal;
+
+implementation
+
+{$R *.dfm}
+
+uses uFrm_CadastroDizimista, ufrm_Cad_Lancamentos, uFrm_CadastroUsuarios,
+  uFuncoes, uFrm_ConsultaLancamentos, uFrm_ConsultaNiver,
+  uFrm_ConsultaNiverConj, uFrm_ConsultaNiverUniao, uFrm_ConsultaCadastro;
+
+
+
+
+
+procedure Tfrm_Principal.btn_CadUsuariosClick(Sender: TObject);
+begin
+  CriarForm(Tfrm_CadastroUsuarios,frm_CadastroUsuarios);
+end;
+
+procedure Tfrm_Principal.btn_LancamentoClick(Sender: TObject);
+begin
+  CriarForm(Tfrm_Cad_Lancamentos,frm_Cad_Lancamentos);
+end;
+
+procedure Tfrm_Principal.Dizimistas1Click(Sender: TObject);
+begin
+ CriarForm(Tfrm_Cad_Dizimista,frm_Cad_Dizimista);
+end;
+
+procedure Tfrm_Principal.btn_CadDizimoClick(Sender: TObject);
+begin
+ CriarForm(Tfrm_Cad_Dizimista,frm_Cad_Dizimista);
+end;
+
+procedure Tfrm_Principal.FormActivate(Sender: TObject);
+begin
+   sSkinManager1.Active := True;
+end;
+
+procedure Tfrm_Principal.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  begin
+   if Application.MessageBox('Deseja realmente sair?', 'Informação',MB_YESNO+MB_ICONQUESTION) = mrYes then
+      Application.Terminate
+   else
+      Abort;
+  end;
+  Action := caFree;
+  frm_Principal := nil;
+end;
+
+procedure Tfrm_Principal.FormShow(Sender: TObject);
+begin
+  StatusBar1.Panels.Items[1].Text := FormatDateTime(' dddd ", " dd " de " mmmm " de " yyyy'+'.',now);
+end;
+
+procedure Tfrm_Principal.Image11Click(Sender: TObject);
+begin
+
+//
+
+end;
+
+procedure Tfrm_Principal.img_CadastroClick(Sender: TObject);
+begin
+
+ CriarForm(Tfrm_Cad_Dizimista,frm_Cad_Dizimista);
+
+end;
+
+procedure Tfrm_Principal.img_CaixaClick(Sender: TObject);
+begin
+//
+end;
+
+procedure Tfrm_Principal.img_LancamentoClick(Sender: TObject);
+begin
+  CriarForm(Tfrm_Cad_Lancamentos,frm_Cad_Lancamentos);
+end;
+
+procedure Tfrm_Principal.img_NavegadorClick(Sender: TObject);
+begin
+   if Application.MessageBox('Deseja realmente sair?', 'Informação',MB_YESNO+MB_ICONQUESTION) = mrYes then
+      Application.Terminate
+   else
+      Abort;
+end;
+
+procedure Tfrm_Principal.img_UsuarioClick(Sender: TObject);
+begin
+  CriarForm(Tfrm_CadastroUsuarios,frm_CadastroUsuarios);
+end;
+
+procedure Tfrm_Principal.Lanamentos1Click(Sender: TObject);
+begin
+  CriarForm(Tfrm_Cad_Lancamentos,frm_Cad_Lancamentos);
+end;
+
+procedure Tfrm_Principal.SpeedButton1Click(Sender: TObject);
+begin
+  CriarForm(Tfrm_ConsultaNiverUniao,frm_ConsultaNiverUniao);
+end;
+
+procedure Tfrm_Principal.SpeedButton2Click(Sender: TObject);
+begin
+  CriarForm(Tfrm_ConsultaNiverConj,frm_ConsultaNiverConj);
+end;
+
+procedure Tfrm_Principal.SpeedButton3Click(Sender: TObject);
+begin
+  CriarForm(Tfrm_ConsultaNiver,frm_ConsultaNiver);
+end;
+
+procedure Tfrm_Principal.SpeedButton4Click(Sender: TObject);
+begin
+  CriarForm(Tfrm_ConsultaLancam,frm_ConsultaLancam);
+end;
+
+procedure Tfrm_Principal.SpeedButton5Click(Sender: TObject);
+begin
+  CriarForm(Tfrm_ConsultaCadastro,frm_ConsultaCadastro);
+end;
+
+procedure Tfrm_Principal.SpeedButton7Click(Sender: TObject);
+begin
+   if Application.MessageBox('Deseja realmente sair?', 'Informação',MB_YESNO+MB_ICONQUESTION) = mrYes then
+      Application.Terminate
+   else
+      Abort;
+end;
+
+procedure Tfrm_Principal.Timer1Timer(Sender: TObject);
+begin
+  StatusBar1.Panels.Items[0].Text := DateTimeToStr(now);
+end;
+
+procedure Tfrm_Principal.Usurios1Click(Sender: TObject);
+begin
+  CriarForm(Tfrm_CadastroUsuarios,frm_CadastroUsuarios);
+end;
+
+end.

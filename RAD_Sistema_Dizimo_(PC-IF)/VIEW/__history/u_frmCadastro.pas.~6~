@@ -1,0 +1,95 @@
+unit u_frmCadastro;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.WinXPanels, Vcl.Imaging.jpeg,
+  Data.DB, Vcl.Grids, Vcl.DBGrids,
+  Datasnap.DBClient, Vcl.Mask, Vcl.DBCtrls, Vcl.WinXCtrls, Vcl.CategoryButtons,
+  acPNG, Datasnap.Provider, uClasses, uDM_Dados;
+
+type
+  TfrmCadastro = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Panel2: TPanel;
+    Image1: TImage;
+    Image2: TImage;
+    Image3: TImage;
+    Image4: TImage;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    CardPanel1: TCardPanel;
+    Card1: TCard;
+    CardPanel2: TCardPanel;
+    Card2: TCard;
+    Card3: TCard;
+    StackPanel1: TStackPanel;
+    StackPanel2: TStackPanel;
+    Card4: TCard;
+    Card5: TCard;
+    Panel3: TPanel;
+    Image5: TImage;
+    Image6: TImage;
+    Image8: TImage;
+    Label19: TLabel;
+    Label20: TLabel;
+    Label22: TLabel;
+    Panel4: TPanel;
+    SplitView1: TSplitView;
+    CategoryButtons1: TCategoryButtons;
+    dsTabela: TDataSource;
+    ClientDataSet1: TClientDataSet;
+    DataSetProvider1: TDataSetProvider;
+    ClientDataSet1CDFICHA: TIntegerField;
+    ClientDataSet1NOME: TStringField;
+    ClientDataSet1NASCDIZIMISTA: TSQLTimeStampField;
+    Label7: TLabel;
+    DBEdit1: TDBEdit;
+    Label8: TLabel;
+    DBEdit2: TDBEdit;
+    Label9: TLabel;
+    DBEdit3: TDBEdit;
+    dbg_Dados: TDBGrid;
+    procedure dbg_DadosDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure Image1Click(Sender: TObject);
+    procedure Image5Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadastro: TfrmCadastro;
+
+implementation
+
+{$R *.dfm}
+
+
+procedure TfrmCadastro.dbg_DadosDrawColumnCell(Sender: TObject; const Rect: TRect;
+  DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  ZebrarDBGrid(dsTabela,dbg_Dados,State,Rect,Column);
+end;
+
+procedure TfrmCadastro.Image1Click(Sender: TObject);
+begin
+  CardPanel2.ActiveCardIndex := 1;
+  CardPanel1.ActiveCardIndex := 1;
+  SplitView1.Open;
+end;
+
+procedure TfrmCadastro.Image5Click(Sender: TObject);
+begin
+  CardPanel2.ActiveCardIndex := 0;
+  CardPanel1.ActiveCardIndex := 0;
+end;
+
+end.

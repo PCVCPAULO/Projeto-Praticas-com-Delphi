@@ -1,0 +1,73 @@
+unit uFrm_ConsultaDataLancam;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Datasnap.DBClient,
+  Vcl.StdCtrls, Vcl.Mask, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls, Data.FMTBcd,
+  Data.SqlExpr;
+
+type
+  Tfrm_ConsultaDizimo = class(TForm)
+    Label1: TLabel;
+    DBGrid1: TDBGrid;
+    Panel1: TPanel;
+    Button1: TButton;
+    lbl_Totaliza: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    lbl_TotalDizimistas: TLabel;
+    edt_DataAbertura: TEdit;
+    ds_TabelaConsulta: TDataSource;
+    procedure Button1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_ConsultaDizimo: Tfrm_ConsultaDizimo;
+
+implementation
+
+{$R *.dfm}
+
+uses uDM_Dados;
+
+procedure Tfrm_ConsultaDizimo.Button1Click(Sender: TObject);
+var
+  Soma: Double;
+  i: Integer;
+begin
+  with TClientDataSet(ds_TabelaConsulta.DataSet) do
+  begin
+    Close;
+    CommandText := '';
+    CommandText := 'select * from LANCAMENTO where DTLANCAMENTO = ' + #39 + edt_DataAbertura.Text + #39;
+//    CommandText := 'select ID, CDFICHA, NOMEDIZ, Sum(VLRDOACAO) as TOTAL from LANCAMENTO where DTLANCAMENTO = ' + #39 + edt_DataAbertura.Text + #39 +
+//                   'group by ID, CDFICHA, NOMEDIZ, VLRDOACAO';
+    Open;
+    Soma := 0;
+    First;
+    for i := 0 to RecordCount -1 do
+    begin
+      Soma := Soma + FieldByName('VLRDOACAO').AsFloat;
+      Next;
+    end;
+     lbl_Totaliza.Caption := FloatToStr('Soma');
+//   lbl_Totaliza.Caption := FormatFloat('###,##0.00',Soma);
+//   lbl_TotalDizimistas.Caption := 'Nº Lancamentos: '+IntToStr(TClientDataSet(ds_TabelaConsulta.DataSet).RecordCount);
+   end;
+
+  edt_DataAbertura.SetFocus;
+end;
+
+procedure Tfrm_ConsultaDizimo.FormCreate(Sender: TObject);
+begin
+//   edt_DataAbertura.SetFocus;
+end;
+
+end.

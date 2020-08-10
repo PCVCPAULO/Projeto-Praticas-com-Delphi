@@ -1,0 +1,233 @@
+unit uFrm_ConsultaLancamentos;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
+  System.ImageList, Vcl.ImgList, Vcl.ExtCtrls, Datasnap.DBClient, Vcl.StdCtrls,
+  Vcl.Mask;
+
+type
+  Tfrm_ConsultaLancam = class(TForm)
+    Panel1: TPanel;
+    lbl_Sistema: TLabel;
+    lbl_Matriz: TLabel;
+    lbl_Mostrahora: TLabel;
+    lbl_CidadeGrau: TLabel;
+    lbl_MostraData: TLabel;
+    Panel4: TPanel;
+    Label1: TLabel;
+    btn_Limpar: TButton;
+    btn6_Imprimir: TButton;
+    brn7_FecharFrom: TButton;
+    Panel3: TPanel;
+    ds_ConsultaLancam: TDataSource;
+    Timer1: TTimer;
+    img_Cadastro: TImageList;
+    Panel2: TPanel;
+    dbg_Consulta: TDBGrid;
+    Label2: TLabel;
+    Label3: TLabel;
+    edt_DT_Inicial: TMaskEdit;
+    edt_DT_Final: TMaskEdit;
+    lbl_Fechamento2: TLabel;
+    lbl_QtdTotLancam2: TLabel;
+    lbl_QtdLancam2: TLabel;
+    lbl_ValorMes2: TLabel;
+    lbl_ValorTotalPeriodo2: TLabel;
+    lbl_QtdLancam1: TLabel;
+    lbl_ValorMes1: TLabel;
+    lbl_QtdTotLancam1: TLabel;
+    lbl_ValorTotalPeriodo1: TLabel;
+    lbl_Fechamento1: TLabel;
+    cds_ConsultaLancam: TClientDataSet;
+    cds_ConsultaLancamID: TIntegerField;
+    cds_ConsultaLancamCDFICHA: TIntegerField;
+    cds_ConsultaLancamNOMEDIZ: TStringField;
+    cds_ConsultaLancamVLRDOACAO: TFMTBCDField;
+    cds_ConsultaLancamID_REFERENCIA: TIntegerField;
+    cds_ConsultaLancamREFERENCIA: TStringField;
+    cds_ConsultaLancamDTLANCAMENTO: TDateField;
+    procedure brn7_FecharFromClick(Sender: TObject);
+    procedure edt_DT_FinalKeyPress(Sender: TObject; var Key: Char);
+    procedure edt_DT_InicialKeyPress(Sender: TObject; var Key: Char);
+    procedure btn_LimparClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
+    procedure dbg_ConsultaDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure btn6_ImprimirClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_ConsultaLancam: Tfrm_ConsultaLancam;
+
+implementation
+
+{$R *.dfm}
+
+uses uDM_Dados, uFuncoes, uDM_Relatorios;
+
+procedure Tfrm_ConsultaLancam.brn7_FecharFromClick(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure Tfrm_ConsultaLancam.btn6_ImprimirClick(Sender: TObject);
+
+begin
+  with DM_Relatorios do
+    begin
+    DM_Relatorios := TDM_Relatorios.Create(nil);
+    try
+      rel_Lancam.Clear;
+      rel_Lancam.LoadFromFile(ExtractFilePath(Application.ExeName)+'Relatorios\rel_Lancamento.fr3');
+      rel_Lancam.Variables['Fechamento']    := QuotedStr(lbl_Fechamento2.Caption);
+      rel_Lancam.Variables['Qtd_Dizimista'] := lbl_QtdLancam2.Caption;
+      rel_Lancam.Variables['Total_Mes']     := lbl_QtdTotLancam2.Caption;
+      rel_Lancam.Variables['Vlr_Periodo']   := QuotedStr(lbl_ValorMes2.Caption);
+      rel_Lancam.Variables['VlrTotal_Mes']  := QuotedStr(lbl_ValorTotalPeriodo2.Caption);
+      rel_Lancam.ShowReport();
+    finally
+      FreeAndNil(DM_Relatorios);
+    end;
+  end;
+end;
+
+procedure Tfrm_ConsultaLancam.btn_LimparClick(Sender: TObject);
+begin
+  edt_DT_Inicial.Clear;
+  edt_DT_Final.Clear;
+  TClientDataSet(ds_ConsultaLancam.DataSet).Close;
+  TClientDataSet(ds_ConsultaLancam.DataSet).Open;
+  edt_DT_Inicial.SetFocus;
+end;
+
+procedure Tfrm_ConsultaLancam.dbg_ConsultaDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  ZebrarDBGrid(ds_ConsultaLancam,dbg_Consulta,State,Rect,Column);
+  dbg_Consulta.Font.Size := 11;
+end;
+
+procedure Tfrm_ConsultaLancam.edt_DT_FinalKeyPress(Sender: TObject;
+  var Key: Char);
+var
+ Soma, Soma1: real;
+ dt_Ini, dt_Fim : TDate;
+begin
+
+  if key = #13 then
+  begin
+      with TClientDataSet(ds_ConsultaLancam.DataSet) do
+      begin
+       begin
+        dt_Ini := StrToDate(edt_DT_Inicial.Text);
+        dt_Fim := StrtoDate(edt_DT_Final.Text);
+        if dt_Fim < dt_Ini then
+        begin
+          Application.MessageBox('Data Final NÃO PODE SER MENOR que a Data Inicial!','Atenção',0+48);
+          edt_DT_Inicial.SetFocus;
+          Abort;
+        end
+        else
+        begin
+          Close;
+          CommandText := '';
+          CommandText := 'select * from LANCAMENTO order by ID';
+          Open;
+          Filter := 'DTLANCAMENTO >=' + QuotedStr(DateToStr(dt_Ini))
+              +' and DTLANCAMENTO <=' + QuotedStr(DateToStr(dt_Fim));
+          Filtered := True;
+        end;
+
+        if RecordCount = 0 then
+          begin
+            Application.MessageBox('Não Existe Dados no Período Solicitado!','Atenção',0+48);
+            edt_DT_Inicial.SetFocus;
+            Abort;
+          end else
+          First;
+          Soma1 := 0;
+          while not Eof do
+          begin
+            Soma1 := Soma1  + FieldByName('VLRDOACAO').AsFloat;
+            Next;
+          end;
+        lbl_Fechamento2.Caption := DateToStr(dt_Fim);
+        lbl_QtdLancam2.Caption  := IntToStr(RecordCount);
+        lbl_ValorMes2.Caption   := 'R$ ' + FormatFloat('###,##0.00',Soma1);
+       end;
+
+
+        if DateToStr(dt_Fim) = '' then
+        begin
+          Application.MessageBox('Entre com uma data para a realização do cálculo!','Atenção',0+48);
+          edt_DT_Inicial.SetFocus;
+          Abort;
+        end
+        else
+        begin
+          Close;
+          CommandText := '';
+          CommandText := 'select * from LANCAMENTO order by ID';
+          Open;
+          Filter := 'DTLANCAMENTO =' + QuotedStr(DateToStr(dt_Fim));
+          Filtered := True;
+
+
+          if RecordCount = 0 then
+          begin
+             Application.MessageBox('Não Existe Dados no Período Solicitado !','Atenção',0+48);
+             edt_DT_Inicial.SetFocus;
+             Abort;
+          end
+          else
+          First;
+          Soma := 0;
+          while not Eof do
+          begin
+            Soma := Soma + FieldByName('VLRDOACAO').AsFloat;
+            Next;
+          end;
+        end;
+        lbl_QtdTotLancam2.Caption      := IntToStr(RecordCount);
+        lbl_ValorTotalPeriodo2.Caption := 'R$ ' + FormatFloat('###,##0.00',Soma);
+      end;
+  end;
+end;
+
+procedure Tfrm_ConsultaLancam.edt_DT_InicialKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if key = #13 then
+  edt_DT_Final.SetFocus;
+end;
+
+procedure Tfrm_ConsultaLancam.FormShow(Sender: TObject);
+begin
+  edt_DT_Inicial.SetFocus;
+end;
+
+procedure Tfrm_ConsultaLancam.Timer1Timer(Sender: TObject);
+var
+  MostraHora, MostraData : TDateTime;
+  strHora : string;
+  strData : String;
+begin
+  MostraHora := Time; // armazena date e hora atuais
+  strHora    := TimeToStr(MostraHora); // converte a hora em uma string
+  lbl_MostraHora.Caption := strHora; // exibe a hora na legenda do formulário
+
+  MostraData := Date;
+  strData := DateToStr(MostraData);
+  lbl_MostraData.Caption := strData;
+end;
+
+end.
+

@@ -1,0 +1,40 @@
+unit uDM_Relatorios;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, frxClass, frxDBSet, frxExportBaseDialog,
+  frxExportPDF;
+
+type
+  TDM_Relatorios = class(TDataModule)
+    frxDBD_Cadastro: TfrxDBDataset;
+    frxDBD_Lancam: TfrxDBDataset;
+    rel_Lancam: TfrxReport;
+    rel_Cadastro: TfrxReport;
+    frxDBD_ConsultaNiver: TfrxDBDataset;
+    rel_ConsultaNiver: TfrxReport;
+    frxDBD_ConsultaNiverConj: TfrxDBDataset;
+    rel_ConsultaNiverConj: TfrxReport;
+    frxDBD_ConsultaNiverUniao: TfrxDBDataset;
+    rel_ConsultaNiverUniao: TfrxReport;
+    frxPDFExport1: TfrxPDFExport;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DM_Relatorios: TDM_Relatorios;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+uses uDM_Dados, uFrm_ConsultaLancamentos, uFrm_ConsultaCadastro,
+  uFrm_ConsultaNiver, uFrm_ConsultaNiverConj, uFrm_ConsultaNiverUniao;
+
+{$R *.dfm}
+
+end.

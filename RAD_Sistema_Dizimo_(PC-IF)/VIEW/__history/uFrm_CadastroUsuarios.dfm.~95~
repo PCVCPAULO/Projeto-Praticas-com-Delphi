@@ -1,0 +1,237 @@
+inherited frm_CadastroUsuarios: Tfrm_CadastroUsuarios
+  Caption = 'Sistema de Controle do D'#237'zimo da Comunidade Matriz Santo Ant'#244'nio'
+  ClientHeight = 636
+  ClientWidth = 1071
+  Position = poScreenCenter
+  ExplicitWidth = 1087
+  ExplicitHeight = 675
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label5: TLabel [0]
+    Left = 56
+    Top = 218
+    Width = 43
+    Height = 21
+    Caption = 'Senha'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clGray
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+  end
+  inherited stb_CadBasico: TStatusBar
+    Top = 611
+    Width = 1071
+    ExplicitTop = 611
+    ExplicitWidth = 1071
+  end
+  inherited ToolBar1: TToolBar
+    Top = 568
+    Width = 1071
+    TabOrder = 3
+    ExplicitTop = 568
+    ExplicitWidth = 1071
+  end
+  inherited pgc_CadBasico: TPageControl
+    Width = 886
+    Height = 498
+    ExplicitWidth = 886
+    ExplicitHeight = 498
+    inherited tbs_Cadastro: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 24
+      ExplicitWidth = 878
+      ExplicitHeight = 470
+      inherited pnl_Cadastro: TPanel
+        Width = 878
+        Height = 470
+        ExplicitWidth = 878
+        ExplicitHeight = 470
+        object lbl_Nome: TLabel
+          Left = 69
+          Top = 93
+          Width = 43
+          Height = 21
+          Caption = 'Nome'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clGray
+          Font.Height = -16
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
+        end
+        object lbl_Login: TLabel
+          Left = 69
+          Top = 169
+          Width = 39
+          Height = 21
+          Caption = 'Login'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clGray
+          Font.Height = -16
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
+        end
+        object lbl_Senha: TLabel
+          Left = 72
+          Top = 250
+          Width = 43
+          Height = 21
+          Caption = 'Senha'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clGray
+          Font.Height = -16
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label4: TLabel
+          Left = 248
+          Top = 250
+          Width = 81
+          Height = 21
+          Caption = 'Sal'#225'rio (R$)'
+        end
+        object edt_Nome: TEdit
+          Left = 72
+          Top = 120
+          Width = 281
+          Height = 29
+          CharCase = ecUpperCase
+          TabOrder = 0
+        end
+        object edt_Login: TEdit
+          Left = 72
+          Top = 192
+          Width = 121
+          Height = 29
+          CharCase = ecUpperCase
+          TabOrder = 1
+        end
+        object edt_Senha: TEdit
+          Left = 72
+          Top = 272
+          Width = 121
+          Height = 29
+          PasswordChar = '*'
+          TabOrder = 2
+        end
+        object edt_Salario: TtpEdit
+          Left = 248
+          Top = 272
+          Width = 193
+          Height = 29
+          Alignment = taRightJustify
+          CharCase = ecUpperCase
+          TabOrder = 3
+          Text = '0,00'
+          Caracter = tcReal
+        end
+      end
+    end
+    inherited tbs_Pesquisar: TTabSheet
+      ExplicitWidth = 878
+      ExplicitHeight = 470
+      inherited Panel2: TPanel
+        Width = 878
+        Height = 470
+        ExplicitWidth = 878
+        ExplicitHeight = 470
+        inherited Panel5: TPanel
+          Width = 878
+          ExplicitWidth = 878
+          inherited btn_Filtrar: TButton
+            OnClick = btn_FiltrarClick
+          end
+          inherited cbx_Pesquisar: TComboBox
+            Text = 'NOME'
+            Items.Strings = (
+              'NOME'
+              'LOGIN')
+          end
+        end
+        object DBGrid1: TDBGrid
+          Left = 0
+          Top = 89
+          Width = 878
+          Height = 381
+          Align = alClient
+          DataSource = ds_Tabela
+          TabOrder = 1
+          TitleFont.Charset = ANSI_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -16
+          TitleFont.Name = 'Segoe UI'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'ID'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NOME'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'LOGIN'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'SENHA'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CADASTRADO'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'SALARIO'
+              Visible = True
+            end>
+        end
+      end
+    end
+  end
+  inherited Panel1: TPanel
+    Width = 1071
+    TabOrder = 2
+    ExplicitWidth = 1071
+  end
+  inherited Panel3: TPanel
+    Left = 886
+    Height = 498
+    ExplicitLeft = 886
+    ExplicitHeight = 498
+  end
+  inherited Panel4: TPanel
+    Width = 1071
+    ExplicitWidth = 1071
+  end
+  inherited img_Cadastro: TImageList
+    Left = 980
+    Top = 264
+  end
+  inherited acl_Cadastro: TActionList
+    Left = 980
+    Top = 192
+  end
+  object ClientDataSet1: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 976
+    Top = 16
+  end
+  object ds_Tabela: TDataSource
+    DataSet = DM_Dados.cds_Usuarios
+    Left = 982
+    Top = 70
+  end
+end

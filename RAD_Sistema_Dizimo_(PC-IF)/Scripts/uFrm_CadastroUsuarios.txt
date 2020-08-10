@@ -1,0 +1,152 @@
+unit uFrm_CadastroUsuarios;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrm_CadastroBasico,uFuncoes, Data.DB, System.Actions,
+  Vcl.ActnList, System.ImageList, Vcl.ImgList, Vcl.StdCtrls,
+  Vcl.Buttons, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls, Vcl.ToolWin,
+  Datasnap.DBClient;
+
+type
+  Tfrm_CadastroUsuarios = class(Tfrm_CadastroBasico)
+    procedure acl_GravarExecute(Sender: TObject);
+    procedure acl_EditarExecute(Sender: TObject);
+    procedure acl_InserirExecute(Sender: TObject);
+    procedure acl_InserirUpdate(Sender: TObject);
+    procedure acl_PesquisarExecute(Sender: TObject);
+    procedure btn_FiltrarClick(Sender: TObject);
+  private
+    { Private declarations }
+    iModo : Integer;
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_CadastroUsuarios: Tfrm_CadastroUsuarios;
+
+implementation
+
+{$R *.dfm}
+
+uses uFrm_Principal, uDM_Dados;
+
+procedure Tfrm_CadastroUsuarios.acl_EditarExecute(Sender: TObject);
+begin
+  inherited;
+
+  edt_Nome.Text  := DM_Dados.cds_UsuarioNOME.AsString;
+  edt_Login.Text := DM_Dados.cds_Usuariologin.AsString;
+  edt_Senha.Text := DM_Dados.cds_Usuariosenha.AsString;
+
+end;
+
+procedure Tfrm_CadastroUsuarios.acl_GravarExecute(Sender: TObject);
+begin
+
+  if Trim(edt_Nome.Text) = '' then
+  begin
+    Application.MessageBox('Preencha o campo NOME.','Atenção!',MB_OK+MB_ICONWARNING);
+    edt_Nome.SetFocus;
+    Abort;
+  end;
+
+  if Trim(edt_Login.Text) = '' then
+  begin
+    Application.MessageBox('Preencha o campo LOGIN.','Atenção!',MB_OK+MB_ICONWARNING);
+    edt_Login.SetFocus;
+    Abort;
+  end;
+
+  if (dsTabela.State in [dsInsert])  and (GetLoginCadastrado(Trim(edt_Login.Text))) then
+  begin
+    Application.MessageBox('Login encontra-se cadastrado.','Atenção!',MB_OK+MB_ICONWARNING);
+    edt_Login.SetFocus;
+    Abort;
+  end;
+
+
+
+  if Trim(edt_Senha.Text) = '' then
+  begin
+    Application.MessageBox('Preencha o campo SENHA.','Atenção!',MB_OK+MB_ICONWARNING);
+    edt_Senha.SetFocus;
+    Abort;
+  end;
+
+  with DM_Dados do
+  begin
+    if dsTabela.State in [dsInsert] then
+      cds_Usuarioid.AsInteger    := GetId('ID', 'TBL_USUARIO');
+      cds_Usuarionome.AsString   := Trim(edt_Nome.Text);
+      cds_Usuariologin.AsString  := Trim(edt_Login.Text);
+      cds_Usuariosenha.AsString  := Trim(edt_Senha.Text);
+      cds_Usuariostatus.AsString := 'A';
+      cds_Usuariodt_cadastro.AsDateTime := now;
+  end;
+
+  inherited;
+
+end;
+
+procedure Tfrm_CadastroUsuarios.acl_InserirExecute(Sender: TObject);
+begin
+  inherited;
+
+  iModo := 0;
+	if PageControl1.ActivePage = tbs_Pesquisar then
+  begin
+    tbs_Cadastro.TabVisible  := True;
+    tbs_Pesquisar.TabVisible := False;
+    PageControl1.ActivePage  := tbs_Cadastro;
+  end;
+
+  if not TClientDataSet(dsTabela.DataSet).Active  then
+     TClientDataSet(dsTabela.DataSet).Open;
+     TClientDataSet(dsTabela.DataSet).Insert;
+
+end;
+
+procedure Tfrm_CadastroUsuarios.acl_InserirUpdate(Sender: TObject);
+begin
+  inherited;
+  acl_Inserir.Enabled := dsTabela.State in [dsBrowse,dsInactive];
+end;
+
+
+
+procedure Tfrm_CadastroUsuarios.acl_PesquisarExecute(Sender: TObject);
+begin
+  edt_Pesquisar.Clear;
+  with DM_Dados do
+  begin
+    cds_Usuario.close;
+	  cds_Usuario.CommandText := 'SELECT * FROM TBL_USUARIO';
+	  cds_Usuario.Open;
+  end;
+end;
+
+procedure Tfrm_CadastroUsuarios.btn_FiltrarClick(Sender: TObject);
+begin
+
+  if edt_Pesquisar.Text = '' then
+  begin
+    Application.MessageBox('Informe um valor a ser pesquisado ou clique em Pesquisar.','ATENÇÃO',MB_OK+MB_ICONWARNING);
+    edt_Pesquisar.SetFocus;
+    Abort;
+  end;
+  with DM_Dados do
+  begin
+    cds_Usuario.Close;
+    case cbx_Filtros.ItemIndex of
+	    0 : cds_Usuario.CommandText := 'SELECT * FROM TBL_USUARIO WHERE NOME  LIKE ' + QuotedStr('%'+edt_Pesquisar.Text+'%');
+      1 : cds_Usuario.CommandText := 'SELECT * FROM TBL_USUARIO WHERE LOGIN LIKE ' + QuotedStr('%'+edt_Pesquisar.Text+'%');
+	  end;
+    cds_Usuario.Open;
+
+  end;
+end;
+
+end.

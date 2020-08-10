@@ -1,0 +1,130 @@
+unit uFrm_CadastroCaixa;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrm_CadastroBasico, Data.DB,
+  System.Actions, Vcl.ActnList, System.ImageList, Vcl.ImgList, Vcl.StdCtrls,
+  Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls, Vcl.Buttons, Vcl.ToolWin, Vcl.ExtCtrls,
+  tpEdit, System.Math;
+
+type
+  Tfrm_CadastroCaixa = class(Tfrm_CadastroBasico)
+    Label4: TLabel;
+    edt_Documento: TEdit;
+    edt_Descricao: TEdit;
+    edt_Valor: TtpEdit;
+    RadioGroup1: TRadioGroup;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label5: TLabel;
+    procedure acl_GravarExecute(Sender: TObject);
+    procedure acl_PesquisarExecute(Sender: TObject);
+    procedure acl_EditarExecute(Sender: TObject);
+    procedure btn_FiltrarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_CadastroCaixa: Tfrm_CadastroCaixa;
+
+implementation
+
+{$R *.dfm}
+
+uses uDM_Dados, uFuncoes;
+
+procedure Tfrm_CadastroCaixa.acl_EditarExecute(Sender: TObject);
+begin
+  inherited;
+  with DM_Dados do
+  begin
+    edt_Documento.Text     := cds_Caixanumero_doc.AsString;
+    edt_Descricao.Text     := cds_Caixadescricao.AsString;
+    edt_Valor.Text         := FormatFloat(',#0.00',cds_Caixavalor.AsCurrency);
+    RadioGroup1.ItemIndex := ifthen(cds_Caixatipo.AsString = 'C',0,1);
+  end;
+
+end;
+
+procedure Tfrm_CadastroCaixa.acl_GravarExecute(Sender: TObject);
+begin
+  //Validações
+  if trim(edt_Documento.Text) = '' then
+  begin
+    Application.MessageBox('Preencha o campo documento.','Atenção',MB_OK+MB_ICONWARNING);
+    edt_Documento.SetFocus;
+    Abort;
+  end;
+  if trim(edt_Descricao.Text) = '' then
+  begin
+    Application.MessageBox('Preencha o campo descrição.','Atenção',MB_OK+MB_ICONWARNING);
+    edt_Descricao.SetFocus;
+    Abort;
+  end;
+  if StringParaFloat(edt_Valor.Text) <= 0 then
+  begin
+    Application.MessageBox('Informe um valor maior que zero.','Atenção',MB_OK+MB_ICONWARNING);
+    edt_Valor.SetFocus;
+    Abort;
+  end;
+
+  with DM_Dados do
+  begin
+    if ds_Tabela.State in [dsInsert] then
+    begin
+      cds_Caixaid.AsInteger           := GetId('ID','CAIXA');
+      cds_Caixadt_cadastro.AsDateTime := now;
+    end;
+    cds_Caixanumero_doc.AsString := Trim(edt_Documento.Text);
+    cds_Caixadescricao.AsString  := trim(edt_Descricao.Text);
+    cds_Caixavalor.AsCurrency    := StringParaFloat(edt_Valor.Text);
+
+    case RadioGroup1.ItemIndex of
+      0: cds_Caixatipo.AsString := 'C';
+      1: cds_Caixatipo.AsString := 'D';
+    end;
+
+  end;
+  RadioGroup1.ItemIndex := 0;
+
+  inherited;
+
+end;
+
+procedure Tfrm_CadastroCaixa.acl_PesquisarExecute(Sender: TObject);
+begin
+  inherited;
+  with DM_Dados do
+  begin
+    cds_Caixa.Close;
+    cds_Caixa.CommandText := 'SELECT * FROM CAIXA';
+    cds_Caixa.Open;
+  end;
+end;
+
+procedure Tfrm_CadastroCaixa.btn_FiltrarClick(Sender: TObject);
+begin
+  if edt_Pesquisar.Text = '' then
+  begin
+    Application.MessageBox('Informe um valor a ser pesquisado ou clique em Pesquisar.','Atenção',MB_OK+MB_ICONWARNING);
+    edt_Pesquisar.SetFocus;
+    Abort;
+  end;
+
+  with DM_Dados do
+  begin
+    cds_Caixa.Close;
+    case cbx_Pesquisar.ItemIndex of
+      0 : cds_Caixa.CommandText := 'SELECT * FROM CAIXA WHERE NUMERO_DOC  LIKE '+QuotedStr('%'+edt_Pesquisar.Text+'%');
+      1 : cds_Caixa.CommandText := 'SELECT * FROM CAIXA WHERE DESCRICAO LIKE '+QuotedStr('%'+edt_Pesquisar.Text+'%');
+    end;
+    cds_Caixa.Open;
+  end;
+end;
+
+end.

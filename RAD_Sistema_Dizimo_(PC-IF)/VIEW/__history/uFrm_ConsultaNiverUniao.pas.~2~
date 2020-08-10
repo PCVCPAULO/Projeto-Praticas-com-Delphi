@@ -1,0 +1,50 @@
+unit uFrm_ConsultaNiverUniao;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Datasnap.DBClient, Vcl.Grids,
+  Vcl.DBGrids, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls, System.ImageList,
+  Vcl.ImgList;
+
+type
+  Tfrm_ConsultaNiverUniao = class(TForm)
+    Panel1: TPanel;
+    lbl_Sistema: TLabel;
+    lbl_Matriz: TLabel;
+    lbl_Mostrahora: TLabel;
+    lbl_CidadeGrau: TLabel;
+    lbl_MostraData: TLabel;
+    Panel4: TPanel;
+    img_Cadastro: TImageList;
+    Timer1: TTimer;
+    pnl_ExibeMes: TPanel;
+    Panel2: TPanel;
+    lbl_Cadastrados: TLabel;
+    Panel3: TPanel;
+    Label1: TLabel;
+    brn7_FecharFrom: TButton;
+    btn6_Imprimir: TButton;
+    btn_Limpar: TButton;
+    MonthCalendar1: TMonthCalendar;
+    cbx_FiltrarMes: TComboBox;
+    dbg_ConsultaNiverCasam: TDBGrid;
+    cds_ConsultaNiverCasam: TClientDataSet;
+    ds_Consulta: TDataSource;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_ConsultaNiverUniao: Tfrm_ConsultaNiverUniao;
+
+implementation
+
+{$R *.dfm}
+
+uses uDM_Dados;
+
+end.

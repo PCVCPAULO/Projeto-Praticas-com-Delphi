@@ -1,0 +1,78 @@
+
+	
+	  procedure SVClosed(Sender: TObject):
+	  procedure SVCOpened(Sender: TObject):
+	  procedure SVCOpening(Sender: TObject);
+	  procedure catMenuItemsCategoryCollapase(Sender: TObject; const Category: TButtonCategory);
+	  procedure imgMenuClick(Sender: TObject);
+	  procedure actConfiguracaoExecute(Sender: TObject);
+	  procedure actEstoqueExecute(Sender: TObject);
+	  procedure actFinanceiroExecute(Sender: TObject);
+	  procedure SVMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+	  
+	  procedure ChamaSubMenu(Menu, subMenuBt; TCategoryButtons; Rect: TRect);
+	
+	private
+	   rec : TRect;
+	public
+	end;
+
+var
+	FrmPrincipal: TFrmPrincipal;
+	
+implementation
+
+
+{$R *.dfm}
+
+
+procedure TFrmPrincipal.actConfiguracaoExecute(Sender: TObject);
+
+procedure TFrmPrincipal.actEstoqueExecute(Sender:TObject);
+begin
+  ChamaSubMenu( catMenuItems, catEstoque, rec);
+end;
+
+procedure TFrmPrincipal.catMenuItemsCategoryCollapase(Sender: TObject; const Category: TButtonCategory);
+begin
+  catMenuItems.Categories[0].Collapase := True;
+end;
+
+procedure TFrmPrincipalChamasubMenu(Menu, subMenuBt; TCategoryButtons; Rect: TRect);
+var i: integer;
+begin
+
+  // usar o Tag do SubMenu para Fechar quando abrir um Outro SubMenu
+  
+  for I := 0 to ComponentCount -1 do
+     begin
+	   if ( Components[I] is TCategoryButtons ) then
+	      begin
+		    if ( TCategoryButtons(Components[I]).Tag = 1 then
+			     TCategoryButtons(Components[I].Visible := False;
+		  end;
+	 end;
+  
+  Rect := Menu.Categories.CategoryButtons.GetGuttonRect(Menu.Categories.CategoryButtons.SelectdItem);
+  
+  SubMenuBt.Left   := Menu.Categories[0].Items[0].CategoryButtons.Width - 
+                      Menu.Categories[0].Items[0].CategoryButtons.Width;
+
+  SubMenuBt.Top     := rect.Top;
+  SubMenuBt.Visible := True;
+  
+  SubMenuBt.Show;
+
+end;
+
+procedure TFrmPrincipal.SVMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+begin
+  catFinanceiro.Visible := False;
+  catEstoque.Visible    := False;
+end;
+
+
+
+
+
+
