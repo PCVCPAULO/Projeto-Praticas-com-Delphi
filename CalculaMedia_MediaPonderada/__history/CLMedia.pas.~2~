@@ -1,0 +1,25 @@
+unit CLMedia;
+
+interface
+
+uses Classes;
+
+type
+  TMedia = class
+
+    protected
+      FValor1 : real;
+      FValor2 : real;
+      procedure SetVal1(valor : real);
+      procedure SetVal2(valor : real);
+    public
+      constructor Create;
+      function CalcularMedia : real; virtual;
+
+    property Valor1 : real  read FValor1 write SetVal1;
+    property Valor2 : real  read FValor2 write SetVal2;
+  end;
+
+implementation
+
+end.

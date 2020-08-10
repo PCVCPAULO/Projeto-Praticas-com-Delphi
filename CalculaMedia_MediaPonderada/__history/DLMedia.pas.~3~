@@ -1,0 +1,54 @@
+unit DLMedia;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons;
+
+type
+  TfrmMedia = class(TForm)
+    edtValor1: TLabel;
+    edtValor2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    edtPeso1: TEdit;
+    edtPeso2: TEdit;
+    bnMedia: TBitBtn;
+    procedure bnMediaClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmMedia: TfrmMedia;
+
+implementation
+
+uses CLMedia, CLMMediaPonderada;
+
+{$R *.dfm}
+
+procedure TfrmMedia.bnMediaClick(Sender: TObject);
+var
+  oMedia : TMedia;
+  rMedia : real;
+begin
+  // verifica se o cálculo tem peso ou não
+  try
+    if (edtPeso1.Text = '') and (edtPeso2.Text = '')then
+    begin
+      oMedia        := TMedia.Create;
+      oMedia.Valor1 := StrToFloat(edtValor1.Text);
+      oMedia.Valor2 := StrToFloat(edtValor2.Text);
+    end;
+  finally
+
+  end;
+end;
+
+end.
