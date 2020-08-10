@@ -1,0 +1,30 @@
+unit clFuncoes;
+
+interface
+
+uses Vcl.Forms, System.SysUtils, System.Classes;
+
+  procedure CriarForm(T : TComponentClass ;Form : TForm);
+  procedure FechaFormEsc(var Key : Char; Form : TForm);
+
+implementation
+
+
+
+procedure CriarForm(T : TComponentClass ;Form : TForm);
+begin
+  Application.CreateForm(T,Form);
+  try
+    Form.ShowModal;
+  finally
+    FreeAndNil(Form);
+  end;
+end;
+
+procedure FechaFormEsc(var Key : Char; Form : TForm);
+begin
+  if key = #27 then Form.Close;
+end;
+
+
+end.

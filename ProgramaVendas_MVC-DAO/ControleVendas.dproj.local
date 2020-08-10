@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2020/04/07 11:04:07.000.265,=C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/04/07 11:10:55.000.060,D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\View\MenuPrincipal.dfm=C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2020/04/07 11:10:55.000.045,D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\View\MenuPrincipal.pas=C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/04/07 11:23:03.000.921,=C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/04/07 11:23:55.000.065,D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\View\CDVendedores.dfm=C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2020/04/07 11:23:55.000.065,D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\View\CDVendedores.pas=C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/04/07 12:05:18.000.745,D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\ControleVendas.dproj=C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2020/04/07 13:06:05.000.057,=D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\Unit1.pas</Transaction>
+    <Transaction>2020/04/07 13:13:57.000.197,D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\View\CDVendas.pas=D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\Unit1.pas</Transaction>
+    <Transaction>2020/04/07 13:13:57.000.197,D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\View\CDVendas.dfm=D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\Unit1.dfm</Transaction>
+    <Transaction>2020/04/07 13:33:51.000.423,=D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\Unit1.pas</Transaction>
+    <Transaction>2020/04/07 13:39:28.000.736,D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\View\CNComissoes.pas=D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\Unit1.pas</Transaction>
+    <Transaction>2020/04/07 13:39:28.000.736,D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\View\CNComissoes.dfm=D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\Unit1.dfm</Transaction>
+    <Transaction>2020/04/07 13:52:08.000.528,=D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\Unit1.pas</Transaction>
+    <Transaction>2020/04/07 13:52:29.000.347,=D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\Unit1.pas</Transaction>
+    <Transaction>2020/04/07 13:53:09.000.322,D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\Controller\CLVendedor.pas=D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\Unit1.pas</Transaction>
+    <Transaction>2020/04/07 14:43:45.000.263,=D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\Unit1.pas</Transaction>
+    <Transaction>2020/04/07 14:44:08.000.101,D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\Controller\CLVendas.pas=D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\Unit1.pas</Transaction>
+    <Transaction>2020/04/07 16:44:37.000.807,=D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\Unit1.pas</Transaction>
+    <Transaction>2020/04/07 16:45:29.000.742,D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\Model\DMVendedor.dfm=D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\Unit1.dfm</Transaction>
+    <Transaction>2020/04/07 16:45:29.000.742,D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\Model\DMVendedor.pas=D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\Unit1.pas</Transaction>
+    <Transaction>2020/04/07 16:55:50.000.236,=D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\Unit1.pas</Transaction>
+    <Transaction>2020/04/07 16:57:11.000.862,D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\Model\DMVendas.pas=D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\Unit1.pas</Transaction>
+    <Transaction>2020/04/07 16:57:11.000.862,D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\Model\DMVendas.dfm=D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\Unit1.dfm</Transaction>
+    <Transaction>2020/04/08 17:25:34.000.019,=D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\Unit1.pas</Transaction>
+    <Transaction>2020/04/08 17:26:17.000.133,D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\Controller\clFuncoes.pas=D:\MeusProjetos_NBAsus\Projetos_Delphi_RAD\ProgramaVendas_MVC-DAO\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>

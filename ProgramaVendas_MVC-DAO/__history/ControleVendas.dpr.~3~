@@ -1,0 +1,24 @@
+program ControleVendas;
+
+uses
+  Vcl.Forms,
+  MenuPrincipal in 'View\MenuPrincipal.pas' {frmMenu},
+  CDVendedores in 'View\CDVendedores.pas' {frmVendedores},
+  CDVendas in 'View\CDVendas.pas' {frmVendas},
+  CNComissoes in 'View\CNComissoes.pas' {frmConsultaComissoes},
+  CLVendedor in 'Controller\CLVendedor.pas',
+  CLVendas in 'Controller\CLVendas.pas',
+  DMVendedor in 'Model\DMVendedor.pas' {DataModule1: TDataModule};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmMenu, frmMenu);
+  Application.CreateForm(TfrmVendedores, frmVendedores);
+  Application.CreateForm(TfrmVendas, frmVendas);
+  Application.CreateForm(TfrmConsultaComissoes, frmConsultaComissoes);
+  Application.CreateForm(TDataModule1, DataModule1);
+  Application.Run;
+end.

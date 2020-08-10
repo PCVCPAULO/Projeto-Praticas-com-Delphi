@@ -1,0 +1,40 @@
+unit CLVendas;
+
+interface
+
+uses
+  Classes, CLVendedor;
+
+  type
+  TVenda = class
+  protected
+    FID       : integer;
+    FNumero   : integer;
+    FData     : TDateTime;
+    FValor    : real;
+    FVendedor : TVendedor;
+
+    procedure SetNumero(iNumero : integer);
+    procedure SetValor (rValor : real);
+  public
+    constructor Create;
+    destructor Destroy; override;
+    function Busca(iNumero : integer) : boolean;
+    function Grava : boolean;
+    procedure Clear;
+
+    class function ObterTotalVendas(dataRef1, dataRef2 : TDateTime);
+
+    property ID : integer          read FID;
+    property Numero : integer      read FNumero write SetNumero;
+    property DataVenda : TDateTime read FData   write FData;
+    property Valor : real          read FValor  write SetValor;
+    property Vendedor : TVendedor  read FVendedor write FVendedor;
+  end;
+
+implementation
+
+
+uses DMVenda, DB;
+
+end.

@@ -1,0 +1,20 @@
+program ControleVendas;
+
+uses
+  Vcl.Forms,
+  MenuPrincipal in 'View\MenuPrincipal.pas' {frmMenu},
+  CDVendedores in 'View\CDVendedores.pas' {frmVendedores},
+  CDVendas in 'View\CDVendas.pas' {frmVendas},
+  CNComissoes in 'View\CNComissoes.pas' {frmConsultaComissoes};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmMenu, frmMenu);
+  Application.CreateForm(TfrmVendedores, frmVendedores);
+  Application.CreateForm(TfrmVendas, frmVendas);
+  Application.CreateForm(TfrmConsultaComissoes, frmConsultaComissoes);
+  Application.Run;
+end.
