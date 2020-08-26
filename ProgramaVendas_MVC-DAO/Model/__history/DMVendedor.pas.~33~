@@ -1,0 +1,195 @@
+unit DMVendedor;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.VCLUI.Wait,
+  FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
+  IBX.IBDatabase, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Data.DB,
+  IBX.IBCustomDataSet, IBX.IBQuery, Vcl.Dialogs, CLVendedor, FireDAC.Phys.FB,
+  FireDAC.Phys.FBDef, FireDAC.Phys.IBBase, FireDAC.Comp.UI;
+
+type
+  TdtmVendedor = class(TDataModule)
+    FDConexao: TFDConnection;
+    FDTransaction: TFDTransaction;
+    qryAcesso: TFDQuery;
+    dtsVendedor: TDataSource;
+    FDGUIxWaitCursor1: TFDGUIxWaitCursor;
+    FDPhysFBDriverLink1: TFDPhysFBDriverLink;
+
+  private
+    { Private declarations }
+  public
+    function Grava(OVendedor : TVendedor) : boolean;
+    function Busca(sMatricula : string; oVendedor :TVendedor;
+                  var Id: integer) : boolean;
+    function BuscarMatricula(iId : integer; oVendedor : TVendedor) : Boolean;
+    procedure obterVendedoresAtivos;
+   { Public declarations }
+  end;
+
+var
+  dtmVendedor: TdtmVendedor;
+
+implementation
+
+{$R *.dfm}
+
+{ TdtmVendedor }
+
+function TdtmVendedor.Busca(sMatricula: string; oVendedor: TVendedor;
+  var Id: integer): boolean;
+begin
+  Result := false;
+  try
+     if not FDConexao.Connected then
+     begin
+       FDConexao.Open;
+       FDTransaction.StartTransaction;
+
+     end;
+
+     if qryAcesso.Active then
+        qryAcesso.Close;
+
+        qryAcesso.SQL.Clear;
+        qryAcesso.SQL.Add('select ven.IDVendedor, ven.Matricula,' +
+        'ven.Nome, ven.SalarioBruto, ven.Percentual');
+        qryAcesso.SQL.Add('from vendedor ven');
+        qryAcesso.SQL.Add('where ven.Matricula = :prmMat');
+
+        qryAcesso.Params.ParamByName('prmMat').Value := sMatricula;
+
+        qryAcesso.Open;
+
+      if qryAcesso.RecordCount <> 0 then
+      begin
+        Result := True;
+        OVendedor.Matricula          := qryAcesso.FieldByName('Matricula').AsString;
+        oVendedor.Nome               := qryAcesso.FieldByName('Nome').AsString;
+        oVendedor.SalarioBruto       := qryAcesso.FieldByName('SalarioBruto').AsFloat;
+        oVendedor.PercentualComissao := qryAcesso.FieldByName('Percentual').AsFloat;
+
+        Id := qryAcesso.FieldByName('IDVendedor').AsInteger;
+      end;
+
+  except on e:exception do
+      ShowMessage('Problemas na conexão com a base de dados! ' + #13 + e.Message);
+  end;
+end;
+
+function TdtmVendedor.BuscarMatricula(iId: integer;
+  oVendedor: TVendedor): Boolean;
+begin
+   Result := False;
+   try
+      if not FDConexao.Connected then
+      begin
+        FDConexao.Open;
+        FDTransaction.StartTransaction;
+      end;
+
+      if qryAcesso.Active then
+         qryAcesso.Close;
+
+      qryAcesso.SQL.Clear;
+      qryAcesso.SQL.Add('select ven.IDVendedor, ven.Matricula,' +
+      'ven.Nome, ven.SalarioBruto, ven.Percentual');
+      qryAcesso.SQL.Add('from vendedor ven');
+      qryAcesso.SQL.Add('where ven.IDVendedor = :prmId');
+
+      qryAcesso.Params.ParamByName('prmId').Value := iId;
+
+      qryAcesso.Open;
+
+      if qryAcesso.RecordCount <> 0 then
+      begin
+        Result := True;
+        OVendedor.Matricula          := qryAcesso.FieldByName('Matricula').AsString;
+        oVendedor.Nome               := qryAcesso.FieldByName('Nome').AsString;
+        oVendedor.SalarioBruto       := qryAcesso.FieldByName('SalarioBruto').AsFloat;
+        oVendedor.PercentualComissao := qryAcesso.FieldByName('Percentual').AsFloat;
+      end;
+   except on e:exception do
+      ShowMessage('Problemas na conexão com a base de dados!## ' + #13 + e.Message);
+   end;
+end;
+
+function TdtmVendedor.Grava(OVendedor: TVendedor): boolean;
+begin
+   Result := False;
+   try
+      if not FDConexao.Connected then
+      begin
+         FDConexao.Connected := True;
+         FDTransaction.Options.Isolation := xiReadCommitted;
+         FDTransaction.Options.AutoCommit := False;
+      end;
+
+      if qryAcesso.Active then
+         qryAcesso.Close;
+
+      qryAcesso.SQL.Clear;
+
+      if oVendedor.ID <> 0 then
+      begin
+        qryAcesso.SQL.Add('update vendedor ven');
+        qryAcesso.SQL.Add('set ven.Matricula = :prmMat, ');
+        qryAcesso.SQL.Add('    ven.Nome = prmNome, ');
+        qryAcesso.SQL.Add('    ven.SalarioBruto = prmSal, ');
+        qryAcesso.SQL.Add('    ven.Percentual = prmPerc, ');
+        qryAcesso.SQL.Add('where ven.IDVendedor = prmId, ');
+        qryAcesso.Params.ParamByName('prmId').Value   := oVendedor.ID;
+        qryAcesso.Params.ParamByName('prmMat').Value  := oVendedor.Matricula;
+        qryAcesso.Params.ParamByName('prmNome').Value := oVendedor.Nome;
+        qryAcesso.Params.ParamByName('prmSal').Value  := oVendedor.SalarioBruto;
+        qryAcesso.Params.ParamByName('prmPerc').Value := oVendedor.PercentualComissao;
+      end else
+
+      begin
+         qryAcesso.SQL.Add('insert into vendedor');
+         qryAcesso.SQL.Add('(Matricula, Nome, Percentual, SalarioBruto)');
+         qryAcesso.SQL.Add('Values');
+         qryAcesso.SQL.Add('(:prmMat, :prmNome, :prmPerc, :prmSal)');
+        qryAcesso.Params.ParamByName('prmMat').Value   := oVendedor.Matricula;
+        qryAcesso.Params.ParamByName('prmNome').Value  := oVendedor.Nome;
+        qryAcesso.Params.ParamByName('prmPerc').Value  := oVendedor.PercentualComissao;
+        qryAcesso.Params.ParamByName('prmSal').Value   := oVendedor.SalarioBruto;
+      end;
+
+       qryAcesso.ExecSQL;
+       FDTransaction.StartTransaction;
+       FDTransaction.Commit;
+       Result := True;
+   except on e:exception do
+      ShowMessage('Problemas no acesso ao Banco de Dados!##! ' + #13 + e.Message);
+   end;
+
+end;
+
+procedure TdtmVendedor.obterVendedoresAtivos;
+begin
+   try
+      if not FDConexao.Connected then
+      begin
+        FDConexao.Open;
+        FDTransaction.StartTransaction;
+      end;
+      if qryAcesso.Active then
+         qryAcesso.Close;
+         qryAcesso.SQL.Clear;
+         qryAcesso.SQL.Add('select ven.IDVendedor, ven.Matricula, ven.Nome, ' +
+         'ven.SalarioBruto, ven.Percentual');
+         qryAcesso.SQL.Add('from vendedor ven');
+
+         qryAcesso.Open;
+
+   except on e:exception do
+      ShowMessage('Problemas na conexão com a Banse de Dados!#!. ' + #13 + e.Message);
+   end;
+end;
+
+end.

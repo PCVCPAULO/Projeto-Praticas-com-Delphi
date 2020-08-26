@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
-  <Transactions>
-    <Transaction>2020/04/06 18:18:27.817,=C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2020/04/06 18:19:11.491,=C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
-    <Transaction>2020/04/06 18:19:47.983,D:\MeusProjetos_NBAsus\Projetos_RAD_Delphi_10_3_1\EscolhaEstilos_Fonte\CLEstilo.pas=C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
-    <Transaction>2020/04/06 18:28:25.228,=C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
-    <Transaction>2020/04/06 18:28:47.176,D:\MeusProjetos_NBAsus\Projetos_RAD_Delphi_10_3_1\EscolhaEstilos_Fonte\CLTexto.pas=C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
-    <Transaction>2020/04/06 18:42:06.879,D:\MeusProjetos_NBAsus\Projetos_RAD_Delphi_10_3_1\EscolhaEstilos_Fonte\DLTexto.pas=C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2020/04/06 18:42:06.879,D:\MeusProjetos_NBAsus\Projetos_RAD_Delphi_10_3_1\EscolhaEstilos_Fonte\DLTexto.dfm=C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
-    <Transaction>2020/04/06 18:56:38.017,D:\MeusProjetos_NBAsus\Projetos_RAD_Delphi_10_3_1\EscolhaEstilos_Fonte\Estilos_.dproj=C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+	<Transactions>
+    <Transaction>2020/04/06 18:18:27.000.817,=C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/04/06 18:19:11.000.491,=C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2020/04/06 18:19:47.000.983,C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit2.pas=D:\MeusProjetos_NBAsus\Projetos_RAD_Delphi_10_3_1\EscolhaEstilos_Fonte\CLEstilo.pas</Transaction>
+    <Transaction>2020/04/06 18:28:25.000.228,=C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2020/04/06 18:28:47.000.176,C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit2.pas=D:\MeusProjetos_NBAsus\Projetos_RAD_Delphi_10_3_1\EscolhaEstilos_Fonte\CLTexto.pas</Transaction>
+    <Transaction>2020/04/06 18:42:06.000.879,C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit1.pas=D:\MeusProjetos_NBAsus\Projetos_RAD_Delphi_10_3_1\EscolhaEstilos_Fonte\DLTexto.pas</Transaction>
+    <Transaction>2020/04/06 18:42:06.000.879,C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit1.dfm=D:\MeusProjetos_NBAsus\Projetos_RAD_Delphi_10_3_1\EscolhaEstilos_Fonte\DLTexto.dfm</Transaction>
+    <Transaction>2020/04/06 18:56:38.000.017,C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Project1.dproj=D:\MeusProjetos_NBAsus\Projetos_RAD_Delphi_10_3_1\EscolhaEstilos_Fonte\Estilos_.dproj</Transaction>
   </Transactions>
 </BorlandProject>

@@ -38,13 +38,14 @@ implementation
 {$R *.dfm}
 
 uses
-    CDVendedores, CDVendas, CNComissoes, clFuncoes;
+    CDVendedores, CDVendas, CNComissoes;
 
 procedure TfrmMenu.Comissoes1Click(Sender: TObject);
-
+var
+   formConsulta : TfrmConsultaComissoes;
 begin
-
-  CriarForm(TfrmConsultaComissoes, frmConsultaComissoes);
+   formConsulta :=  TfrmConsultaComissoes.Create(Application);
+   formConsulta.Show;
 end;
 
 procedure TfrmMenu.Sair1Click(Sender: TObject);
@@ -53,17 +54,19 @@ begin
 end;
 
 procedure TfrmMenu.Vendas1Click(Sender: TObject);
-
+var
+   formCadastro : TfrmVendas;
 begin
-
-  CriarForm(TfrmVendas, frmVendas);
+   formCadastro := TfrmVendas.Create(Application);
+   formcadastro.Show;
 end;
 
 procedure TfrmMenu.Vendedor1Click(Sender: TObject);
-
+var
+   formCadastro : TfrmVendedores;
 begin
-
-  CriarForm(TfrmVendedores, frmVendedores);
+   formCadastro := TfrmVendedores.Create(Application);
+   formcadastro.Show;
 end;
 
 end.

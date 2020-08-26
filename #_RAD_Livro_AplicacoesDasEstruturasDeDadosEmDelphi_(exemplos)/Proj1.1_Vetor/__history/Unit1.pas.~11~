@@ -1,0 +1,298 @@
+// Aplicação com Vetor Não Ordenado e com Repetições
+
+
+unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
+  Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TForm1 = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    btn1Incluir: TButton;
+    btn2Excluir: TButton;
+    btn3Limpar: TButton;
+    btn4Fechar: TButton;
+    Label1: TLabel;
+    posLivre: TEdit;
+    pos1: TEdit;
+    pos2: TEdit;
+    pos3: TEdit;
+    pos4: TEdit;
+    pos5: TEdit;
+    pos6: TEdit;
+    pos7: TEdit;
+    pos8: TEdit;
+    pos9: TEdit;
+    pos10: TEdit;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    procedure FormActivate(Sender: TObject);
+    procedure btn1IncluirClick(Sender: TObject);
+    procedure btn2ExcluirClick(Sender: TObject);
+    procedure btn3LimparClick(Sender: TObject);
+    procedure btn4FecharClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+  // vetor com identifiar VET, dez posições e armazenando números
+  // do tipo inteiro
+  vet:array[1..10] of integer;
+
+  // variável com identificar NUMERO que receberá os números a serem
+  // inseridos
+  numero: integer;
+
+  // variável com identificador PL que mostra a próxima posição livre
+  pl: integer;
+
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.btn1IncluirClick(Sender: TObject);
+var
+  num: String;
+begin
+  // verifica se o Vetor está cheio, ou seja, se está com as dez
+  // posições ocupadas
+  if pl = 11 then
+    showmessage('O vetor está cheio, ou seja, com as dez poisições ocupadas!')
+  else
+  begin
+    // recebe o número a ser inserido no vetor
+    num := InputBox('Aplicação 1 - Vetores', 'Digite o número a ser incluído','');
+    if num <> '' then
+      begin
+        numero := StrToInt(num);
+
+        //coloca o número digitado no vetor
+        vet[pl] := numero;
+
+        // verifica a posição em que o número foi colocado
+        // para mostrar também na tela
+        if pl = 1 then
+        begin
+           pos1.Text := IntToStr(numero);
+//           pos1.Visible := true;
+        end;
+        if pl = 2 then
+        begin
+          pos2.Text := IntToStr(numero);
+//        pos2.Visible := true;
+        end;
+        if pl = 3 then
+        begin
+           pos3.Text := IntToStr(numero);
+//          pos3.Visible := true;
+        end;
+        if pl = 4 then
+        begin
+          pos4.Text := IntToStr(numero);
+//          pos4.Visible := true;
+        end;
+        if pl = 5 then
+        begin
+           pos5.Text := IntToStr(numero);
+//           pos5.Visible := true;
+        end;
+        if pl = 6 then
+        begin
+          pos6.Text := IntToStr(numero);
+//          pos6.Visible := true;
+        end;
+        if pl = 7 then
+        begin
+           pos7.Text := IntToStr(numero);
+//           pos7.Visible := true;
+        end;
+        if pl = 8 then
+        begin
+          pos8.Text := IntToStr(numero);
+//          pos8.Visible := true;
+        end;
+        if pl = 9 then
+        begin
+           pos9.Text := IntToStr(numero);
+//           pos9.Visible := true;
+        end;
+        if pl = 10 then
+        begin
+          pos10.Text := IntToStr(numero);
+//          pos10.Visible := true;
+        end;
+
+        // atualiza a posição livre após a inclusão do novo número
+        // atualiza a variável PL
+        pl := pl + 1;
+
+        // mostra a nova posição livre
+        posLivre.Text := IntToStr(pl);
+      end;
+  end;
+end;
+
+procedure TForm1.btn2ExcluirClick(Sender: TObject);
+var
+  i, j, achou, encontrou: Integer;
+    num: String;
+begin
+  // verifica se o vetor está vazio, ou seja,
+  // se a próxima posição livre é a 1.
+  if pl = 1 then
+    ShowMessage('O vetor está vazio, logo, nenhum número poderá ser excluído!')
+  else
+  begin
+    // a variável ENCONTROU verifica a existência de
+    // pelo menos uma ocorrência do número digitado no vetor
+    encontrou := 0;
+
+    // receb o número a ser escluído do vetor
+    num := InputBox('Aplicação 1 - Vetores', 'Digite o número a ser excluído', '');
+    if num <> '' then
+    begin
+      numero := StrToInt(num);
+
+        // percorre todas as posições ocupadas do vetor
+        // para verificar se o número a ser exclupido existe
+        // caso o número exista poderá ocorrer
+        // o deslocamento de posições no vetor
+      i := 1;
+      achou := 0;
+      while i < pl do
+      begin
+        if vet[i] = numero then
+        begin
+            // marca a existência do número a ser exluído
+          encontrou := 1;
+
+            // realiza o deslocamento
+          for j := i to pl - 2 do
+          begin
+              vet[j] := vet[j + 1];
+          end;
+          i := 1;
+          achou := 1;
+          end
+          else
+          i := i + 1;
+
+        if achou = 1 then
+        begin
+          achou := 0;
+          if pl = 2
+          then pos1.Text := '';
+          if pl = 3
+          then pos2.Text := '';
+          if pl = 4
+          then pos3.Text := '';
+          if pl = 5
+          then pos4.Text := '';
+          if pl = 6
+          then pos5.Text := '';
+          if pl = 7
+          then pos6.Text := '';
+          if pl = 8
+          then pos7.Text := '';
+          if pl = 9
+          then pos8.Text := '';
+          if pl = 10
+          then pos9.Text := '';
+          if pl = 11
+          then pos10.Text := '';
+          // atualiza o valor da posição livre
+          pl := pl - 1;
+        posLivre.Text := IntToStr(pl);
+
+        // atualizando os números na tela
+        for j := 1 to pl -1 do
+          begin
+            if j = 1
+            then pos1.Text := IntToStr(vet[j]);
+            if j = 2
+            then pos2.Text := IntToStr(vet[j]);
+            if j = 3
+            then pos3.Text := IntToStr(vet[j]);
+            if j = 4
+            then pos4.Text := IntToStr(vet[j]);
+            if j = 5
+            then pos5.Text := IntToStr(vet[j]);
+            if j = 6
+            then pos6.Text := IntToStr(vet[j]);
+            if j = 7
+            then pos7.Text := IntToStr(vet[j]);
+            if j = 8
+            then pos8.Text := IntToStr(vet[j]);
+            if j = 9
+            then pos9.Text := IntToStr(vet[j]);
+             if j = 10
+            then pos10.Text := IntToStr(vet[j]);
+          end;
+         end;
+      end;
+      if encontrou = 0 then
+         ShowMessage('O número digitado para exclusão não existe no vetor!');
+    end;
+  end;
+end;
+
+procedure TForm1.btn3LimparClick(Sender: TObject);
+begin
+   // mostrando no Edit denominda posLivre a posição 1, ou seja,
+   // esvaziando o vetor
+   posLivre.Text := '1';
+
+   // colocando o valor 1 na variável PL que representa
+   // a posição livre quando o vetor está vazio
+   pl := 1;
+
+   // limpa os números antriormente incluídos
+   pos1.Text := '';
+   pos2.Text := '';
+   pos3.Text := '';
+   pos4.Text := '';
+   pos5.Text := '';
+   pos6.Text := '';
+   pos7.Text := '';
+   pos8.Text := '';
+   pos9.Text := '';
+   pos10.Text := '';
+end;
+
+procedure TForm1.btn4FecharClick(Sender: TObject);
+begin
+   // fechar o formulário
+   Close;
+end;
+
+procedure TForm1.FormActivate(Sender: TObject);
+begin
+  // mostrando no edit denominado posLivre a posição 1,
+  //pois o vetor está vazio
+  posLivre.Text := '1';
+
+  // colocando o valor 1 na variável PL que representa
+  // a posição livre quando o vetor está vazio
+  pl := 1;
+end;
+
+end.

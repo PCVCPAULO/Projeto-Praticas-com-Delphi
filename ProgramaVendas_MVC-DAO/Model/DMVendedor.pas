@@ -9,7 +9,7 @@ uses
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   IBX.IBDatabase, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Data.DB,
   IBX.IBCustomDataSet, IBX.IBQuery, Vcl.Dialogs, CLVendedor, FireDAC.Phys.FB,
-  FireDAC.Phys.FBDef;
+  FireDAC.Phys.FBDef, FireDAC.Phys.IBBase, FireDAC.Comp.UI;
 
 type
   TdtmVendedor = class(TDataModule)
@@ -17,6 +17,8 @@ type
     FDTransaction: TFDTransaction;
     qryAcesso: TFDQuery;
     dtsVendedor: TDataSource;
+    FDGUIxWaitCursor1: TFDGUIxWaitCursor;
+    FDPhysFBDriverLink1: TFDPhysFBDriverLink;
 
   private
     { Private declarations }
@@ -147,16 +149,16 @@ begin
         qryAcesso.Params.ParamByName('prmPerc').Value := oVendedor.PercentualComissao;
       end else
 
-       begin
-          qryAcesso.SQL.Add('insert into vendedor');
-          qryAcesso.SQL.Add('(Matricula, Nome, Percentual, SalarioBruto)');
-          qryAcesso.SQL.Add('Values');
-          qryAcesso.SQL.Add('(:prmMat, :prmNome, :prmPerc, :prmSal)');
-          qryAcesso.Params.ParamByName('prmMat').Value := oVendedor.Matricula;
+      begin
+         qryAcesso.SQL.Add('insert into vendedor');
+         qryAcesso.SQL.Add('(Matricula, Nome, Percentual, SalarioBruto)');
+         qryAcesso.SQL.Add('Values');
+         qryAcesso.SQL.Add('(:prmMat, :prmNome, :prmPerc, :prmSal)');
+        qryAcesso.Params.ParamByName('prmMat').Value   := oVendedor.Matricula;
         qryAcesso.Params.ParamByName('prmNome').Value  := oVendedor.Nome;
         qryAcesso.Params.ParamByName('prmPerc').Value  := oVendedor.PercentualComissao;
         qryAcesso.Params.ParamByName('prmSal').Value   := oVendedor.SalarioBruto;
-       end;
+      end;
 
        qryAcesso.ExecSQL;
        FDTransaction.StartTransaction;
@@ -186,7 +188,7 @@ begin
          qryAcesso.Open;
 
    except on e:exception do
-      ShowMessage('Problemas na conexão com a Banse de Dados!#!. ' + #13 + e.Message);
+      ShowMessage('Problemas na conexão com a Base de Dados!#!. ' + #13 + e.Message);
    end;
 end;
 

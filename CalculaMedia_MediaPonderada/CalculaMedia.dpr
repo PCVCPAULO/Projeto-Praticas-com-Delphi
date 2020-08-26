@@ -4,7 +4,7 @@ uses
   Vcl.Forms,
   DLMedia in 'DLMedia.pas' {frmMedia},
   CLMedia in 'CLMedia.pas',
-  CLMMediaPonderada in 'CLMMediaPonderada.pas';
+  CLMediaPonderada in 'CLMediaPonderada.pas';
 
 {$R *.res}
 

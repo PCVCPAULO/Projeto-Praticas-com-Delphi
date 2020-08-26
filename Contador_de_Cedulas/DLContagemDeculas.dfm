@@ -3,7 +3,7 @@ object frmDLContagemCedulas: TfrmDLContagemCedulas
   Top = 0
   Caption = 'Contagem de C'#233'dulas'
   ClientHeight = 299
-  ClientWidth = 572
+  ClientWidth = 553
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

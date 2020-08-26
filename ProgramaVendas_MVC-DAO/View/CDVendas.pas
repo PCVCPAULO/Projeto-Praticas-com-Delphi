@@ -50,6 +50,46 @@ begin
   Close;
 end;
 
+procedure TfrmVendas.edtNumeroExit(Sender: TObject);
+begin
+  if edtNumero.Text = '' then
+  begin
+      edtData.Date := Date;
+      edtValor.Clear;
+      cmbVendedor.Text := '';
+  end
+  else
+  begin
+     if oVenda.Busca(StrToInt(edtNumero.Text)) then
+     begin
+        edtData.Date     := oVenda.DataVenda;
+        edtValor.Text    := FloatToStr(oVenda.Valor);
+        cmbVendedor.Text := oVenda.Vendedor.Nome;
+     end;
+  end;
+end;
+
+procedure TfrmVendas.FormCreate(Sender: TObject);
+var
+  lstVendedores : TList;
+  oVendedor : TVendedor;
+  iAux : integer;
+begin
+  oVenda := TVenda.Create;
+  lstVendedores := TVendedor.obterListaVendedoresAtivos;
+
+  for iAux := 0 to lstVendedores.Count -1 do
+  begin
+    oVendedor := lstVendedores[iAux];
+    cmbVendedor.AddItem(oVendedor.Nome, oVendedor);
+  end;
+end;
+
+procedure TfrmVendas.FormDestroy(Sender: TObject);
+begin
+  oVenda.Free;
+end;
+
 procedure TfrmVendas.btnGravarClick(Sender: TObject);
 begin
   if (edtNumero.Text <> '') and
@@ -77,32 +117,15 @@ begin
   begin
     ShowMessage('Campos Inválidos!');
   end;
-
 end;
 
 procedure TfrmVendas.edtValorKeyPress(Sender: TObject; var Key: Char);
 begin
+//  Key := Ret_Numero( Key, edtValor.Text );
+//   if not (IsNumeric(Key) or (Key = TAB) or (Key = ',') or (Key = BACKSPACE)) then
 
-  Key := Ret_Numero( Key, edtValor.Text );
-end;
-
-procedure TfrmVendas.edtNumeroExit(Sender: TObject);
-begin
-  if edtNumero.Text = '' then
-  begin
-      edtData.Date := Date;
-      edtValor.Clear;
-      cmbVendedor.Text := '';
-  end
-  else
-  begin
-     if oVenda.Busca(StrToInt(edtNumero.Text)) then
-     begin
-        edtData.Date     := oVenda.DataVenda;
-        edtValor.Text    := FloatToStr(oVenda.Valor);
-        cmbVendedor.Text := oVenda.Vendedor.Nome;
-     end;
-  end;
+  if not (Key in ['0'..'9',#8, #13,#26, #32]) then
+      Key := #0;
 end;
 
 procedure TfrmVendas.edtNumeroKeyPress(Sender: TObject; var Key: Char);
@@ -114,27 +137,6 @@ end;
 procedure TfrmVendas.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   action := caFree;
-end;
-
-procedure TfrmVendas.FormCreate(Sender: TObject);
-var
-  lstVendedores : TList;
-  oVendedor : TVendedor;
-  iAux : integer;
-begin
-  oVenda := TVenda.Create;
-  lstVendedores := TVendedor.obterListaVendedoresAtivos;
-
-  for iAux := 0 to lstVendedores.Count -1 do
-  begin
-    oVendedor := lstVendedores[iAux];
-    cmbVendedor.AddItem(oVendedor.Nome, oVendedor);
-  end;
-end;
-
-procedure TfrmVendas.FormDestroy(Sender: TObject);
-begin
-  oVenda.Free;
 end;
 
 end.

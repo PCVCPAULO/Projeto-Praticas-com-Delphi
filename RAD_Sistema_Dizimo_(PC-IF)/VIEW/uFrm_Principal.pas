@@ -115,10 +115,6 @@ uses uFrm_CadastroDizimista, ufrm_Cad_Lancamentos, uFrm_CadastroUsuarios,
   uFrm_ConsultaNiverConj, uFrm_ConsultaNiverUniao, uFrm_ConsultaCadastro,
   uFrm_Gera_Backup, uFrm_Gera_Restore;
 
-
-
-
-
 procedure Tfrm_Principal.btn_CadUsuariosClick(Sender: TObject);
 begin
   CriarForm(Tfrm_CadastroUsuarios,frm_CadastroUsuarios);

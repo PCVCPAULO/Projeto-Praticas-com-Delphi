@@ -126,14 +126,14 @@ end;
 
 procedure Tfrm_Padrao.act_CadDizimista_Execute(Sender: TObject);
 begin
-  frm_Cad_Dizimista := Tfrm_Cad_Dizimista.Create(Self);
+  frm_Cad_Dizimista        := Tfrm_Cad_Dizimista.Create(Self);
   frm_Cad_Dizimista.Parent := pnl2_ExibiForms;
   frm_Cad_Dizimista.Show;
 end;
 
 procedure Tfrm_Padrao.act_LancamentosExecute(Sender: TObject);
 begin
-  frm_Cad_Lancamentos := Tfrm_Cad_Lancamentos.Create(Self);
+  frm_Cad_Lancamentos        := Tfrm_Cad_Lancamentos.Create(Self);
   frm_Cad_Lancamentos.Parent := pnl2_ExibiForms;
   frm_Cad_Lancamentos.Show;
 end;

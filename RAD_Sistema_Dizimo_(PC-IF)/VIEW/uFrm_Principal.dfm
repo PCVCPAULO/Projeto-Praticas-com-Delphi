@@ -16,6 +16,7 @@ object frm_Principal: Tfrm_Principal
   Menu = mm_Principal
   OldCreateOrder = False
   Position = poScreenCenter
+  WindowState = wsMaximized
   OnActivate = FormActivate
   OnClose = FormClose
   OnShow = FormShow

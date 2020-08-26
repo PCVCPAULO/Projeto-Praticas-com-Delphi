@@ -28,6 +28,5 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TDM_Dados, DM_Dados);
   Application.CreateForm(Tfrm_Principal, frm_Principal);
-  Application.CreateForm(Tfrm_RestauraBanco, frm_RestauraBanco);
   Application.Run;
 end.

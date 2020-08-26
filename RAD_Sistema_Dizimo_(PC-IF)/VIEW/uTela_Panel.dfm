@@ -1071,7 +1071,7 @@ object frm_Padrao: Tfrm_Padrao
     object lbl_MostraData: TLabel
       Left = 552
       Top = 11
-      Width = 80
+      Width = 3
       Height = 21
       Caption = '.'
       Color = clWhite

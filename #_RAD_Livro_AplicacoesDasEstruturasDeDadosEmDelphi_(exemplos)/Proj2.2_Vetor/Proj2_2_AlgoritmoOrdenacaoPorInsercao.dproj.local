@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2019/08/26 17:57:15.000.304,=C:\Users\PCVCPAULO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/08/26 20:34:50.000.397,=C:\Users\PCVCPAULO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/08/26 20:49:48.000.996,=C:\Users\PCVCPAULO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/08/29 19:02:25.000.724,=C:\Users\PCVCPAULO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/08/29 19:04:45.000.313,=C:\Users\PCVCPAULO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/08/29 20:33:01.000.136,=C:\Users\PCVCPAULO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/06/13 00:52:13.000.820,=C:\Users\PCVCPAULO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/06/24 18:17:22.000.688,=C:\Users\PCVCPAULO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/06/24 22:19:11.000.831,=C:\Users\PCVCPAULO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/06/25 11:13:48.000.978,=C:\Users\PCVCPAULO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/06/29 10:20:37.000.380,=C:\Users\PCVCPAULO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/06/30 20:59:10.000.671,=C:\Users\PCVCPAULO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/07/15 15:02:17.000.978,=C:\Users\PCVCPAULO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/07/28 21:24:28.000.389,=C:\Users\PCVCPAULO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/08/05 21:05:34.000.140,=C:\Users\PCVCPAULO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/08/07 09:39:11.000.699,=C:\Users\PCVCPAULO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/08/07 10:21:30.000.279,D:\#_RAD_Livro_AplicacoesDasEstruturasDeDadosEmDelphi_(exemplos)\Proj1_Vetor\Unit1.pas=C:\Users\PCVCPAULO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/08/07 10:21:30.000.279,D:\#_RAD_Livro_AplicacoesDasEstruturasDeDadosEmDelphi_(exemplos)\Proj1_Vetor\Unit1.dfm=C:\Users\PCVCPAULO\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2020/08/07 10:21:46.000.541,D:\#_RAD_Livro_AplicacoesDasEstruturasDeDadosEmDelphi_(exemplos)\Proj1_Vetor\Project1.dproj=C:\Users\PCVCPAULO\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2020/08/12 18:45:36.000.792,D:\Projeto-Praticas-com-Delphi_(GitHub)\#_RAD_Livro_AplicacoesDasEstruturasDeDadosEmDelphi_(exemplos)\Proj3_Vetor\Project1.dproj=D:\Projeto-Praticas-com-Delphi_(GitHub)\#_RAD_Livro_AplicacoesDasEstruturasDeDadosEmDelphi_(exemplos)\Proj3_Vetor\Proj1_3.dproj</Transaction>
+    <Transaction>2020/08/12 18:45:59.000.084,D:\Projeto-Praticas-com-Delphi_(GitHub)\#_RAD_Livro_AplicacoesDasEstruturasDeDadosEmDelphi_(exemplos)\Proj3_Vetor\Proj1_3.dproj=D:\Projeto-Praticas-com-Delphi_(GitHub)\#_RAD_Livro_AplicacoesDasEstruturasDeDadosEmDelphi_(exemplos)\Proj3_Vetor\Proj1_3_VetorNaoOrdenadoSemRepeticoes.dproj</Transaction>
+    <Transaction>2020/08/12 19:13:35.000.778,D:\Projeto-Praticas-com-Delphi_(GitHub)\#_RAD_Livro_AplicacoesDasEstruturasDeDadosEmDelphi_(exemplos)\Proj4_Vetor\Proj1_4_VetorOrdenadoSemRepeticoes.dproj=D:\Projeto-Praticas-com-Delphi_(GitHub)\#_RAD_Livro_AplicacoesDasEstruturasDeDadosEmDelphi_(exemplos)\Proj4_Vetor\Proj1_3_VetorNaoOrdenadoSemRepeticoes.dproj</Transaction>
+    <Transaction>2020/08/12 20:55:31.000.629,D:\Projeto-Praticas-com-Delphi_(GitHub)\#_RAD_Livro_AplicacoesDasEstruturasDeDadosEmDelphi_(exemplos)\Proj5_Vetor\Proj1_4_VetorOrdenadoSemRepeticoes.dproj=D:\Projeto-Praticas-com-Delphi_(GitHub)\#_RAD_Livro_AplicacoesDasEstruturasDeDadosEmDelphi_(exemplos)\Proj5_Vetor\Proj2_1_AlgoritmoOrdenacaoPorTroca.dproj</Transaction>
+    <Transaction>2020/08/12 21:40:59.793,D:\Projeto-Praticas-com-Delphi_(GitHub)\#_RAD_Livro_AplicacoesDasEstruturasDeDadosEmDelphi_(exemplos)\Proj2.2_Vetor\Proj2_2_AlgoritmoOrdenacaoPorInsercao.dproj=D:\Projeto-Praticas-com-Delphi_(GitHub)\#_RAD_Livro_AplicacoesDasEstruturasDeDadosEmDelphi_(exemplos)\Proj2.2_Vetor\Proj2_1_AlgoritmoOrdenacaoPorTroca.dproj</Transaction>
+  </Transactions>
+	<ActiveMobileDevice>
+		<NoProfile iOSSimulator="iPhone5"/>
+	</ActiveMobileDevice>
+</BorlandProject>

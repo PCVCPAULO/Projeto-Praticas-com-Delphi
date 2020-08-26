@@ -3,11 +3,12 @@
 	<Transactions>
     <Transaction>2020/04/06 19:16:41.000.386,=C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2020/04/06 19:16:50.000.244,=C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
-    <Transaction>2020/04/06 19:17:20.000.013,D:\MeusProjetos_NBAsus\Projetos_RAD_Delphi_10_3_1\CalculaMedia_MediaPonderada\CLMedia.pas=C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2020/04/06 19:17:20.000.013,C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit2.pas=D:\MeusProjetos_NBAsus\Projetos_RAD_Delphi_10_3_1\CalculaMedia_MediaPonderada\CLMedia.pas</Transaction>
     <Transaction>2020/04/06 19:25:40.000.364,=C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
-    <Transaction>2020/04/06 19:25:55.000.130,D:\MeusProjetos_NBAsus\Projetos_RAD_Delphi_10_3_1\CalculaMedia_MediaPonderada\CLMMediaPonderada.pas=C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
-    <Transaction>2020/04/06 19:39:23.000.532,D:\MeusProjetos_NBAsus\Projetos_RAD_Delphi_10_3_1\CalculaMedia_MediaPonderada\DLMedia.dfm=C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
-    <Transaction>2020/04/06 19:39:23.000.532,D:\MeusProjetos_NBAsus\Projetos_RAD_Delphi_10_3_1\CalculaMedia_MediaPonderada\DLMedia.pas=C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2020/04/06 19:39:45.000.680,D:\MeusProjetos_NBAsus\Projetos_RAD_Delphi_10_3_1\CalculaMedia_MediaPonderada\CalculaMedia.dproj=C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2020/04/06 19:25:55.000.130,C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit2.pas=D:\MeusProjetos_NBAsus\Projetos_RAD_Delphi_10_3_1\CalculaMedia_MediaPonderada\CLMMediaPonderada.pas</Transaction>
+    <Transaction>2020/04/06 19:39:23.000.532,C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit1.pas=D:\MeusProjetos_NBAsus\Projetos_RAD_Delphi_10_3_1\CalculaMedia_MediaPonderada\DLMedia.pas</Transaction>
+    <Transaction>2020/04/06 19:39:23.000.532,C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Unit1.dfm=D:\MeusProjetos_NBAsus\Projetos_RAD_Delphi_10_3_1\CalculaMedia_MediaPonderada\DLMedia.dfm</Transaction>
+    <Transaction>2020/04/06 19:39:45.000.680,C:\Users\Paulo Vieira\Documents\Embarcadero\Studio\Projects\Project1.dproj=D:\MeusProjetos_NBAsus\Projetos_RAD_Delphi_10_3_1\CalculaMedia_MediaPonderada\CalculaMedia.dproj</Transaction>
+    <Transaction>2020/08/13 10:31:51.593,D:\Projeto-Praticas-com-Delphi_(GitHub)\CalculaMedia_MediaPonderada\CLMediaPonderada.pas=D:\Projeto-Praticas-com-Delphi_(GitHub)\CalculaMedia_MediaPonderada\CLMMediaPonderada.pas</Transaction>
   </Transactions>
 </BorlandProject>

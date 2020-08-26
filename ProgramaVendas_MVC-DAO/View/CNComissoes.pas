@@ -36,7 +36,27 @@ implementation
 
 {$R *.dfm}
 
-uses CLVendedor, MenuPrincipal;
+uses CLVendedor;
+
+procedure TfrmConsultaComissoes.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  action := caFree;
+end;
+
+procedure TfrmConsultaComissoes.FormCreate(Sender: TObject);
+var
+  lstVendedores : TList;
+  oVendedor : TVendedor;
+  iAux : integer;
+begin
+  lstVendedores := TVendedor.obterListaVendedoresAtivos;
+
+  for iAux := 0 to lstVendedores.Count - 1  do
+  begin
+    oVendedor := lstVendedores[iAux];
+    cmbVendedor.AddItem(oVendedor.Nome, oVendedor);
+  end;
+end;
 
 procedure TfrmConsultaComissoes.btnVerificarClick(Sender: TObject);
 var
@@ -59,24 +79,5 @@ begin
   end;
 end;
 
-procedure TfrmConsultaComissoes.FormClose(Sender: TObject; var Action: TCloseAction);
-begin
-  action := caFree;
-end;
-
-procedure TfrmConsultaComissoes.FormCreate(Sender: TObject);
-var
-  lstVendedores : TList;
-  oVendedor : TVendedor;
-  iAux : integer;
-begin
-  lstVendedores := TVendedor.obterListaVendedoresAtivos;
-
-  for iAux := 0 to lstVendedores.Count -1  do
-  begin
-    oVendedor := lstVendedores[iAux];
-    cmbVendedor.AddItem(oVendedor.Nome, oVendedor);
-  end;
-end;
 
 end.

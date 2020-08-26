@@ -2,7 +2,21 @@ unit CLContagemCedulas;
 
 interface
 
+{    Seção interface
+   - a estrutra de uma Unit determina que as definições de Procedures,
+     Function ou dos métodos da classe fiquem aqui. }
+
 uses Classes, Dialogs, SysUtils;
+
+{  Criaremos uma Classe que simule uma Contador de Cédulas
+   Os objetivos dessa clase é emitir a quantidade de notas necessárias para
+   compor um determinado valor.
+
+   Afim de simplificar a classe, não aceitaremos centavos e a saída da
+   distribuição de nota será na realidade uma String Descritiva.
+
+   A interface que se comunicará com a classe deve solicitar ao usuário
+   um valor para contagem de cédulas.  }
 
 type
   TContagemCedulas = class
@@ -25,7 +39,39 @@ type
 
 end;
 
+{  Herança
+   Na definição da classe TContagemCedulas, a classe-pai foi omitida, por ser
+   automaticamente a classe TObject.
+
+   Visibilidade de atributos e Operações
+   Para a classe TContagemCedulas, estaremos definindo seus elementos
+   privados, protegidos e públicos, por meio das declarações
+   Private, Protected e Public.
+
+   - tudo que for definido como PRIVATE só poderá ser acessado dentro da
+     própria classe, e no caso de uma herança, não será enxergado.
+
+   - nas declarações abaixo da declaração PROTECTED serão acessadas dentro
+     da própria classe e pelas classes descendentes.
+
+   - as definições feitas na declaração PUBLIC serão acessadas dentro e fora
+     da classe. }
+
 implementation
+
+{  Aqui ficam os códigos pripriamente ditos. As operações criam vidas.
+   A definição do método na Seção Implementation deve ser feito assim:
+   - Escopo Tipo-do-método Nome-da-Classe.Assinatura-da-Operação
+
+   Onde:
+   ESCOPO corresponde ao escopo da operação (de instância ou de classe).
+   Se nada for colocado, é considerado como instância.
+
+   Para definir um escopo de classe deve-se colocar a palavra CLASS.
+
+   Tipo-do-método corresponde à PROCEDURE ou FUNCTION.
+   Nome-da-Classe é o mesmo nome definido na declaração TYPE.
+   Assinatura-da-Operação é a mesma assintatura definida na seção Interface. }
 
 uses Math;
 

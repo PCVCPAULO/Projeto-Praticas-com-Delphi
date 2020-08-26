@@ -10,6 +10,16 @@ type
       FValor : string;
       FEstilo : TEstilo;
 
+{  MÉTODOS CONSTRUCTOR E DESTRUCTOR
+   Toda classe possui seus métods construtores e destrutoroes.
+
+   Um método construtor cria uma ÁREA em memória para o objeto,
+   colocando nesta área a estrutra da classe, ou seja, INSTANCIA um objeto
+   a partir da classe.
+
+   Um método destrutor serve para eliminar o objeto da memória, liberando
+   o espaço ocupado. }
+
     public
       constructor Create;
       destructor Destroy; override;

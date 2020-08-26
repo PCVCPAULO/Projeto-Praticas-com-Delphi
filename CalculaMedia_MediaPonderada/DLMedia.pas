@@ -16,8 +16,8 @@ type
     edtValor2: TEdit;
     edtPeso1: TEdit;
     edtPeso2: TEdit;
-    bnMedia: TBitBtn;
-    procedure bnMediaClick(Sender: TObject);
+    btnMedia: TBitBtn;
+    procedure btnMediaClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -29,11 +29,11 @@ var
 
 implementation
 
-uses CLMedia, CLMMediaPonderada;
+uses CLMedia, CLMediaPonderada;
 
 {$R *.dfm}
 
-procedure TfrmMedia.bnMediaClick(Sender: TObject);
+procedure TfrmMedia.btnMediaClick(Sender: TObject);
 var
   oMedia : TMedia;
   rMedia : real;

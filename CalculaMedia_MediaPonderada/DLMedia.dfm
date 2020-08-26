@@ -89,7 +89,7 @@ object frmMedia: TfrmMedia
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 1
+    TabOrder = 2
   end
   object edtPeso1: TEdit
     Left = 336
@@ -102,7 +102,7 @@ object frmMedia: TfrmMedia
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 2
+    TabOrder = 1
   end
   object edtPeso2: TEdit
     Left = 336
@@ -117,7 +117,7 @@ object frmMedia: TfrmMedia
     ParentFont = False
     TabOrder = 3
   end
-  object bnMedia: TBitBtn
+  object btnMedia: TBitBtn
     Left = 160
     Top = 136
     Width = 249
@@ -130,6 +130,6 @@ object frmMedia: TfrmMedia
     Font.Style = []
     ParentFont = False
     TabOrder = 4
-    OnClick = bnMediaClick
+    OnClick = btnMediaClick
   end
 end

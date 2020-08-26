@@ -5,7 +5,7 @@ interface
 uses
   Classes, CLVendedor;
 
-  type
+type
   TVenda = class
   protected
     FID       : integer;
