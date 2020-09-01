@@ -1,0 +1,77 @@
+object frmQuadEq: TfrmQuadEq
+  Left = 0
+  Top = 0
+  Caption = 'Solu'#231#227'o da Equa'#231#227'o Quadr'#225'tica'
+  ClientHeight = 373
+  ClientWidth = 643
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object lnlCoefs: TLabel
+    Left = 64
+    Top = 72
+    Width = 214
+    Height = 13
+    Caption = 'Insira os coeficientes da equa'#231#227'o quadr'#225'tica'
+  end
+  object lblX1: TLabel
+    Left = 64
+    Top = 160
+    Width = 22
+    Height = 13
+    Caption = 'lblX1'
+    Visible = False
+  end
+  object lblX2: TLabel
+    Left = 64
+    Top = 200
+    Width = 22
+    Height = 13
+    Caption = 'lblX2'
+    Visible = False
+  end
+  object lblNo: TLabel
+    Left = 64
+    Top = 280
+    Width = 159
+    Height = 13
+    Caption = 'Nenhuma raiz real foi encontrada'
+    Visible = False
+  end
+  object edtA: TEdit
+    Left = 64
+    Top = 104
+    Width = 57
+    Height = 21
+    TabOrder = 0
+  end
+  object edtC: TEdit
+    Left = 232
+    Top = 104
+    Width = 65
+    Height = 21
+    TabOrder = 2
+  end
+  object btnFind: TButton
+    Left = 312
+    Top = 102
+    Width = 75
+    Height = 25
+    Caption = 'Calcule'
+    TabOrder = 3
+    OnClick = btnFindClick
+  end
+  object edtB: TEdit
+    Left = 144
+    Top = 104
+    Width = 65
+    Height = 21
+    TabOrder = 1
+  end
+end

@@ -1,0 +1,96 @@
+unit Unit2.Dizimo.View;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
+  Datasnap.DBClient, Vcl.Imaging.pngimage, Vcl.ExtCtrls, Vcl.WinXPanels,
+  Vcl.StdCtrls, Vcl.Mask, Vcl.DBCtrls, Vcl.CategoryButtons, Vcl.WinXCtrls,
+  System.ImageList, Vcl.ImgList, cxImageList, cxGraphics;
+
+type
+  TfrmCadastro = class(TForm)
+    Panel1Cabecalho: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    cdp2Bottons: TCardPanel;
+    Card1Buttons: TCard;
+    Panel1Buttons: TPanel;
+    cdp1AreaTrabalho: TCardPanel;
+    card1Pesquisar: TCard;
+    DBGrid1: TDBGrid;
+    Card3: TCard;
+    StackPanel2: TStackPanel;
+    Card4: TCard;
+    Panel4Buttons: TPanel;
+    Panel4AreaTrabalho: TPanel;
+    Card5: TCard;
+    StackPanel3: TStackPanel;
+    pnlPesquisar: TPanel;
+    Label28: TLabel;
+    cbx_Pesquisar: TComboBox;
+    Label29: TLabel;
+    edt_Pesquisar: TEdit;
+    btn_Filtrar: TButton;
+    cxImageList1: TcxImageList;
+    spvPanel1Buttons: TSplitView;
+    spvPanel4Buttons: TSplitView;
+    Image1: TImage;
+    Image2: TImage;
+    ctgButtons3Fechar: TCategoryButtons;
+    ctgButtons4Fechar: TCategoryButtons;
+    ctgButtons2Detalhar: TCategoryButtons;
+    ctgButtons1Novo: TCategoryButtons;
+    procedure btn1NovoClick(Sender: TObject);
+    procedure btn1SalvarClick(Sender: TObject);
+    procedure CategoryButtons1Categories0Items0Click(Sender: TObject);
+    procedure CategoryButtons1Categories0Items1Click(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadastro: TfrmCadastro;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmCadastro.CategoryButtons1Categories0Items0Click(Sender: TObject);
+begin
+  cdp1AreaTrabalho.ActiveCardIndex := 1;
+end;
+
+procedure TfrmCadastro.CategoryButtons1Categories0Items1Click(Sender: TObject);
+begin
+  cdp1AreaTrabalho.ActiveCardIndex := 2;
+end;
+
+procedure TfrmCadastro.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+   if key = #13 then
+   begin
+      key := #0;
+      Perform(WM_NEXTDLGCTL, 0, 0);
+   end;
+end;
+
+procedure TfrmCadastro.btn1NovoClick(Sender: TObject);
+begin
+  cdp1AreaTrabalho.ActiveCardIndex := 1;
+  cdp1AreaTrabalho.ActiveCardIndex := 1;
+//  SplitView1.Open;
+end;
+
+procedure TfrmCadastro.btn1SalvarClick(Sender: TObject);
+begin
+  cdp1AreaTrabalho.ActiveCardIndex := 0;
+  cdp2Bottons.ActiveCardIndex := 0;
+//  SplitView1.Close;
+end;
+
+end.

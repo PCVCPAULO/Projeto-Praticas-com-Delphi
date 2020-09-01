@@ -1,0 +1,238 @@
+unit dmCadastro.DataSets;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, dmCadastro.Conexao, Data.FMTBcd, Data.DB,
+  Datasnap.DBClient, Datasnap.Provider, Data.SqlExpr, uCadastro.Dizimista.Model;
+
+type
+  TdmCadastroDataSet = class(TDataModule)
+    sqlAlterar: TSQLDataSet;
+    sqlInativar: TSQLDataSet;
+    dspPesquisar: TDataSetProvider;
+    cdsPesq: TClientDataSet;
+    sqlNovo: TSQLDataSet;
+    sqlPesquisar: TSQLDataSet;
+    cdsPesqCDFICHA: TIntegerField;
+    cdsPesqNOME: TStringField;
+    cdsPesqNASCDIZIMISTA: TSQLTimeStampField;
+    cdsPesqFONE_MOVEL: TStringField;
+    cdsPesqSITUACAO: TStringField;
+    sqlBuscarFicha: TSQLDataSet;
+    sqlPesquisarCDFICHA: TIntegerField;
+    sqlPesquisarNOME: TStringField;
+    sqlPesquisarNASCDIZIMISTA: TSQLTimeStampField;
+    sqlPesquisarFONE_MOVEL: TStringField;
+    sqlPesquisarSITUACAO: TStringField;
+    dspBuscarFicha: TDataSetProvider;
+    cdsBuscarFicha: TClientDataSet;
+    cdsBuscarFichaCDFICHA: TIntegerField;
+    cdsBuscarFichaNOME: TStringField;
+    cdsBuscarFichaNASCDIZIMISTA: TSQLTimeStampField;
+    cdsBuscarFichaFONE_MOVEL: TStringField;
+    cdsBuscarFichaSITUACAO: TStringField;
+  private
+    { Private declarations }
+  public
+    function GerarFicha: Integer;
+    procedure Pesquisar(sNome: string);
+    procedure BuscarFicha(iCDFicha: integer);
+    procedure CarregarDizimista(oDizimista: TDizimista; iCDFicha: Integer);
+    function Inserir(oDizimista: TDizimista; out sErro: string): Boolean;
+    function Alterar(oDizimista: TDizimista; out sErro: string): Boolean;
+    function Excluir(iCDFicha: Integer; out sErro: string): Boolean;
+  end;
+
+var
+  dmCadastroDataSet: TdmCadastroDataSet;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+{ TdmCadastro }
+
+function TdmCadastroDataSet.Alterar(oDizimista: TDizimista;
+  out sErro: string): Boolean;
+begin
+   with sqlAlterar, oDizimista do
+   begin
+      Params[0].AsString  := Nome;
+      Params[1].AsDate    := StrToDate(DataNasc);
+      Params[2].AsString  := CEB;
+      Params[3].AsString := End_Rua;
+      Params[4].AsInteger := StrToInt(end_NR);
+      Params[5].AsString := end_complem;
+      Params[6].AsString := end_bairro;
+      Params[7].AsString := end_cep;
+      Params[8].AsString := end_cidade;
+      Params[9].AsString := end_uf;
+      Params[10].AsString := fone_fixo;
+      Params[11].AsString := fone_movel;
+      Params[12].AsString := email;
+      Params[13].AsString := genero;
+      Params[14].AsString := estado_civil;
+      Params[15].AsString := nome_conjuge;
+      Params[16].AsDate := StrToDate(NascConjuge);
+      Params[17].AsDate := StrToDate(dataCasamento);
+      Params[18].AsDate := StrToDate(dataCadastro);
+      Params[19].AsString := situacao;
+      Params[20].AsInteger := CDFicha;
+
+      try
+         ExecSQL();
+         Result := True;
+      except on E: Exception do
+         begin
+            sErro := 'Ocorreu um erro ao alterar o Dizimista: ' + sLineBreak + E.Message;
+            Result := False;
+         end;
+      end;
+   end;
+end;
+
+procedure TdmCadastroDataSet.CarregarDizimista(oDizimista: TDizimista; iCDFicha: Integer);
+var
+   sqlDizimista: TSQLDataSet;
+begin
+   sqlDizimista := TSQLDataSet.Create(nil);
+   try
+      with sqlDizimista do
+      begin
+         SQLConnection := dmConexao.sqlConexao;
+         CommandText := 'select * from tbl_plandados where (cdficha = ' + IntToStr(iCDFicha) + ') ';
+         Open;
+         with oDizimista do
+         begin
+            CDFicha  := FieldByName('cdficha').AsInteger;
+            Nome     := FieldByName('nome').AsString;
+            DataNasc := DatetoStr(FieldByName('nascDizimista').AsDateTime);
+            CEB      := FieldByName('Comunidade').AsString;
+            End_Rua  := FieldByName('end_Rua').AsString;
+            End_NR      := FieldByName('end_NR').AsString;
+            End_Complem := FieldByName('end_Complem').AsString;
+            End_Bairro  := FieldByName('end_Bairro').AsString;
+            End_Cep     := FieldByName('end_CEP').AsString;
+            End_Cidade  := FieldByName('end_Cidade').AsString;
+            End_UF      := FieldByName('end_UF').AsString;
+            Fone_Fixo   := FieldByName('fone_Fixo').AsString;
+            Fone_Movel  := FieldByName('fone_Movel').AsString;
+            Email       := FieldByName('Email').AsString;
+            Genero      := FieldByName('Genero').AsString;
+            Estado_Civil  := FieldByName('estado_Civil').AsString;
+            Nome_conjuge  := FieldByName('nome_Conj').AsString;
+            NascConjuge   := DatetoStr(FieldByName('nasConjuge').AsDateTime);
+            DataCasamento := DatetoStr(FieldByName('dataCasamento').AsDateTime);
+            DataCadastro  := DatetoStr(FieldByName('dataCadastro').AsDateTime);
+            Situacao  := FieldByName('situacao').AsString;
+         end;
+      end;
+   finally
+      FreeAndNil(sqlDizimista);
+   end;
+end;
+
+function TdmCadastroDataSet.Excluir(iCDFicha: Integer; out sErro: string): Boolean;
+begin
+   with sqlInativar do
+   begin
+      Params[0].AsInteger := iCDFicha;
+      try
+         ExecSQL();
+         Result := True;
+      except on E: Exception do
+         begin
+            sErro := 'Ocorreu um erro ao desativar o Dizimista: ' + sLineBreak + E.Message;
+            Result := False;
+         end;
+      end;
+   end;
+end;
+
+function TdmCadastroDataSet.GerarFicha: Integer;
+var
+   sqlSequencia: TSQLDataSet;
+begin
+   sqlSequencia := TSQLDataSet.Create(nil);
+   try
+      with sqlSequencia do
+      begin
+         SQLConnection := dmConexao.sqlConexao;
+         CommandText := 'select coalesce(max(cdficha), 0) + 1 as fichaseq from tbl_plandados';
+         Open;
+         Result := FieldByName('fichaseq').AsInteger;
+      end;
+   finally
+      FreeAndNil(sqlSequencia);
+   end;
+end;
+
+function TdmCadastroDataSet.Inserir(oDizimista: TDizimista;
+  out sErro: string): Boolean;
+begin
+   with sqlNovo, oDizimista do
+   begin
+      Params[0].AsInteger := GerarFicha;
+      Params[1].AsString := Nome;
+      Params[2].AsDate   := StrToDate(DataNasc);
+      Params[3].AsString := CEB;
+      Params[4].AsString := End_Rua;
+      Params[5].AsInteger := StrToInt(end_NR);
+      Params[6].AsString := end_complem;
+      Params[7].AsString := end_bairro;
+      Params[8].AsString := end_cep;
+      Params[9].AsString := end_cidade;
+      Params[10].AsString := end_uf;
+      Params[11].AsString := fone_fixo;
+      Params[12].AsString := fone_movel;
+      Params[13].AsString := email;
+      Params[14].AsString := genero;
+      Params[15].AsString := estado_civil;
+      Params[16].AsString := nome_conjuge;
+      Params[17].AsDate := StrToDate(nascConjuge);
+      Params[18].AsDate := StrToDate(datacasamento);
+      Params[19].AsDate := StrToDate(datacadastro);
+      Params[20].AsString := situacao;
+
+      try
+         ExecSQL();
+         Result := True;
+      except on E: Exception do
+         begin
+            sErro := 'Ocorreu um erro ao inserir o Dizimista: ' + sLineBreak + E.Message;
+            Result := False;
+         end;
+      end;
+   end;
+end;
+
+procedure TdmCadastroDataSet.Pesquisar(sNome: string);
+begin
+   with cdsPesq do
+   begin
+      if Active then
+         Close;
+      Params[0].AsString := '%' + sNome + '%';
+      Open;
+      First;
+   end;
+end;
+
+
+procedure TdmCadastroDataSet.BuscarFicha(iCDFicha: integer);
+begin
+  with cdsPesq do
+  begin
+    if Active then
+       close;
+    Params[1].AsInteger := iCDFicha;
+    Open;
+    First;
+  end;
+
+end;
+
+end.

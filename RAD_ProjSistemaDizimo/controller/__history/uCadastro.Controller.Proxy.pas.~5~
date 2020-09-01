@@ -1,0 +1,64 @@
+unit uCadastro.Controller.Proxy;
+
+interface
+
+uses
+  System.Generics.Collections,
+  Vcl.Forms,
+  Classes,
+  Vcl.ExtCtrls,
+  Vcl.StdCtrls;
+
+Type
+  TCadastroControllerProxy = class
+  private
+     ListaForm : TDictionary<TComponentClass, TForm>;
+  public
+     procedure AddForm(Value: TComponentClass; const Parent : TPanel);
+     constructor Create;
+     destructor Destroy; override;
+  end;
+
+var
+   CadastroControllerProxy : TCadastroControllerProxy;
+
+implementation
+
+uses
+  System.SysUtils;
+
+{ TCadastroControllerProxy }
+
+procedure TCadastroControllerProxy.AddForm(Value: TComponentClass;
+  const Parent: TPanel);
+var
+   aForm: TForm;
+begin
+  if not ListaForm.TryGetValue(Value, aForm) then
+  begin
+    Application.CreateForm(Value, aForm);
+    ListaForm.Add(Value, aForm);
+  end;
+  aForm.Parent := Parent;
+  aForm.Show;
+  aForm.WindowState.wsMaximized;
+end;
+
+constructor TCadastroControllerProxy.Create;
+begin
+   ListaForm := TDictionary<TComponentClass, TForm>.Create;
+end;
+
+destructor TCadastroControllerProxy.Destroy;
+begin
+  FreeAndNil(ListaForm);
+  inherited;
+end;
+
+initialization
+  CadastroControllerProxy := TCadastroControllerProxy.Create;
+
+finalization
+  CadastroControllerProxy.Free;
+
+end.

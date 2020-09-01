@@ -1,0 +1,42 @@
+unit uCadastro.Model;
+
+interface
+
+type
+
+   TCadastro = class
+   private
+    FComuniade: String;
+    FNascDiz: String;
+    FEnd_Rua: String;
+    FCDFICHA: Integer;
+    FNome: String;
+    FComunidade: String;
+    procedure SetNome(const Value: String);
+
+   public
+      property CDFICHA: Integer    read FCDFICHA write FCDFICHA;
+      property Nome: String        read FNome    write SetNome;
+      property NascDiz: String     read FNascDiz write FNascDiz;
+      property Comunidade: String  read FComunidade write FComunidade;
+      property End_Rua: String     read FEnd_Rua write FEnd_Rua;
+
+
+
+   end;
+
+implementation
+
+uses
+  System.SysUtils;
+
+{ TCadastro }
+
+procedure TCadastro.SetNome(const Value: String);
+begin
+   if Value = EmptyStr then
+      raise EArgumentException.Create('''Nome do Dizimista'' precisa ser preenchido!');
+  FNome := Value;
+end;
+
+end.

@@ -1,0 +1,65 @@
+﻿unit Unit1_TESTE;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TForm1 = class(TForm)
+    Label1: TLabel;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Edit3: TEdit;
+    Button1: TButton;
+    lblX1: TLabel;
+    lblX2: TLabel;
+    lblNo: TLabel;
+    procedure Button1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.Button1Click(Sender: TObject);
+var
+   A, B, C, D, X1, X2, Xf, Xs, dis: Real;
+begin
+   A := StrToFloat(edit1.Text);
+   B := StrToFloat(edit2.Text);
+   c := StrToFloat(edit3.Text);
+        // leia os coefeicientes A, B, C
+
+   D := Sqr(B) - 4 * A * C;    // computar o discriminante Δ
+   if D >= 0  then         // Se Δ >= 0, então
+   begin
+      Xf := (-B + Sqrt(dis)) / (2 * A);
+      Xs := (-B - Sqrt(dis)) / (2 * A);
+
+      lblX1.Visible := true;
+      lblX1.Caption := 'x1 = '; // + FloatToStr(Xf);
+      lblx2.Visible := true;
+      lblx2.Caption := 'x2 = '; // + FloatToStr(Xs);
+   end
+   else // senão ou caso contrário
+      lblNo.Visible := True;
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+//   lblX1.Visible := false;
+//   lblX2.Visible := false;
+//   lblNo.Visible := false;
+end;
+
+end.

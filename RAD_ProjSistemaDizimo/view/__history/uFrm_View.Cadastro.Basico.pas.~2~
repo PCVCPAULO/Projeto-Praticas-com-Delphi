@@ -1,0 +1,100 @@
+unit uFrm_View.Cadastro.Basico;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
+  Vcl.ComCtrls, Vcl.ActnMan, Vcl.ActnCtrls, Vcl.ToolWin, System.ImageList,
+  Vcl.ImgList, Vcl.PlatformDefaultStyleActnCtrls, System.Actions, Vcl.ActnList,
+  Vcl.Buttons, Datasnap.DBClient, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.AppEvnts, System.Generics.Collections,
+  sSkinManager;
+
+
+type
+
+  TExecutar = (sentencaSQL,exibePanels);
+
+  Tfrm_CadastroBasico = class(TForm)
+    stb_CadBasico: TStatusBar;
+    ToolBar1: TToolBar;
+    pgc_CadBasico: TPageControl;
+    tbs_Cadastro: TTabSheet;
+    tbs_Pesquisar: TTabSheet;
+    img_Cadastro: TImageList;
+    acl_Cadastro: TActionList;
+    acl_Inserir: TAction;
+    acl_Editar: TAction;
+    acl_Excluir: TAction;
+    acl_Gravar: TAction;
+    acl_Cancelar: TAction;
+    acl_Pesquisar: TAction;
+    acl_Imprimir: TAction;
+    acl_Fechar: TAction;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    SpeedButton4: TSpeedButton;
+    SpeedButton5: TSpeedButton;
+    SpeedButton6: TSpeedButton;
+    SpeedButton7: TSpeedButton;
+    SpeedButton8: TSpeedButton;
+    Panel1: TPanel;
+    Label2: TLabel;
+    lbl_Atividade: TLabel;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    Panel2: TPanel;
+    Label3: TLabel;
+    cbx_Pesquisar: TComboBox;
+    Label1: TLabel;
+    btn_Filtrar: TButton;
+    edt_Pesquisar: TEdit;
+    pnl_Cadastro: TPanel;
+    app_CadBasico: TApplicationEvents;
+    tmr_CadBasico: TTimer;
+    Panel5: TPanel;
+    dbg_Dados: TDBGrid;
+{    procedure acl_InserirExecute(Sender: TObject);
+    procedure acl_EditarExecute(Sender: TObject);
+    procedure acl_ExcluirExecute(Sender: TObject);
+    procedure acl_GravarExecute(Sender: TObject);
+    procedure acl_CancelarExecute(Sender: TObject);
+    procedure acl_PesquisarExecute(Sender: TObject);
+    procedure acl_FecharExecute(Sender: TObject);
+    procedure acl_CancelarUpdate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormShow(Sender: TObject);
+    procedure acl_InserirUpdate(Sender: TObject);
+    procedure acl_ExcluirUpdate(Sender: TObject);
+    procedure acl_EditarUpdate(Sender: TObject);
+    procedure acl_GravarUpdate(Sender: TObject);
+    procedure acl_ImprimirExecute(Sender: TObject);
+    procedure cbx_PesquisarClick(Sender: TObject);
+    procedure app_CadBasicoHint(Sender: TObject);
+    procedure tmr_CadBasicoTimer(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure edt_PesquisarKeyPress(Sender: TObject; var Key: Char);   }
+
+  private
+     { Private declarations }
+
+  protected
+
+  public
+  end;
+
+var
+  frm_CadastroBasico: Tfrm_CadastroBasico;
+
+implementation
+
+{$R *.dfm}
+
+
+
+
+
+
+
+end.

@@ -1,0 +1,39 @@
+unit dmProjDizimo.DAO.DataSet.Cadastro;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, dmProjDizimo.DAO.Conexao, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, projDizimo.Cadastro.Model;
+
+type
+  TdmCadastro = class(TDataModule)
+    sqlPesquisa: TFDQuery;
+    sqlInserir: TFDQuery;
+    sqlAlterar: TFDQuery;
+    sqlExcluir: TFDQuery;
+  private
+    { Private declarations }
+  public
+    function GerarCDFicha: Integer;
+    procedure Pesquisar(sNome: String);
+    procedure CarregarDizimista(oDizimista: TDizimista; iCDFicha: Integer);
+    function Inserir(ODizimista: TDizimista; out sErro: string): Boolean;
+    function Alterar(oDizimista: TDizimista; out sErro: string): Boolean;
+    function Excluir(iCDFicha: Integer; out sErro: string): Boolean;
+  end;
+
+var
+  dmCadastro: TdmCadastro;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+
+
+{$R *.dfm}
+
+end.

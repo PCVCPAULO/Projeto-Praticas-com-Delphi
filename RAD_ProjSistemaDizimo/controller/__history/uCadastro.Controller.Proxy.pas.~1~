@@ -1,0 +1,77 @@
+unit ProjDizimo.Controller.Proxy;
+
+interface
+
+uses
+  System.Generics.Collections,
+  Vcl.Forms,
+  Classes,
+  Vcl.ExtCtrls,
+  Vcl.StdCtrls;
+
+Type
+  TControllerProxy = class
+    private
+      ListaForm : TDictionary<TComponentClass, TForm>;
+    public
+      procedure AddForm(Value: TComponentClass; const Parent : TPanel);
+      procedure ListForms(var Lista : TListBox);
+      constructor Create;
+      destructor Destroy; override;
+  end;
+
+var
+  ControllerProxy : TControllerProxy;
+
+implementation
+
+uses
+  System.SysUtils;
+
+{ TControllerProxy }
+
+procedure TControllerProxy.AddForm(Value: TComponentClass; const Parent : TPanel);
+var
+  aForm : TForm;
+begin
+  if not ListaForm.TryGetValue(Value, aForm) then
+  begin
+    Application.CreateForm(Value, aForm);
+    ListaForm.Add(Value, aForm);
+  end;
+  aForm.Parent := Parent;
+  aForm.Show;
+end;
+
+constructor TControllerProxy.Create;
+begin
+  ListaForm := TDictionary<TComponentClass, TForm>.Create;
+end;
+
+destructor TControllerProxy.Destroy;
+begin
+  FreeAndNil(ListaForm);
+  inherited;
+end;
+
+
+procedure TControllerProxy.ListForms(var Lista: TListBox);
+var
+  Key : TForm;
+begin
+  Lista.Items.Clear;
+  Lista.Style := lbOwnerDrawFixed;
+  Lista.Ctl3D := false;
+  Lista.ItemHeight := 50;
+
+  for Key in ListaForm.Values do
+    Lista.AddItem(Key.Caption, Key);
+end;
+
+initialization
+  ControllerProxy := TControllerProxy.Create;
+
+finalization
+  ControllerProxy.Free;
+
+end.

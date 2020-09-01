@@ -1,0 +1,23 @@
+unit uCadastro.Controller;
+
+interface
+
+uses uCadastro.Dizimista.Model;
+
+type
+   TCadastroControoler = class
+   public
+      function Inserir(oDizimista: TDizimista; var sEroo: string): Boolean;
+   end;
+
+implementation
+
+{ TCadastroControoler }
+
+function TCadastroControoler.Inserir(oDizimista: TDizimista;
+  var sEroo: string): Boolean;
+begin
+
+end;
+
+end.

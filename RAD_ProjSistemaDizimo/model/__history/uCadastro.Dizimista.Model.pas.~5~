@@ -1,0 +1,37 @@
+unit uCadastro.Dizimista.Model;
+
+interface
+
+uses
+  System.SysUtils;
+
+type
+   TDizimista = class
+   private
+    FCDFicha: Integer;
+    FNome: string;
+    FDataNasc: string;
+    FCEB: string;
+    FEnd_Rua: string;
+    procedure SetNome(const Value: string);
+   public
+      property CDFicha: Integer read FCDFicha write FCDFicha;
+      property Nome: string     read FNome    write SetNome;
+      property DataNasc: string read FDataNasc write FDataNasc;
+      property CEB: string      read FCEB      write FCEB;
+      property End_Rua: string  read FEnd_Rua  write FEnd_Rua;
+   end;
+
+implementation
+
+{ TCadPes }
+
+procedure TDizimista.SetNome(const Value: string);
+begin
+   if Value = EmptyStr then
+      raise EArgumentException.Create('''Nome'' precisa ser preenchido!');
+
+  FNome := Value;
+end;
+
+end.

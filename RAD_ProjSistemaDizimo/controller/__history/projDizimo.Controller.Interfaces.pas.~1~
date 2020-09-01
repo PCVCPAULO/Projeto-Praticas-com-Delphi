@@ -1,0 +1,13 @@
+unit projDizimo.Controller.Interfaces;
+
+interface
+
+type
+
+  iControllerProxy = interface
+    ['{4447BE24-EF1C-47AF-B8C0-6DB45A21A959}']
+  end;
+
+implementation
+
+end.

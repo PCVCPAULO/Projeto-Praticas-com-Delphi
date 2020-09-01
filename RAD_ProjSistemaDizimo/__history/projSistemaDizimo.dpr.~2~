@@ -1,0 +1,16 @@
+program projSistemaDizimo;
+
+uses
+  Vcl.Forms,
+  Unit1 in 'view\Unit1.pas' {Form1},
+  uFrmDizimo.View.Principal in 'view\uFrmDizimo.View.Principal.pas' {frmDizimoPrincipal};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TfrmDizimoPrincipal, frmDizimoPrincipal);
+  Application.Run;
+end.

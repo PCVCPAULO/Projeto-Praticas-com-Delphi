@@ -1,0 +1,106 @@
+unit Unit2.Dizimo.View;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
+  Datasnap.DBClient, Vcl.Imaging.pngimage, Vcl.ExtCtrls, Vcl.WinXPanels,
+  Vcl.StdCtrls, Vcl.Mask, Vcl.DBCtrls, Vcl.CategoryButtons, Vcl.WinXCtrls,
+  dmCadastro.DataSets;
+
+type
+  TfrmCadastro = class(TForm)
+    Panel1Cabecalho: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    cdp2Bottons: TCardPanel;
+    Card1Buttons: TCard;
+    Panel1Buttons: TPanel;
+    btn1Novo: TImage;
+    btn2Editar: TImage;
+    btn3Pesquisar: TImage;
+    btn4Excluir: TImage;
+    lbl1Novo: TLabel;
+    lbl2Editar: TLabel;
+    lbl3Pesquisar: TLabel;
+    lbl4Excluir: TLabel;
+    cdp1AreaTrabalho: TCardPanel;
+    card1Pesquisar: TCard;
+    dsCadastro: TDataSource;
+    DBGrid1: TDBGrid;
+    Card3: TCard;
+    StackPanel2: TStackPanel;
+    Card4: TCard;
+    Panel4Buttons: TPanel;
+    btn1Salvar: TImage;
+    btn2Cancelar: TImage;
+    btn3Excluir: TImage;
+    Label19: TLabel;
+    Label20: TLabel;
+    Label22: TLabel;
+    Panel4AreaTrabalho: TPanel;
+    SplitView1: TSplitView;
+    CategoryButtons1: TCategoryButtons;
+    Card5: TCard;
+    StackPanel3: TStackPanel;
+    Label21: TLabel;
+    DBEdit13: TDBEdit;
+    Label23: TLabel;
+    DBEdit14: TDBEdit;
+    Label24: TLabel;
+    DBEdit15: TDBEdit;
+    Label25: TLabel;
+    DBEdit16: TDBEdit;
+    Label26: TLabel;
+    DBEdit17: TDBEdit;
+    Label27: TLabel;
+    DBEdit18: TDBEdit;
+    pnlPesquisar: TPanel;
+    Label28: TLabel;
+    cbx_Pesquisar: TComboBox;
+    Label29: TLabel;
+    edt_Pesquisar: TEdit;
+    btn_Filtrar: TButton;
+    procedure btn1NovoClick(Sender: TObject);
+    procedure btn1SalvarClick(Sender: TObject);
+    procedure CategoryButtons1Categories0Items0Click(Sender: TObject);
+    procedure CategoryButtons1Categories0Items1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadastro: TfrmCadastro;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmCadastro.CategoryButtons1Categories0Items0Click(Sender: TObject);
+begin
+  cdp1AreaTrabalho.ActiveCardIndex := 1;
+end;
+
+procedure TfrmCadastro.CategoryButtons1Categories0Items1Click(Sender: TObject);
+begin
+  cdp1AreaTrabalho.ActiveCardIndex := 2;
+end;
+
+procedure TfrmCadastro.btn1NovoClick(Sender: TObject);
+begin
+  cdp1AreaTrabalho.ActiveCardIndex := 1;
+  cdp1AreaTrabalho.ActiveCardIndex := 1;
+  SplitView1.Open;
+end;
+
+procedure TfrmCadastro.btn1SalvarClick(Sender: TObject);
+begin
+  cdp1AreaTrabalho.ActiveCardIndex := 0;
+  cdp2Bottons.ActiveCardIndex := 0;
+  SplitView1.Close;
+end;
+
+end.

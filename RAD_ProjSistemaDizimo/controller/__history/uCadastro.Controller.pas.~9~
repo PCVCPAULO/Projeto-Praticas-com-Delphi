@@ -1,0 +1,61 @@
+unit uCadastro.Controller;
+
+interface
+
+uses uCadastro.Dizimista.Model, dmCadastro.DataSets, System.SysUtils;
+
+type
+   TCadastroController = class
+   public
+      constructor Create;
+      destructor Destroy; override;
+      procedure Pesquisar(sNome: string);
+      procedure CarregarDizimista(oDizimista: TDizimista; iCDFicha: Integer);
+      function Inserir(oDizimista: TDizimista; var sErro: string): Boolean;
+      function Alterar(oDizimista: TDizimista; var sErro: string): Boolean;
+      function Excluir(iCDFicha: Integer; var sErro: string): Boolean;
+   end;
+
+implementation
+
+{ TCadastroControoler }
+
+function TCadastroController.Alterar(oDizimista: TDizimista;
+  var sErro: string): Boolean;
+begin
+   Result := dmCadastroDataSet.Alterar(oDizimista, sErro);
+end;
+
+procedure TCadastroController.CarregarDizimista(oDizimista: TDizimista;
+  iCDFicha: Integer);
+begin
+   dmCadastroDataSet.CarregarDizimista(oDizimista, iCDFicha);
+end;
+
+constructor TCadastroController.Create;
+begin
+// dmCadastroDataSet := TdmCadastroDataSet.Create(nil);
+end;
+
+destructor TCadastroController.Destroy;
+begin
+   FreeAndnil(dmCadastroDataSet);
+  inherited;
+end;
+
+function TCadastroController.Excluir(iCDFicha: Integer; var sErro: string): Boolean;
+begin
+   Result := dmCadastroDataSet.Excluir(iCDFicha, sErro);
+end;
+
+function TCadastroController.Inserir(oDizimista: TDizimista; var sErro: string): Boolean;
+begin
+   Result := dmCadastroDataSet.Inserir(oDizimista, sErro);
+end;
+
+procedure TCadastroController.Pesquisar(sNome: string);
+begin
+   dmCadastroDataSet.Pesquisar(sNome);
+end;
+
+end.
